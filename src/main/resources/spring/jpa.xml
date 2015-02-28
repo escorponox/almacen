@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <beans>
+
+        <jee:jndi-lookup jndi-name="jdbc/almacen" id="dataSource" resource-ref="true"/>
+
+        <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+        <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+
+        <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+            <property name="dataSource" ref="dataSource"/>
+            <property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+            <property name="packagesToScan" value="jpa"/>
+        </bean>
+
+        <bean id="tm" class="org.springframework.orm.jpa.JpaTransactionManager">
+            <property name="entityManagerFactory" ref="emf"/>
+        </bean>
+
+        <tx:annotation-driven transaction-manager="tm"/>
+        <bean id="usersDAO" class="jpa.dao.UsersDAO"/>
+
+        <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+            <property name="database" value="ORACLE"/>
+            <property name="showSql" value="true"/>
+            <property name="generateDdl" value="false"/>
+            <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/>
+        </bean>
+    </beans>
+
+</beans>
