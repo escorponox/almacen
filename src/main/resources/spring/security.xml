@@ -27,7 +27,7 @@
                                users-by-username-query=
                                        "select username,password, enabled from users where username=?"
                                authorities-by-username-query=
-                                       "select users.username, user_roles.role as authorities from user_roles INNER JOIN USERS on users.id = user_roles.user_id where users.username =?"/>
+                                       "SELECT users.username, ROLE_TYPE.role AS authorities FROM user_roles INNER JOIN USERS ON users.id = user_roles.user_id INNER JOIN ROLE_TYPE ON ROLE_TYPE.ID = user_roles.ROLE WHERE users.username =?"/>
         </authentication-provider>
     </authentication-manager>
 </beans:beans>
