@@ -6,37 +6,20 @@ import javax.persistence.*;
 @Table(name = "USER_ROLES", schema = "PROYECTO", catalog = "")
 public class UserRoles {
     private Long id;
-    private String role;
-    private Long userId;
+    private RoleType role;
+    private Users user;
+
+    @SequenceGenerator(name = "USER_ROLES_SEQ", sequenceName = "USER_ROLES_SEQ", allocationSize = 1)
 
     @Id
     @Column(name = "ID", nullable = false, insertable = true, updatable = true, precision = -127)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_ROLES_SEQ")
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Basic
-    @Column(name = "ROLE", nullable = false, insertable = true, updatable = true, length = 40)
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    @Basic
-    @Column(name = "USER_ID", nullable = false, insertable = true, updatable = true, precision = -127)
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     @Override
@@ -47,17 +30,32 @@ public class UserRoles {
         UserRoles userRoles = (UserRoles) o;
 
         if (id != null ? !id.equals(userRoles.id) : userRoles.id != null) return false;
-        if (role != null ? !role.equals(userRoles.role) : userRoles.role != null) return false;
-        if (userId != null ? !userId.equals(userRoles.userId) : userRoles.userId != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (role != null ? role.hashCode() : 0);
-        result = 31 * result + (userId != null ? userId.hashCode() : 0);
-        return result;
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "ROLE", referencedColumnName = "ID", nullable = false)
+    public RoleType getRole() {
+        return role;
+    }
+
+    public void setRole(RoleType role) {
+        this.role = role;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "USER_ID", referencedColumnName = "ID", nullable = false)
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }

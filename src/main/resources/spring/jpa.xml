@@ -22,7 +22,7 @@
         </bean>
 
         <tx:annotation-driven transaction-manager="tm"/>
-        <bean id="usersDAO" class="jpa.dao.UsersDAO"/>
+        <bean id="locationsDAO" class="jpa.dao.LocationsDAO"/>
 
         <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
             <property name="database" value="ORACLE"/>
