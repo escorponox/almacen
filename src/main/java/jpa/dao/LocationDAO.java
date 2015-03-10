@@ -10,9 +10,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
 
-@Repository("locationsDao")
+@Repository("locationDao")
 @Transactional
-public class LocationsDAO {
+public class LocationDAO {
 
     @PersistenceContext
     private EntityManager em;

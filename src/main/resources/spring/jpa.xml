@@ -25,11 +25,12 @@
 
         <bean id="actionStatusDAO" class="jpa.dao.ActionStatusDAO"/>
         <bean id="containerStatusDAO" class="jpa.dao.ContainerStatusDAO"/>
-        <bean id="locationsDAO" class="jpa.dao.LocationsDAO"/>
+        <bean id="locationDAO" class="jpa.dao.LocationDAO"/>
         <bean id="orderStatusDAO" class="jpa.dao.OrdersStatusDAO"/>
         <bean id="receivingOrdersStatusDAO" class="jpa.dao.ReceivingOrdersStatusDAO"/>
         <bean id="roleTypeDAO" class="jpa.dao.RoleTypeDAO"/>
         <bean id="userDAO" class="jpa.dao.UserDAO"/>
+        <bean id="userRoleDAO" class="jpa.dao.UserRoleDAO"/>
 
         <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
             <property name="database" value="ORACLE"/>

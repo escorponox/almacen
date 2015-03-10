@@ -5,5 +5,5 @@
 <a href="<s:url value="/"/>">Home</a>
 
 <security:authorize access="hasRole('ROLE_ADMIN')">
-    <a href="<s:url value="/users"/>">Users Management</a>
+    <a href="<s:url value="/users?list"/>">Users Management</a>
 </security:authorize>

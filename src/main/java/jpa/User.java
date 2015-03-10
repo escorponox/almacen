@@ -103,7 +103,7 @@ public class User {
         this.ordersBySeller = ordersBySeller;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     public List<UserRole> getUserRoleById() {
         return userRoleById;
     }

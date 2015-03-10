@@ -33,7 +33,6 @@ public class ContainerStatus {
     }
 
     @Basic
-    @Enumerated(EnumType.STRING)
     @Column(name = "DESCRIPTION", nullable = true, insertable = true, updatable = true, length = 100)
     public String getDescription() {
         return description;

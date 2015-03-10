@@ -1,7 +1,7 @@
 package initTests;
 
 import jpa.Location;
-import jpa.dao.LocationsDAO;
+import jpa.dao.LocationDAO;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -17,7 +17,7 @@ public class LocationsInitiator {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-context.xml");
 
-        LocationsDAO locationsDAO = (LocationsDAO) context.getBean("locationsDAO");
+        LocationDAO locationDAO = (LocationDAO) context.getBean("locationsDAO");
 
         Long sequence = 0L;
 
@@ -34,7 +34,7 @@ public class LocationsInitiator {
                     location.setSeq(sequence);
                     sequence++;
 
-                    locationsDAO.addLocation(location);
+                    locationDAO.addLocation(location);
                 }
             }
 
