@@ -4,10 +4,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "USER_ROLES", schema = "PROYECTO", catalog = "")
-public class UserRoles {
+public class UserRole {
     private Long id;
     private RoleType role;
-    private Users user;
+    private User user;
 
     @SequenceGenerator(name = "USER_ROLES_SEQ", sequenceName = "USER_ROLES_SEQ", allocationSize = 1)
 
@@ -27,9 +27,9 @@ public class UserRoles {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserRoles userRoles = (UserRoles) o;
+        UserRole userRole = (UserRole) o;
 
-        if (id != null ? !id.equals(userRoles.id) : userRoles.id != null) return false;
+        if (id != null ? !id.equals(userRole.id) : userRole.id != null) return false;
 
         return true;
     }
@@ -51,11 +51,11 @@ public class UserRoles {
 
     @ManyToOne
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID", nullable = false)
-    public Users getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Users user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

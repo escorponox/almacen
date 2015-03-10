@@ -6,16 +6,16 @@ import java.util.List;
 
 @Entity
 @Table(name = "RECEIPT_ACTIONS", schema = "PROYECTO", catalog = "")
-public class ReceiptActions {
+public class ReceiptAction {
     private Long id;
     private String deliveryNote;
     private Long recQuantity;
     private Date receivedAt;
-    private List<LocateActions> locateActions;
-    private IncomingDocks incomingDock;
-    private ReceivingOrders receivingOrder;
-    private ReceivingOrdersLines receivingOrdersLine;
-    private Users picker;
+    private List<LocateAction> locateActions;
+    private IncomingDock incomingDock;
+    private ReceivingOrder receivingOrder;
+    private ReceivingOrdersLine receivingOrdersLine;
+    private User picker;
 
     @SequenceGenerator(name = "RECEIPT_ACTIONS_SEQ", sequenceName = "RECEIPT_ACTIONS_SEQ", allocationSize = 1)
 
@@ -65,7 +65,7 @@ public class ReceiptActions {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ReceiptActions that = (ReceiptActions) o;
+        ReceiptAction that = (ReceiptAction) o;
 
         if (deliveryNote != null ? !deliveryNote.equals(that.deliveryNote) : that.deliveryNote != null) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
@@ -84,52 +84,52 @@ public class ReceiptActions {
         return result;
     }
 
-    @OneToMany(mappedBy = "receiptActionsByReceiptActionId")
-    public List<LocateActions> getLocateActions() {
+    @OneToMany(mappedBy = "receiptAction")
+    public List<LocateAction> getLocateActions() {
         return locateActions;
     }
 
-    public void setLocateActions(List<LocateActions> locateActions) {
+    public void setLocateActions(List<LocateAction> locateActions) {
         this.locateActions = locateActions;
     }
 
     @ManyToOne
     @JoinColumn(name = "DOCK_ID", referencedColumnName = "ID", nullable = false)
-    public IncomingDocks getIncomingDock() {
+    public IncomingDock getIncomingDock() {
         return incomingDock;
     }
 
-    public void setIncomingDock(IncomingDocks incomingDock) {
+    public void setIncomingDock(IncomingDock incomingDock) {
         this.incomingDock = incomingDock;
     }
 
     @ManyToOne
     @JoinColumn(name = "REC_ORDER_ID", referencedColumnName = "ID", nullable = false)
-    public ReceivingOrders getReceivingOrder() {
+    public ReceivingOrder getReceivingOrder() {
         return receivingOrder;
     }
 
-    public void setReceivingOrder(ReceivingOrders receivingOrder) {
+    public void setReceivingOrder(ReceivingOrder receivingOrder) {
         this.receivingOrder = receivingOrder;
     }
 
     @ManyToOne
     @JoinColumn(name = "REC_ORDER_LINE_ID", referencedColumnName = "ID", nullable = false)
-    public ReceivingOrdersLines getReceivingOrdersLine() {
+    public ReceivingOrdersLine getReceivingOrdersLine() {
         return receivingOrdersLine;
     }
 
-    public void setReceivingOrdersLine(ReceivingOrdersLines receivingOrdersLine) {
+    public void setReceivingOrdersLine(ReceivingOrdersLine receivingOrdersLine) {
         this.receivingOrdersLine = receivingOrdersLine;
     }
 
     @ManyToOne
     @JoinColumn(name = "USER_ID", referencedColumnName = "ID", nullable = false)
-    public Users getPicker() {
+    public User getPicker() {
         return picker;
     }
 
-    public void setPicker(Users picker) {
+    public void setPicker(User picker) {
         this.picker = picker;
     }
 }

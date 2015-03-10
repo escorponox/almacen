@@ -4,13 +4,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ORDERS_LINES", schema = "PROYECTO", catalog = "")
-public class OrdersLines {
+public class OrdersLine {
     private Long id;
     private Long lineNumber;
     private Long orderedQuantity;
     private Long pendingQuantity;
     private Item item;
-    private Orders order;
+    private Order order;
 
     @SequenceGenerator(name = "ORDERS_LINES_SEQ", sequenceName = "ORDERS_LINES_SEQ", allocationSize = 1)
 
@@ -60,7 +60,7 @@ public class OrdersLines {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrdersLines that = (OrdersLines) o;
+        OrdersLine that = (OrdersLine) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (lineNumber != null ? !lineNumber.equals(that.lineNumber) : that.lineNumber != null) return false;
@@ -93,11 +93,11 @@ public class OrdersLines {
 
     @ManyToOne
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID", nullable = false)
-    public Orders getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 }

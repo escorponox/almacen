@@ -1,6 +1,6 @@
 package initTests;
 
-import jpa.Locations;
+import jpa.Location;
 import jpa.dao.LocationsDAO;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -27,14 +27,14 @@ public class LocationsInitiator {
 
                 for (int s = 0; s < 2; s++) {
 
-                    Locations locations = new Locations();
-                    locations.setCorridor("P" + p);
-                    locations.setSide(String.valueOf(s));
-                    locations.setModule("M" + m);
-                    locations.setSeq(sequence);
+                    Location location = new Location();
+                    location.setCorridor("P" + p);
+                    location.setSide(String.valueOf(s));
+                    location.setModule("M" + m);
+                    location.setSeq(sequence);
                     sequence++;
 
-                    locationsDAO.addLocation(locations);
+                    locationsDAO.addLocation(location);
                 }
             }
 

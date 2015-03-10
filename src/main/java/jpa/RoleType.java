@@ -1,12 +1,14 @@
 package jpa;
 
+import jpa.enums.RoleTypeEnum;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ROLE_TYPE", schema = "PROYECTO", catalog = "")
 public class RoleType {
     private Long id;
-    private String role;
+    private RoleTypeEnum role;
     private String description;
 
     @Id
@@ -20,12 +22,13 @@ public class RoleType {
     }
 
     @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "ROLE", nullable = false, insertable = true, updatable = true, length = 20)
-    public String getRole() {
+    public RoleTypeEnum getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleTypeEnum role) {
         this.role = role;
     }
 

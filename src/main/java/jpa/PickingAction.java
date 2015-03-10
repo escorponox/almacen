@@ -5,17 +5,17 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "PICKING_ACTIONS", schema = "PROYECTO", catalog = "")
-public class PickingActions {
+public class PickingAction {
     private Long id;
     private BigDecimal ordered;
     private BigDecimal picked;
     private Long seq;
     private ActionStatus status;
     private Container container;
-    private Orders order;
-    private OrdersLines orderLine;
-    private OutgoingDocks outgoingDock;
-    private Users picker;
+    private Order order;
+    private OrdersLine orderLine;
+    private OutgoingDock outgoingDock;
+    private User picker;
 
     @SequenceGenerator(name = "PICKING_ACTIONS_SEQ", sequenceName = "PICKING_ACTIONS_SEQ", allocationSize = 1)
 
@@ -65,7 +65,7 @@ public class PickingActions {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PickingActions that = (PickingActions) o;
+        PickingAction that = (PickingAction) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (ordered != null ? !ordered.equals(that.ordered) : that.ordered != null) return false;
@@ -106,41 +106,41 @@ public class PickingActions {
 
     @ManyToOne
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID", nullable = false)
-    public Orders getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 
     @ManyToOne
     @JoinColumn(name = "LINE_ID", referencedColumnName = "ID", nullable = false)
-    public OrdersLines getOrderLine() {
+    public OrdersLine getOrderLine() {
         return orderLine;
     }
 
-    public void setOrderLine(OrdersLines orderLine) {
+    public void setOrderLine(OrdersLine orderLine) {
         this.orderLine = orderLine;
     }
 
     @ManyToOne
     @JoinColumn(name = "OUT_DOCK", referencedColumnName = "ID", nullable = false)
-    public OutgoingDocks getOutgoingDock() {
+    public OutgoingDock getOutgoingDock() {
         return outgoingDock;
     }
 
-    public void setOutgoingDock(OutgoingDocks outgoingDock) {
+    public void setOutgoingDock(OutgoingDock outgoingDock) {
         this.outgoingDock = outgoingDock;
     }
 
     @ManyToOne
     @JoinColumn(name = "PICKER_ID", referencedColumnName = "ID")
-    public Users getPicker() {
+    public User getPicker() {
         return picker;
     }
 
-    public void setPicker(Users picker) {
+    public void setPicker(User picker) {
         this.picker = picker;
     }
 }

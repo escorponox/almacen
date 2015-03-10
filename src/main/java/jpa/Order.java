@@ -5,16 +5,17 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Orders {
+@Table(name = "ORDERS")
+public class Order {
     private Long id;
     private Long code;
     private Date createdAt;
     private Date updatedAt;
-    private Clients client;
+    private Client client;
     private OrdersStatus status;
-    private Users seller;
-    private List<OrdersLines> orderLines;
-    private List<PickingActions> pickingActionsesById;
+    private User seller;
+    private List<OrdersLine> orderLines;
+    private List<PickingAction> pickingActions;
 
     @SequenceGenerator(name = "ORDERS_SEQ", sequenceName = "ORDERS_SEQ", allocationSize = 1)
 
@@ -64,12 +65,12 @@ public class Orders {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Orders orders = (Orders) o;
+        Order order = (Order) o;
 
-        if (code != null ? !code.equals(orders.code) : orders.code != null) return false;
-        if (createdAt != null ? !createdAt.equals(orders.createdAt) : orders.createdAt != null) return false;
-        if (id != null ? !id.equals(orders.id) : orders.id != null) return false;
-        if (updatedAt != null ? !updatedAt.equals(orders.updatedAt) : orders.updatedAt != null) return false;
+        if (code != null ? !code.equals(order.code) : order.code != null) return false;
+        if (createdAt != null ? !createdAt.equals(order.createdAt) : order.createdAt != null) return false;
+        if (id != null ? !id.equals(order.id) : order.id != null) return false;
+        if (updatedAt != null ? !updatedAt.equals(order.updatedAt) : order.updatedAt != null) return false;
 
         return true;
     }
@@ -85,11 +86,11 @@ public class Orders {
 
     @ManyToOne
     @JoinColumn(name = "CLIENT_ID", referencedColumnName = "ID", nullable = false)
-    public Clients getClient() {
+    public Client getClient() {
         return client;
     }
 
-    public void setClient(Clients client) {
+    public void setClient(Client client) {
         this.client = client;
     }
 
@@ -105,29 +106,29 @@ public class Orders {
 
     @ManyToOne
     @JoinColumn(name = "SELLER_ID", referencedColumnName = "ID", nullable = false)
-    public Users getSeller() {
+    public User getSeller() {
         return seller;
     }
 
-    public void setSeller(Users seller) {
+    public void setSeller(User seller) {
         this.seller = seller;
     }
 
     @OneToMany(mappedBy = "order")
-    public List<OrdersLines> getOrderLines() {
+    public List<OrdersLine> getOrderLines() {
         return orderLines;
     }
 
-    public void setOrderLines(List<OrdersLines> orderLines) {
+    public void setOrderLines(List<OrdersLine> orderLines) {
         this.orderLines = orderLines;
     }
 
     @OneToMany(mappedBy = "order")
-    public List<PickingActions> getPickingActionsesById() {
-        return pickingActionsesById;
+    public List<PickingAction> getPickingActions() {
+        return pickingActions;
     }
 
-    public void setPickingActionsesById(List<PickingActions> pickingActionsesById) {
-        this.pickingActionsesById = pickingActionsesById;
+    public void setPickingActions(List<PickingAction> pickingActionsesById) {
+        this.pickingActions = pickingActionsesById;
     }
 }

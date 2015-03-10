@@ -6,8 +6,8 @@ import javax.persistence.*;
 public class Container {
     private Long id;
     private ContainerStatus status;
-    private Orders order;
-    private OutgoingDocks outgoingDock;
+    private Order order;
+    private OutgoingDock outgoingDock;
 
     @SequenceGenerator(name = "CONTAINER_SEQ", sequenceName = "CONTAINER_SEQ", allocationSize = 1)
 
@@ -51,21 +51,21 @@ public class Container {
 
     @ManyToOne
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID", nullable = false)
-    public Orders getOrder() {
+    public Order getOrder() {
         return order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(Order order) {
         this.order = order;
     }
 
     @ManyToOne
     @JoinColumn(name = "OUT_DOCK", referencedColumnName = "ID")
-    public OutgoingDocks getOutgoingDock() {
+    public OutgoingDock getOutgoingDock() {
         return outgoingDock;
     }
 
-    public void setOutgoingDock(OutgoingDocks outgoingDock) {
+    public void setOutgoingDock(OutgoingDock outgoingDock) {
         this.outgoingDock = outgoingDock;
     }
 }

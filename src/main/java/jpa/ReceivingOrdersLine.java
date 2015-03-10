@@ -5,13 +5,13 @@ import java.util.List;
 
 @Entity
 @Table(name = "RECEIVING_ORDERS_LINES", schema = "PROYECTO", catalog = "")
-public class ReceivingOrdersLines {
+public class ReceivingOrdersLine {
     private Long id;
     private Long lineNumber;
     private Long orderedQuantity;
     private Long pendingQuantity;
-    private List<ReceiptActions> receiptActionsesByRecLine;
-    private ReceivingOrders receivingOrder;
+    private List<ReceiptAction> receiptActionsesByRecLine;
+    private ReceivingOrder receivingOrder;
 
     @SequenceGenerator(name = "RECEIVING_ORDERS_LINES_SEQ", sequenceName = "RECEIVING_ORDERS_LINES_SEQ", allocationSize = 1)
 
@@ -61,7 +61,7 @@ public class ReceivingOrdersLines {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ReceivingOrdersLines that = (ReceivingOrdersLines) o;
+        ReceivingOrdersLine that = (ReceivingOrdersLine) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (lineNumber != null ? !lineNumber.equals(that.lineNumber) : that.lineNumber != null) return false;
@@ -83,21 +83,21 @@ public class ReceivingOrdersLines {
     }
 
     @OneToMany(mappedBy = "receivingOrdersLine")
-    public List<ReceiptActions> getReceiptActionsesByRecLine() {
+    public List<ReceiptAction> getReceiptActionsesByRecLine() {
         return receiptActionsesByRecLine;
     }
 
-    public void setReceiptActionsesByRecLine(List<ReceiptActions> receiptActionsesByRecLine) {
+    public void setReceiptActionsesByRecLine(List<ReceiptAction> receiptActionsesByRecLine) {
         this.receiptActionsesByRecLine = receiptActionsesByRecLine;
     }
 
     @ManyToOne
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID", nullable = false)
-    public ReceivingOrders getReceivingOrder() {
+    public ReceivingOrder getReceivingOrder() {
         return receivingOrder;
     }
 
-    public void setReceivingOrder(ReceivingOrders receivingOrder) {
+    public void setReceivingOrder(ReceivingOrder receivingOrder) {
         this.receivingOrder = receivingOrder;
     }
 }

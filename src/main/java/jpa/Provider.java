@@ -1,20 +1,22 @@
 package jpa;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class Clients {
+@Table(name = "PROVIDERS")
+public class Provider {
     private Long id;
     private String nif;
     private String name;
     private String address;
-    private OutgoingDocks outgoingDock;
+    private List<ReceivingOrder> receivingOrdersByProvider;
 
-    @SequenceGenerator(name = "CLIENTS_SEQ", sequenceName = "CLIENTS_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "PROVIDERS_SEQ", sequenceName = "PROVIDERS_SEQ", allocationSize = 1)
 
     @Id
     @Column(name = "ID", nullable = false, insertable = true, updatable = true, precision = -127)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLIENTS_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PROVIDERS_SEQ")
     public Long getId() {
         return id;
     }
@@ -58,12 +60,12 @@ public class Clients {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Clients clients = (Clients) o;
+        Provider provider = (Provider) o;
 
-        if (address != null ? !address.equals(clients.address) : clients.address != null) return false;
-        if (id != null ? !id.equals(clients.id) : clients.id != null) return false;
-        if (name != null ? !name.equals(clients.name) : clients.name != null) return false;
-        if (nif != null ? !nif.equals(clients.nif) : clients.nif != null) return false;
+        if (address != null ? !address.equals(provider.address) : provider.address != null) return false;
+        if (id != null ? !id.equals(provider.id) : provider.id != null) return false;
+        if (name != null ? !name.equals(provider.name) : provider.name != null) return false;
+        if (nif != null ? !nif.equals(provider.nif) : provider.nif != null) return false;
 
         return true;
     }
@@ -77,13 +79,12 @@ public class Clients {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "DEFAULT_DOCK", referencedColumnName = "ID")
-    public OutgoingDocks getOutgoingDock() {
-        return outgoingDock;
+    @OneToMany(mappedBy = "provider")
+    public List<ReceivingOrder> getReceivingOrdersByProvider() {
+        return receivingOrdersByProvider;
     }
 
-    public void setOutgoingDock(OutgoingDocks outgoingDock) {
-        this.outgoingDock = outgoingDock;
+    public void setReceivingOrdersByProvider(List<ReceivingOrder> receivingOrdersByProvider) {
+        this.receivingOrdersByProvider = receivingOrdersByProvider;
     }
 }

@@ -22,7 +22,14 @@
         </bean>
 
         <tx:annotation-driven transaction-manager="tm"/>
+
+        <bean id="actionStatusDAO" class="jpa.dao.ActionStatusDAO"/>
+        <bean id="containerStatusDAO" class="jpa.dao.ContainerStatusDAO"/>
         <bean id="locationsDAO" class="jpa.dao.LocationsDAO"/>
+        <bean id="orderStatusDAO" class="jpa.dao.OrdersStatusDAO"/>
+        <bean id="receivingOrdersStatusDAO" class="jpa.dao.ReceivingOrdersStatusDAO"/>
+        <bean id="roleTypeDAO" class="jpa.dao.RoleTypeDAO"/>
+        <bean id="userDAO" class="jpa.dao.UserDAO"/>
 
         <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
             <property name="database" value="ORACLE"/>

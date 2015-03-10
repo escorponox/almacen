@@ -5,13 +5,15 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-public class Users {
+@Table(name = "USERS")
+public class User {
     private Long id;
     private String username;
     private String password;
     private Boolean enabled;
     private BigDecimal commission;
-    private List<Orders> ordersBySeller;
+    private List<Order> ordersBySeller;
+    private List<UserRole> userRoleById;
 
     @SequenceGenerator(name = "USERS_SEQ", sequenceName = "USERS_SEQ", allocationSize = 1)
 
@@ -71,13 +73,13 @@ public class Users {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Users users = (Users) o;
+        User user = (User) o;
 
-        if (commission != null ? !commission.equals(users.commission) : users.commission != null) return false;
-        if (enabled != null ? !enabled.equals(users.enabled) : users.enabled != null) return false;
-        if (id != null ? !id.equals(users.id) : users.id != null) return false;
-        if (password != null ? !password.equals(users.password) : users.password != null) return false;
-        if (username != null ? !username.equals(users.username) : users.username != null) return false;
+        if (commission != null ? !commission.equals(user.commission) : user.commission != null) return false;
+        if (enabled != null ? !enabled.equals(user.enabled) : user.enabled != null) return false;
+        if (id != null ? !id.equals(user.id) : user.id != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
 
         return true;
     }
@@ -93,11 +95,20 @@ public class Users {
     }
 
     @OneToMany(mappedBy = "seller")
-    public List<Orders> getOrdersBySeller() {
+    public List<Order> getOrdersBySeller() {
         return ordersBySeller;
     }
 
-    public void setOrdersBySeller(List<Orders> ordersBySeller) {
+    public void setOrdersBySeller(List<Order> ordersBySeller) {
         this.ordersBySeller = ordersBySeller;
+    }
+
+    @OneToMany(mappedBy = "user")
+    public List<UserRole> getUserRoleById() {
+        return userRoleById;
+    }
+
+    public void setUserRoleById(List<UserRole> userRoleById) {
+        this.userRoleById = userRoleById;
     }
 }

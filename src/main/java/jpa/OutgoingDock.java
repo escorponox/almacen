@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "INCOMING_DOCKS", schema = "PROYECTO", catalog = "")
-public class IncomingDocks {
+@Table(name = "OUTGOING_DOCKS", schema = "PROYECTO", catalog = "")
+public class OutgoingDock {
     private Long id;
     private String name;
-    private List<ReceiptActions> receiptActions;
+    private List<Container> containersByDock;
 
-    @SequenceGenerator(name = "INCOMING_DOCKS_SEQ", sequenceName = "INCOMING_DOCKS_SEQ", allocationSize = 1)
+    @SequenceGenerator(name = "OUTGOING_DOCKS_SEQ", sequenceName = "OUTGOING_DOCKS_SEQ", allocationSize = 1)
 
     @Id
     @Column(name = "ID", nullable = false, insertable = true, updatable = true, precision = -127)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INCOMING_DOCKS_SEQ")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "OUTGOING_DOCKS_SEQ")
     public Long getId() {
         return id;
     }
@@ -38,7 +38,7 @@ public class IncomingDocks {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        IncomingDocks that = (IncomingDocks) o;
+        OutgoingDock that = (OutgoingDock) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
@@ -53,12 +53,12 @@ public class IncomingDocks {
         return result;
     }
 
-    @OneToMany(mappedBy = "incomingDock")
-    public List<ReceiptActions> getReceiptActions() {
-        return receiptActions;
+    @OneToMany(mappedBy = "outgoingDock")
+    public List<Container> getContainersByDock() {
+        return containersByDock;
     }
 
-    public void setReceiptActions(List<ReceiptActions> receiptActions) {
-        this.receiptActions = receiptActions;
+    public void setContainersByDock(List<Container> containersById) {
+        this.containersByDock = containersById;
     }
 }

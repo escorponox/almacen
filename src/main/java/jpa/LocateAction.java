@@ -4,11 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "LOCATE_ACTIONS", schema = "PROYECTO", catalog = "")
-public class LocateActions {
+public class LocateAction {
     private Long id;
-    private ActionStatus actionStatusByStatus;
-    private ReceiptActions receiptActionsByReceiptActionId;
-    private Users usersByPickerId;
+    private ActionStatus status;
+    private ReceiptAction receiptAction;
+    private User picker;
 
     @SequenceGenerator(name = "LOCATE_ACTIONS_SEQ", sequenceName = "LOCATE_ACTIONS_SEQ", allocationSize = 1)
 
@@ -28,7 +28,7 @@ public class LocateActions {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        LocateActions that = (LocateActions) o;
+        LocateAction that = (LocateAction) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
 
@@ -42,31 +42,31 @@ public class LocateActions {
 
     @ManyToOne
     @JoinColumn(name = "STATUS", referencedColumnName = "ID", nullable = false)
-    public ActionStatus getActionStatusByStatus() {
-        return actionStatusByStatus;
+    public ActionStatus getStatus() {
+        return status;
     }
 
-    public void setActionStatusByStatus(ActionStatus actionStatusByStatus) {
-        this.actionStatusByStatus = actionStatusByStatus;
+    public void setStatus(ActionStatus actionStatusByStatus) {
+        this.status = actionStatusByStatus;
     }
 
     @ManyToOne
     @JoinColumn(name = "RECEIPT_ACTION_ID", referencedColumnName = "ID", nullable = false)
-    public ReceiptActions getReceiptActionsByReceiptActionId() {
-        return receiptActionsByReceiptActionId;
+    public ReceiptAction getReceiptAction() {
+        return receiptAction;
     }
 
-    public void setReceiptActionsByReceiptActionId(ReceiptActions receiptActionsByReceiptActionId) {
-        this.receiptActionsByReceiptActionId = receiptActionsByReceiptActionId;
+    public void setReceiptAction(ReceiptAction receiptActionsByReceiptActionId) {
+        this.receiptAction = receiptActionsByReceiptActionId;
     }
 
     @ManyToOne
     @JoinColumn(name = "PICKER_ID", referencedColumnName = "ID", nullable = false)
-    public Users getUsersByPickerId() {
-        return usersByPickerId;
+    public User getPicker() {
+        return picker;
     }
 
-    public void setUsersByPickerId(Users usersByPickerId) {
-        this.usersByPickerId = usersByPickerId;
+    public void setPicker(User userByPickerId) {
+        this.picker = userByPickerId;
     }
 }

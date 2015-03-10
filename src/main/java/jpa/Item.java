@@ -10,7 +10,7 @@ public class Item {
     private String name;
     private String description;
     private BigDecimal price;
-    private Locations locationsByLocation;
+    private Location location;
 
     @SequenceGenerator(name = "ITEM_SEQ", sequenceName = "ITEM_SEQ", allocationSize = 1)
 
@@ -93,11 +93,11 @@ public class Item {
 
     @ManyToOne
     @JoinColumn(name = "LOCATION", referencedColumnName = "ID")
-    public Locations getLocationsByLocation() {
-        return locationsByLocation;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setLocationsByLocation(Locations locationsByLocation) {
-        this.locationsByLocation = locationsByLocation;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

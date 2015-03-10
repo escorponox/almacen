@@ -3,7 +3,8 @@ package jpa;
 import javax.persistence.*;
 
 @Entity
-public class Locations {
+@Table(name = "LOCATIONS")
+public class Location {
     private Long id;
     private String corridor;
     private String side;
@@ -79,14 +80,14 @@ public class Locations {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Locations locations = (Locations) o;
+        Location location = (Location) o;
 
-        if (corridor != null ? !corridor.equals(locations.corridor) : locations.corridor != null) return false;
-        if (id != null ? !id.equals(locations.id) : locations.id != null) return false;
-        if (module != null ? !module.equals(locations.module) : locations.module != null) return false;
-        if (name != null ? !name.equals(locations.name) : locations.name != null) return false;
-        if (seq != null ? !seq.equals(locations.seq) : locations.seq != null) return false;
-        if (side != null ? !side.equals(locations.side) : locations.side != null) return false;
+        if (corridor != null ? !corridor.equals(location.corridor) : location.corridor != null) return false;
+        if (id != null ? !id.equals(location.id) : location.id != null) return false;
+        if (module != null ? !module.equals(location.module) : location.module != null) return false;
+        if (name != null ? !name.equals(location.name) : location.name != null) return false;
+        if (seq != null ? !seq.equals(location.seq) : location.seq != null) return false;
+        if (side != null ? !side.equals(location.side) : location.side != null) return false;
 
         return true;
     }

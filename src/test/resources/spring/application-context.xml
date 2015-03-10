@@ -16,8 +16,9 @@
         </bean>
 
         <tx:annotation-driven transaction-manager="tm"/>
-        <bean id="locationsDAO" class="jpa.dao.LocationsDAO">
-        </bean>
+        <bean id="locationsDAO" class="jpa.dao.LocationsDAO"/>
+        <bean id="roleTypeDAO" class="jpa.dao.RoleTypeDAO"/>
+        <bean id="actionStatusDAO" class="jpa.dao.ActionStatusDAO"/>
     </beans>
 
 </beans>

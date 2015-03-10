@@ -1,12 +1,14 @@
 package jpa;
 
+import jpa.enums.ActionStatusEnum;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ACTION_STATUS", schema = "PROYECTO", catalog = "")
 public class ActionStatus {
     private Long id;
-    private String status;
+    private ActionStatusEnum status;
     private String description;
 
     @Id
@@ -20,12 +22,13 @@ public class ActionStatus {
     }
 
     @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "STATUS", nullable = false, insertable = true, updatable = true, length = 20)
-    public String getStatus() {
+    public ActionStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ActionStatusEnum status) {
         this.status = status;
     }
 
@@ -41,14 +44,19 @@ public class ActionStatus {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
 
         ActionStatus that = (ActionStatus) o;
 
-        if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (status != null ? !status.equals(that.status) : that.status != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null)
+            return false;
+        if (id != null ? !id.equals(that.id) : that.id != null)
+            return false;
+        if (status != null ? !status.equals(that.status) : that.status != null)
+            return false;
 
         return true;
     }

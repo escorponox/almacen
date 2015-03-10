@@ -25,7 +25,7 @@
         background: #fff;
         -webkit-border-radius: 2px;
         -moz-border-radius: 2px;
-        border: 1px solid #000;
+        /*border: 1px solid #000;*/
     }
 </style>
 <div id="login-box">

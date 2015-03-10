@@ -7,15 +7,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "RECEIVING_ORDERS", schema = "PROYECTO", catalog = "")
-public class ReceivingOrders {
+public class ReceivingOrder {
     private BigDecimal id;
     private Long code;
     private Date createdAt;
     private Date updatedAt;
-    private List<ReceiptActions> receiptActionsesByOrder;
-    private Providers provider;
+    private List<ReceiptAction> receiptActionsesByOrder;
+    private Provider provider;
     private ReceivingOrdersStatus status;
-    private List<ReceivingOrdersLines> receivingOrdersLinesByOrder;
+    private List<ReceivingOrdersLine> receivingOrdersLinesByOrder;
 
     @SequenceGenerator(name = "RECEIVING_ORDERS_SEQ", sequenceName = "RECEIVING_ORDERS_SEQ", allocationSize = 1)
 
@@ -65,7 +65,7 @@ public class ReceivingOrders {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ReceivingOrders that = (ReceivingOrders) o;
+        ReceivingOrder that = (ReceivingOrder) o;
 
         if (code != null ? !code.equals(that.code) : that.code != null) return false;
         if (createdAt != null ? !createdAt.equals(that.createdAt) : that.createdAt != null) return false;
@@ -85,21 +85,21 @@ public class ReceivingOrders {
     }
 
     @OneToMany(mappedBy = "receivingOrder")
-    public List<ReceiptActions> getReceiptActionsesByOrder() {
+    public List<ReceiptAction> getReceiptActionsesByOrder() {
         return receiptActionsesByOrder;
     }
 
-    public void setReceiptActionsesByOrder(List<ReceiptActions> receiptActionsesByOrder) {
+    public void setReceiptActionsesByOrder(List<ReceiptAction> receiptActionsesByOrder) {
         this.receiptActionsesByOrder = receiptActionsesByOrder;
     }
 
     @ManyToOne
     @JoinColumn(name = "PROVIDER_ID", referencedColumnName = "ID", nullable = false)
-    public Providers getProvider() {
+    public Provider getProvider() {
         return provider;
     }
 
-    public void setProvider(Providers provider) {
+    public void setProvider(Provider provider) {
         this.provider = provider;
     }
 
@@ -114,11 +114,11 @@ public class ReceivingOrders {
     }
 
     @OneToMany(mappedBy = "receivingOrder")
-    public List<ReceivingOrdersLines> getReceivingOrdersLinesByOrder() {
+    public List<ReceivingOrdersLine> getReceivingOrdersLinesByOrder() {
         return receivingOrdersLinesByOrder;
     }
 
-    public void setReceivingOrdersLinesByOrder(List<ReceivingOrdersLines> receivingOrdersLinesByOrder) {
+    public void setReceivingOrdersLinesByOrder(List<ReceivingOrdersLine> receivingOrdersLinesByOrder) {
         this.receivingOrdersLinesByOrder = receivingOrdersLinesByOrder;
     }
 }

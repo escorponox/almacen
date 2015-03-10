@@ -1,12 +1,14 @@
 package jpa;
 
+import jpa.enums.ReceivingOrdersStatusEnum;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "RECEIVING_ORDERS_STATUS", schema = "PROYECTO", catalog = "")
 public class ReceivingOrdersStatus {
     private Long id;
-    private String status;
+    private ReceivingOrdersStatusEnum status;
     private String description;
 
     @Id
@@ -20,12 +22,13 @@ public class ReceivingOrdersStatus {
     }
 
     @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "STATUS", nullable = false, insertable = true, updatable = true, length = 20)
-    public String getStatus() {
+    public ReceivingOrdersStatusEnum getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ReceivingOrdersStatusEnum status) {
         this.status = status;
     }
 
