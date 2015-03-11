@@ -29,4 +29,8 @@
         <put-attribute name="body" value="/WEB-INF/views/users/list.jsp"/>
     </definition>
 
+    <definition name="editUserTile" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/users/edit.jsp"/>
+    </definition>
+
 </tiles-definitions>

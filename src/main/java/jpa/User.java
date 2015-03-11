@@ -1,7 +1,10 @@
 package jpa;
 
+import jpa.enums.RoleTypeEnum;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -111,4 +114,14 @@ public class User {
     public void setUserRoleById(List<UserRole> userRoleById) {
         this.userRoleById = userRoleById;
     }
+
+    @Transient
+    public List<RoleTypeEnum> getRoleTypes() {
+        List<RoleTypeEnum> roleTypes = new LinkedList<RoleTypeEnum>();
+        for (UserRole userRole : getUserRoleById()) {
+            roleTypes.add(userRole.getRole().getRole());
+        }
+        return roleTypes;
+    }
+
 }

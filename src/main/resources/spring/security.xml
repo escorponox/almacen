@@ -28,6 +28,10 @@
                                        "select username,password, enabled from users where username=?"
                                authorities-by-username-query=
                                        "SELECT users.username, ROLE_TYPE.role AS authorities FROM user_roles INNER JOIN USERS ON users.id = user_roles.user_id INNER JOIN ROLE_TYPE ON ROLE_TYPE.ID = user_roles.ROLE WHERE users.username =?"/>
+            <password-encoder ref="encoder"/>
         </authentication-provider>
     </authentication-manager>
+    <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
 </beans:beans>
