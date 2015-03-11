@@ -124,4 +124,8 @@ public class User {
         return roleTypes;
     }
 
+    public void setRoleTypes(List<RoleTypeEnum> roleTypes) {
+
+    }
+
 }
