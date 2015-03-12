@@ -1,14 +1,13 @@
 package services;
 
 import jpa.User;
-import jpa.UserRole;
-import jpa.dao.RoleTypeDAO;
 import jpa.dao.UserDAO;
-import jpa.dao.UserRoleDAO;
 import jpa.enums.RoleTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import services.utils.users.UserNameAvailabilityChecker;
+import services.utils.users.UserUpdater;
 
 import java.util.Collection;
 import java.util.List;
@@ -18,43 +17,30 @@ import java.util.List;
 public class UserService {
 
     @Autowired
+    private UserUpdater userUpdater;
+    @Autowired
+    private UserNameAvailabilityChecker userNameAvailabilityChecker;
+
+    @Autowired
     private UserDAO userDAO;
-    @Autowired
-    private UserRoleDAO userRoleDAO;
-    @Autowired
-    private RoleTypeDAO roleTypeDAO;
+
 
     public void deleteUser(User user) {
         userDAO.deleteUser(user);
     }
 
-    public void updateUserFromForm(User user, List<RoleTypeEnum> roleTypes) {
+    public void updateUserFromForm(User userFromForm, List<RoleTypeEnum> roleTypes) {
 
-        User savedUser = userDAO.getUserById(user.getId());
+        User savedUser = userDAO.getUserById(userFromForm.getId());
 
         if (savedUser != null) {
-            if (user.getUsername().equals(savedUser.getUsername())) {
-                savedUser.setEnabled(user.getEnabled());
-                savedUser.setCommission(user.getCommission());
-
-                List<RoleTypeEnum> roleTypesToRemove = savedUser.getRoleTypesEnums();
-                roleTypesToRemove.removeAll(roleTypes);
-
-                roleTypes.removeAll(savedUser.getRoleTypesEnums());
-                for (RoleTypeEnum roleType : roleTypes) {
-                    UserRole userRole = new UserRole();
-                    userRole.setRole(roleTypeDAO.getRoleTypeByRole(roleType));
-                    userRole.setUser(savedUser);
-                    userRoleDAO.addUserRole(userRole);
-                }
-
-                for (RoleTypeEnum roleTypeEnum : roleTypesToRemove) {
-                    UserRole roleToRemove = userRoleDAO.getUserRoleByUserAndRoleTypeEnum(savedUser, roleTypeEnum);
-                    userRoleDAO.deleteUserRole(roleToRemove);
-                }
-
-                userDAO.updateUser(savedUser);
+            if (userNameAvailabilityChecker.check(userFromForm, savedUser)) {
+                userUpdater.update(userFromForm, roleTypes, savedUser);
+            } else {
+                //TODO: name not available
             }
+        } else {
+            //TODO: create new user
         }
     }
 
