@@ -1,7 +1,6 @@
 package jpa.dao;
 
 
-import jpa.Location;
 import jpa.User;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +20,7 @@ public class UserDAO {
     }
 
     public void deleteUser(User user) {
-        em.remove(em.find(Location.class, user.getId()));
+        em.remove(em.find(User.class, user.getId()));
     }
 
     public void updateUser(User user) {

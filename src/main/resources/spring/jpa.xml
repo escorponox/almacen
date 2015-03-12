@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jee="http://www.springframework.org/schema/jee"
-       xmlns="http://www.springframework.org/schema/beans"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+       xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <beans>
 
@@ -19,9 +19,11 @@
 
         <bean id="tm" class="org.springframework.orm.jpa.JpaTransactionManager">
             <property name="entityManagerFactory" ref="emf"/>
+            <property name="jpaDialect" ref="jpaDialect"/>
         </bean>
 
         <tx:annotation-driven transaction-manager="tm"/>
+        <context:component-scan base-package="services"/>
 
         <bean id="actionStatusDAO" class="jpa.dao.ActionStatusDAO"/>
         <bean id="containerStatusDAO" class="jpa.dao.ContainerStatusDAO"/>
@@ -38,6 +40,8 @@
             <property name="generateDdl" value="false"/>
             <property name="databasePlatform" value="org.hibernate.dialect.Oracle10gDialect"/>
         </bean>
+
+        <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
     </beans>
 
 </beans>

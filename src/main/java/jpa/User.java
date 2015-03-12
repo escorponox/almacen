@@ -17,6 +17,7 @@ public class User {
     private BigDecimal commission;
     private List<Order> ordersBySeller;
     private List<UserRole> userRoleById;
+    private List<RoleTypeEnum> roleTypesEnums;
 
     @SequenceGenerator(name = "USERS_SEQ", sequenceName = "USERS_SEQ", allocationSize = 1)
 
@@ -116,7 +117,7 @@ public class User {
     }
 
     @Transient
-    public List<RoleTypeEnum> getRoleTypes() {
+    public List<RoleTypeEnum> getRoleTypesEnums() {
         List<RoleTypeEnum> roleTypes = new LinkedList<RoleTypeEnum>();
         for (UserRole userRole : getUserRoleById()) {
             roleTypes.add(userRole.getRole().getRole());
@@ -124,8 +125,8 @@ public class User {
         return roleTypes;
     }
 
-    public void setRoleTypes(List<RoleTypeEnum> roleTypes) {
-
+    public void setRoleTypesEnums(List<RoleTypeEnum> roleTypes) {
+        this.roleTypesEnums = roleTypes;
     }
 
 }

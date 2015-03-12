@@ -25,18 +25,21 @@ public class UserRole {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof UserRole)) return false;
 
         UserRole userRole = (UserRole) o;
 
-        if (id != null ? !id.equals(userRole.id) : userRole.id != null) return false;
+        if (!role.equals(userRole.role)) return false;
+        if (!user.equals(userRole.user)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        int result = role.hashCode();
+        result = 31 * result + user.hashCode();
+        return result;
     }
 
     @ManyToOne

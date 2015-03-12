@@ -1,8 +1,9 @@
 package jpa.dao;
 
 
-import jpa.Location;
+import jpa.User;
 import jpa.UserRole;
+import jpa.enums.RoleTypeEnum;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,7 @@ public class UserRoleDAO {
     }
 
     public void deleteUserRole(UserRole userRole) {
-        em.remove(em.find(Location.class, userRole.getId()));
+        em.remove(em.find(UserRole.class, userRole.getId()));
     }
 
     public void updateUserRole(UserRole userRole) {
@@ -37,5 +38,12 @@ public class UserRoleDAO {
 
     public UserRole getUserRoleById(Long id) {
         return em.find(UserRole.class, id);
+    }
+
+    public UserRole getUserRoleByUserAndRoleTypeEnum(User user, RoleTypeEnum roleTypeEnum) {
+        Query query = em.createQuery("select ur from UserRole ur where ur.user = :user and ur.role.role = :roleTypeEnum");
+        query.setParameter("user", user);
+        query.setParameter("roleTypeEnum", roleTypeEnum);
+        return (UserRole) query.getSingleResult();
     }
 }
