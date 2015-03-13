@@ -11,11 +11,11 @@ public class UserNameAvailabilityChecker {
     @Autowired
     private UserDAO userDAO;
 
-    public Boolean check(User modifiedUser) {
+    public Boolean check(String username, Long editedUserId) {
 
-        User savedUser = userDAO.getUserById(modifiedUser.getId());
+        User savedUser = userDAO.getUserById(editedUserId);
 
-        User existingUserByName = userDAO.getUserByUsername(modifiedUser.getUsername());
+        User existingUserByName = userDAO.getUserByUsername(username);
         return !(existingUserByName != null && !existingUserByName.equals(savedUser));
     }
 

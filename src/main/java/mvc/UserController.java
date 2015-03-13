@@ -37,7 +37,10 @@ public class UserController {
 
         if (user != null) {
             UserEditForm userEditForm = new UserEditForm();
-            userEditForm.setUser(user);
+            userEditForm.setId(user.getId());
+            userEditForm.setUsername(user.getUsername());
+            userEditForm.setEnabled(user.getEnabled());
+            userEditForm.setCommission(user.getCommission());
             userEditForm.setRoleTypeEnums(user.getRoleTypesEnums());
             model.addAttribute("roleTypesList", RoleTypeEnum.asList());
             model.addAttribute(userEditForm);
@@ -85,8 +88,8 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String saveUser(@Valid UserEditForm userEditForm, BindingResult bindingResult, Model model) {
 
-        if (!userService.getUserNameAvailabilityChecker().check(userEditForm.getUser())) {
-            bindingResult.rejectValue("user.username", "error.user.username", "Username already in use");
+        if (!userService.getUserNameAvailabilityChecker().check(userEditForm.getUsername(), userEditForm.getId())) {
+            bindingResult.rejectValue("username", "error.user.username", "Username already in use");
         }
 
         if (bindingResult.hasErrors()) {
@@ -94,7 +97,7 @@ public class UserController {
             return "editUserTile";
         }
 
-        userService.updateUser(userEditForm.getUser(), userEditForm.getRoleTypeEnums());
+        userService.updateUser(userEditForm);
 
         return "redirect:/users?list";
     }

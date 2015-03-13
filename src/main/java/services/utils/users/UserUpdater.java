@@ -1,5 +1,6 @@
 package services.utils.users;
 
+import forms.UserEditForm;
 import jpa.User;
 import jpa.UserRole;
 import jpa.dao.RoleTypeDAO;
@@ -23,16 +24,16 @@ public class UserUpdater {
     @Autowired
     private UserDAO userDAO;
 
-    public void update(User modifiedUser, List<RoleTypeEnum> roleTypes, User savedUser) {
-        savedUser.setUsername(modifiedUser.getUsername());
-        savedUser.setEnabled(modifiedUser.getEnabled());
-        savedUser.setCommission(modifiedUser.getCommission());
+    public void update(UserEditForm userEditForm, User savedUser) {
+        savedUser.setUsername(userEditForm.getUsername());
+        savedUser.setEnabled(userEditForm.getEnabled());
+        savedUser.setCommission(userEditForm.getCommission());
 
         List<RoleTypeEnum> roleTypesToRemove = savedUser.getRoleTypesEnums();
-        roleTypesToRemove.removeAll(roleTypes);
+        roleTypesToRemove.removeAll(userEditForm.getRoleTypeEnums());
 
-        roleTypes.removeAll(savedUser.getRoleTypesEnums());
-        for (RoleTypeEnum roleType : roleTypes) {
+        userEditForm.getRoleTypeEnums().removeAll(savedUser.getRoleTypesEnums());
+        for (RoleTypeEnum roleType : userEditForm.getRoleTypeEnums()) {
             UserRole userRole = new UserRole();
             userRole.setRole(roleTypeDAO.getRoleTypeByRole(roleType));
             userRole.setUser(savedUser);

@@ -3,8 +3,6 @@ package jpa;
 import jpa.enums.RoleTypeEnum;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,8 +63,6 @@ public class User {
     }
 
     @Basic
-    @DecimalMin(value = "0", message = "Value must be between 0.00 and 1.00")
-    @DecimalMax(value = "1", message = "Value must be between 0.00 and 1.00")
     @Column(name = "COMMISSION", nullable = true, insertable = true, updatable = true, precision = -127)
     public BigDecimal getCommission() {
         return commission;

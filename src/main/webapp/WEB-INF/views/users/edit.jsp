@@ -11,20 +11,20 @@
     <sf:form method="post" id="userForm" modelAttribute="userEditForm">
         <table cellspacing="5" style="text-align: center">
             <tr>
-                <sf:hidden path="user.id"/>
-                <td><sf:label path="user.username">User: </sf:label></td>
-                <td><sf:input path="user.username"/></td>
-                <td><sf:errors path="user.username"/></td>
+                <sf:hidden path="id"/>
+                <td><sf:label path="username">User: </sf:label></td>
+                <td><sf:input path="username"/></td>
+                <td><sf:errors path="username"/></td>
             </tr>
             <tr>
-                <td><sf:label path="user.enabled">Enabled: </sf:label></td>
-                <td><sf:checkbox path="user.enabled"/></td>
-                <td><sf:errors path="user.enabled"/></td>
+                <td><sf:label path="enabled">Enabled: </sf:label></td>
+                <td><sf:checkbox path="enabled"/></td>
+                <td><sf:errors path="enabled"/></td>
             </tr>
             <tr>
-                <td><sf:label path="user.commission">Commission: </sf:label></td>
-                <td><sf:input path="user.commission"/></td>
-                <td><sf:errors path="user.commission"/></td>
+                <td><sf:label path="commission">Commission: </sf:label></td>
+                <td><sf:input path="commission"/></td>
+                <td><sf:errors path="commission"/></td>
             </tr>
             <tr>
                 <td><sf:label path="roleTypeEnums">Roles: </sf:label></td>

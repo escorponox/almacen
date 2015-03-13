@@ -2,16 +2,15 @@ package services;
 
 import forms.ChangePasswordForm;
 import forms.CreateUserForm;
+import forms.UserEditForm;
 import jpa.User;
 import jpa.dao.UserDAO;
-import jpa.enums.RoleTypeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import services.utils.users.*;
 
 import java.util.Collection;
-import java.util.List;
 
 @Service
 @Transactional
@@ -41,21 +40,19 @@ public class UserService {
         userCreator.create(createUserForm);
     }
 
-    //TODO: Refactor. Create a editUserForm and return Boolean
-    public void updateUser(User userFromForm, List<RoleTypeEnum> roleTypes) {
+    public void updateUser(UserEditForm userEditForm) {
 
-        User savedUser = userDAO.getUserById(userFromForm.getId());
+        User savedUser = userDAO.getUserById(userEditForm.getId());
 
         if (savedUser != null) {
-            userUpdater.update(userFromForm, roleTypes, savedUser);
-        } else {
-            //TODO: userCreator.create(userFromForm, roleTypes);
+            userUpdater.update(userEditForm, savedUser);
         }
     }
 
     public void changePassword(ChangePasswordForm changePasswordForm) {
 
         User savedUser = userDAO.getUserById(changePasswordForm.getUserId());
+
         if (savedUser != null) {
             userPasswordUpdater.update(savedUser, changePasswordForm.getNewPassword());
         }
