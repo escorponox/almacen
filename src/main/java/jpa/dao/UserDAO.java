@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.Collection;
+import java.util.List;
 
 @Repository("usersDao")
 public class UserDAO {
@@ -39,6 +40,10 @@ public class UserDAO {
     public User getUserByUsername(String username) {
         Query query = em.createQuery("select a from User a where a.username = :username");
         query.setParameter("username", username);
-        return (User) query.getSingleResult();
+        List<User> resultList = query.getResultList();
+        if (resultList.size() > 0) {
+            return resultList.get(0);
+        }
+        return null;
     }
 }

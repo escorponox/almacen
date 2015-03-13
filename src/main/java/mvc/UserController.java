@@ -1,5 +1,7 @@
 package mvc;
 
+import forms.ChangePasswordForm;
+import forms.CreateUserForm;
 import forms.UserEditForm;
 import jpa.User;
 import jpa.enums.RoleTypeEnum;
@@ -23,39 +25,118 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.GET, params = "list")
     public String list(Model model) {
+
         model.addAttribute(userService.listAll());
         return "listUsersTile";
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "edit")
     public String edit(@RequestParam("edit") Long id, Model model) {
+
         User user = userService.getUserById(id);
-        UserEditForm userEditForm = new UserEditForm();
-        userEditForm.setUser(user);
-        userEditForm.setRoleTypeEnums(user.getRoleTypesEnums());
-        model.addAttribute("roleTypesList", RoleTypeEnum.asList());
-        model.addAttribute(userEditForm);
-        return "editUserTile";
+
+        if (user != null) {
+            UserEditForm userEditForm = new UserEditForm();
+            userEditForm.setUser(user);
+            userEditForm.setRoleTypeEnums(user.getRoleTypesEnums());
+            model.addAttribute("roleTypesList", RoleTypeEnum.asList());
+            model.addAttribute(userEditForm);
+            return "editUserTile";
+        } else {
+            return "redirect:/users?list";
+        }
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "delete")
     public String delete(@RequestParam("delete") Long id) {
+
         User user = userService.getUserById(id);
-        userService.deleteUser(user);
+
+        if (user != null) {
+            userService.deleteUser(user);
+        }
         return "redirect:/users?list";
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public String save(@Valid UserEditForm userEditForm, BindingResult bindingResult, Model model) {
+    @RequestMapping(method = RequestMethod.GET, params = "pass")
+    public String pass(@RequestParam("pass") Long id, Model model) {
+        User user = userService.getUserById(id);
+
+        if (user != null) {
+            ChangePasswordForm changePasswordForm = new ChangePasswordForm();
+            changePasswordForm.setUserId(user.getId());
+            changePasswordForm.setUsername(user.getUsername());
+            model.addAttribute(changePasswordForm);
+            return "changePasswordTile";
+        } else {
+            return "redirect:/users?list";
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, params = "newUser")
+    public String newUser(Model model) {
+
+        CreateUserForm createUserForm = new CreateUserForm();
+        model.addAttribute(createUserForm);
+        model.addAttribute("roleTypesList", RoleTypeEnum.asList());
+        return "newUserTile";
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String saveUser(@Valid UserEditForm userEditForm, BindingResult bindingResult, Model model) {
+
+        if (!userService.getUserNameAvailabilityChecker().check(userEditForm.getUser())) {
+            bindingResult.rejectValue("user.username", "error.user.username", "Username already in use");
+        }
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("roleTypesList", RoleTypeEnum.asList());
-//            model.addAttribute("user", userEditForm);
             return "editUserTile";
         }
 
-        userService.updateUserFromForm(userEditForm.getUser(), userEditForm.getRoleTypeEnums());
-//        userService.addUser(user);
+        userService.updateUser(userEditForm.getUser(), userEditForm.getRoleTypeEnums());
+
+        return "redirect:/users?list";
+    }
+
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public String changePassword(@Valid ChangePasswordForm changePasswordForm,
+                                 BindingResult bindingResult, Model model) {
+
+        if (!userService.getPasswordValidator().userExist(changePasswordForm)) {
+            bindingResult.reject("error.notValidId", "User not found");
+        }
+
+        if (!userService.getPasswordValidator().equalsPasswords(changePasswordForm)) {
+            bindingResult.reject("error.passwordsMismatch", "Passwords does not match");
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "changePasswordTile";
+        }
+
+        userService.changePassword(changePasswordForm);
+
+        return "redirect:/users?list";
+    }
+
+    @RequestMapping(value = "/new", method = RequestMethod.POST)
+    public String saveNewUser(@Valid CreateUserForm createUserForm, BindingResult bindingResult, Model model) {
+
+        if (!userService.getUserNameAvailabilityChecker().check(createUserForm.getUsername())) {
+            bindingResult.rejectValue("username", "error.user.username", "Username already in use");
+        }
+
+        if (!userService.getPasswordValidator().equalsPasswords(createUserForm)) {
+            bindingResult.rejectValue("repeatPassword", "error.passwordsMismatch", "Passwords does not match");
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("roleTypesList", RoleTypeEnum.asList());
+            return "newUserTile";
+        }
+
+        userService.createUser(createUserForm);
 
         return "redirect:/users?list";
     }

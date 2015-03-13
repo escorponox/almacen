@@ -33,4 +33,12 @@
         <put-attribute name="body" value="/WEB-INF/views/users/edit.jsp"/>
     </definition>
 
+    <definition name="changePasswordTile" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/users/password.jsp"/>
+    </definition>
+
+    <definition name="newUserTile" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/users/new.jsp"/>
+    </definition>
+
 </tiles-definitions>

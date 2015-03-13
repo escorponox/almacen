@@ -25,10 +25,17 @@
                             <c:if test="${!rolStatus.last}">&nbsp;-&nbsp;</c:if>
                         </c:forEach>
                     </td>
-                    <td><input type="button" value="Edit" onclick="editUser(<c:out value="${user.id}"/>)"></td>
-                    <td><input type="button" value="Delete" onclick="deleteUser(<c:out value="${user.id}"/>)"></td>
+                    <td><input type="button" value="Edit" onclick="editUser(<c:out value="${user.id}"/>)">
+                        <input type="button" value="Delete" onclick="deleteUser(<c:out value="${user.id}"/>)">
+                        <input type="button" value="Change Password"
+                               onclick="changePassword(<c:out value="${user.id}"/>)">
+                    </td>
                 </tr>
             </c:forEach>
+            <tr>
+                <td><input type="button" value="New User"
+                           onclick="newUser()"></td>
+            </tr>
         </table>
     </sf:form>
 </div>
@@ -39,5 +46,11 @@
     }
     function deleteUser(userId) {
         window.location.href = '<s:url value="/users?delete="/>' + userId;
+    }
+    function changePassword(userId) {
+        window.location.href = '<s:url value="/users?pass="/>' + userId;
+    }
+    function newUser() {
+        window.location.href = '<s:url value="/users?newUser"/>';
     }
 </script>

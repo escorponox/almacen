@@ -40,7 +40,7 @@
 </div>
 <script>
     function saveUser() {
-        document.getElementById('userForm').action = '<c:url value="/users"/>';
+        document.getElementById('userForm').action = '<c:url value="/users/save"/>';
         document.getElementById('userForm').submit();
     }
 
