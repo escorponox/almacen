@@ -17,7 +17,7 @@ public class LocationsInitiator {
 
         ApplicationContext context = new ClassPathXmlApplicationContext("spring/application-context.xml");
 
-        LocationDAO locationDAO = (LocationDAO) context.getBean("locationsDAO");
+        LocationDAO locationDAO = (LocationDAO) context.getBean("locationDAO");
 
         Long sequence = 0L;
 

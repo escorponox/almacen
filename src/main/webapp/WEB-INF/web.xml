@@ -42,4 +42,16 @@
         </listener-class>
     </listener>
 
+    <servlet>
+        <servlet-name>ReceivingOrdersSOAP</servlet-name>
+        <servlet-class>
+            com.sun.xml.ws.transport.http.servlet.WSServlet
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReceivingOrdersSOAP</servlet-name>
+        <url-pattern>/ReceivingOrdersSOAP</url-pattern>
+    </servlet-mapping>
+
 </web-app>

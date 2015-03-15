@@ -1,5 +1,5 @@
 package jpa.enums;
 
 public enum OrdersStatusEnum {
-    CR, PI, DO, SH
+    CR, PI, AS, DO, SH
 }

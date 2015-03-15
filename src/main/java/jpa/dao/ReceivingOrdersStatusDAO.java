@@ -1,6 +1,7 @@
 package jpa.dao;
 
 import jpa.ReceivingOrder;
+import jpa.ReceivingOrdersStatus;
 import jpa.enums.ReceivingOrdersStatusEnum;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,9 +27,9 @@ public class ReceivingOrdersStatusDAO {
         return em.find(ReceivingOrder.class, id);
     }
 
-    public ReceivingOrder getReceivingOrdersStatusByStatus(ReceivingOrdersStatusEnum receivingOrdersStatusEnum) {
-        Query query = em.createQuery("select a from ReceivingOrder a where a.status = :status");
+    public ReceivingOrdersStatus getReceivingOrdersStatusByStatus(ReceivingOrdersStatusEnum receivingOrdersStatusEnum) {
+        Query query = em.createQuery("select a from ReceivingOrdersStatus a where a.status = :status");
         query.setParameter("status", receivingOrdersStatusEnum);
-        return (ReceivingOrder) query.getSingleResult();
+        return (ReceivingOrdersStatus) query.getSingleResult();
     }
 }

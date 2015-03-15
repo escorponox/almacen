@@ -1356,3 +1356,20 @@ SET VERSION = '0.3';
 --------------------------------------------------------------------------------
 -- VERSION 0.4
 --------------------------------------------------------------------------------
+
+INSERT INTO ORDERS_STATUS (ID, STATUS, DESCRIPTION) VALUES (5, 'AS', 'ASSIGNED');
+UPDATE DB_VERSION
+SET VERSION = '0.4';
+
+--------------------------------------------------------------------------------
+-- VERSION 0.5
+--------------------------------------------------------------------------------
+INSERT INTO PROVIDERS (ID, NIF, NAME, ADDRESS)
+VALUES (PROVIDERS_SEQ.nextval, '51094582J', 'PROVIDER 1', 'CALLE DE LA CERDA S/N');
+INSERT INTO PROVIDERS (ID, NIF, NAME, ADDRESS)
+VALUES (PROVIDERS_SEQ.nextval, '81182528A', 'PROVIDER 2', 'CALLE DEL CERDO S/N');
+UPDATE DB_VERSION
+SET VERSION = '0.5';
+--------------------------------------------------------------------------------
+-- VERSION 0.6
+--------------------------------------------------------------------------------

@@ -15,7 +15,7 @@ public class ReceivingOrder {
     private List<ReceiptAction> receiptActionsesByOrder;
     private Provider provider;
     private ReceivingOrdersStatus status;
-    private List<ReceivingOrdersLine> receivingOrdersLinesByOrder;
+    private List<ReceivingOrderLine> receivingOrderLinesByOrder;
 
     @SequenceGenerator(name = "RECEIVING_ORDERS_SEQ", sequenceName = "RECEIVING_ORDERS_SEQ", allocationSize = 1)
 
@@ -114,11 +114,11 @@ public class ReceivingOrder {
     }
 
     @OneToMany(mappedBy = "receivingOrder")
-    public List<ReceivingOrdersLine> getReceivingOrdersLinesByOrder() {
-        return receivingOrdersLinesByOrder;
+    public List<ReceivingOrderLine> getReceivingOrderLinesByOrder() {
+        return receivingOrderLinesByOrder;
     }
 
-    public void setReceivingOrdersLinesByOrder(List<ReceivingOrdersLine> receivingOrdersLinesByOrder) {
-        this.receivingOrdersLinesByOrder = receivingOrdersLinesByOrder;
+    public void setReceivingOrderLinesByOrder(List<ReceivingOrderLine> receivingOrderLinesByOrder) {
+        this.receivingOrderLinesByOrder = receivingOrderLinesByOrder;
     }
 }

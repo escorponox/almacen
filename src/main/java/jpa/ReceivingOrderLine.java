@@ -1,16 +1,15 @@
 package jpa;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "RECEIVING_ORDERS_LINES", schema = "PROYECTO", catalog = "")
-public class ReceivingOrdersLine {
+public class ReceivingOrderLine {
     private Long id;
-    private Long lineNumber;
+    private Integer lineNumber;
     private Long orderedQuantity;
     private Long pendingQuantity;
-    private List<ReceiptAction> receiptActionsesByRecLine;
+    private Item item;
     private ReceivingOrder receivingOrder;
 
     @SequenceGenerator(name = "RECEIVING_ORDERS_LINES_SEQ", sequenceName = "RECEIVING_ORDERS_LINES_SEQ", allocationSize = 1)
@@ -28,11 +27,11 @@ public class ReceivingOrdersLine {
 
     @Basic
     @Column(name = "LINE_NUMBER", nullable = false, insertable = true, updatable = true, precision = -127)
-    public Long getLineNumber() {
+    public Integer getLineNumber() {
         return lineNumber;
     }
 
-    public void setLineNumber(Long lineNumber) {
+    public void setLineNumber(Integer lineNumber) {
         this.lineNumber = lineNumber;
     }
 
@@ -61,7 +60,7 @@ public class ReceivingOrdersLine {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ReceivingOrdersLine that = (ReceivingOrdersLine) o;
+        ReceivingOrderLine that = (ReceivingOrderLine) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (lineNumber != null ? !lineNumber.equals(that.lineNumber) : that.lineNumber != null) return false;
@@ -82,15 +81,6 @@ public class ReceivingOrdersLine {
         return result;
     }
 
-    @OneToMany(mappedBy = "receivingOrdersLine")
-    public List<ReceiptAction> getReceiptActionsesByRecLine() {
-        return receiptActionsesByRecLine;
-    }
-
-    public void setReceiptActionsesByRecLine(List<ReceiptAction> receiptActionsesByRecLine) {
-        this.receiptActionsesByRecLine = receiptActionsesByRecLine;
-    }
-
     @ManyToOne
     @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID", nullable = false)
     public ReceivingOrder getReceivingOrder() {
@@ -99,5 +89,15 @@ public class ReceivingOrdersLine {
 
     public void setReceivingOrder(ReceivingOrder receivingOrder) {
         this.receivingOrder = receivingOrder;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "ITEM_ID", referencedColumnName = "ID", nullable = false)
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

@@ -7,7 +7,28 @@
     <persistence-unit name="jpaPU">
         <description>My Persistence Unit</description>
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>jpa.Locations</class>
+        <class>jpa.Location</class>
+        <class>jpa.Item</class>
+        <class>jpa.Provider</class>
+        <class>jpa.User</class>
+        <class>jpa.Order</class>
+        <class>jpa.Client</class>
+        <class>jpa.OutgoingDock</class>
+        <class>jpa.OrdersStatus</class>
+        <class>jpa.UserRole</class>
+        <class>jpa.RoleType</class>
+        <class>jpa.ReceivingOrder</class>
+        <class>jpa.ReceivingOrderLine</class>
+        <class>jpa.ReceivingOrdersStatus</class>
+        <class>jpa.Container</class>
+        <class>jpa.ContainerStatus</class>
+        <class>jpa.ReceiptAction</class>
+        <class>jpa.LocateAction</class>
+        <class>jpa.IncomingDock</class>
+        <class>jpa.ActionStatus</class>
+        <class>jpa.OrdersLine</class>
+        <class>jpa.PickingAction</class>
+
         <properties>
             <property name="javax.persistence.jdbc.url"
                       value="jdbc:oracle:thin:@//?"/>

@@ -14,7 +14,7 @@ public class ReceiptAction {
     private List<LocateAction> locateActions;
     private IncomingDock incomingDock;
     private ReceivingOrder receivingOrder;
-    private ReceivingOrdersLine receivingOrdersLine;
+    private ReceivingOrderLine receivingOrderLine;
     private User picker;
 
     @SequenceGenerator(name = "RECEIPT_ACTIONS_SEQ", sequenceName = "RECEIPT_ACTIONS_SEQ", allocationSize = 1)
@@ -115,12 +115,12 @@ public class ReceiptAction {
 
     @ManyToOne
     @JoinColumn(name = "REC_ORDER_LINE_ID", referencedColumnName = "ID", nullable = false)
-    public ReceivingOrdersLine getReceivingOrdersLine() {
-        return receivingOrdersLine;
+    public ReceivingOrderLine getReceivingOrderLine() {
+        return receivingOrderLine;
     }
 
-    public void setReceivingOrdersLine(ReceivingOrdersLine receivingOrdersLine) {
-        this.receivingOrdersLine = receivingOrdersLine;
+    public void setReceivingOrderLine(ReceivingOrderLine receivingOrderLine) {
+        this.receivingOrderLine = receivingOrderLine;
     }
 
     @ManyToOne
