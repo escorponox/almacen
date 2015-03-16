@@ -1,6 +1,6 @@
 package services.utils.receipts;
 
-import forms.ReceiptSelectForm;
+import forms.ReceiptActionsForm;
 import jpa.IncomingDock;
 import jpa.ReceiptAction;
 import jpa.ReceivingOrder;
@@ -13,9 +13,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
 import java.util.Collection;
+import java.util.List;
 
 @Component
-public class ReceiptSelectValidator {
+public class ReceiptValidator {
 
     @Autowired
     private ReceivingOrderDAO receivingOrderDAO;
@@ -24,9 +25,9 @@ public class ReceiptSelectValidator {
     @Autowired
     private IncomingDockDAO incomingDockDAO;
 
-    public void validateOrderCode(ReceiptSelectForm receiptSelectForm, BindingResult bindingResult) {
+    public void validateOrderCode(Long orderCode, BindingResult bindingResult) {
 
-        ReceivingOrder receivingOrder = receivingOrderDAO.getReceivingOrderByCode(receiptSelectForm.getOrderCode());
+        ReceivingOrder receivingOrder = receivingOrderDAO.getReceivingOrderByCode(orderCode);
 
         if (receivingOrder == null) {
             bindingResult.rejectValue("orderCode", "error.receipt.orderCode", "The order does not exists");
@@ -36,21 +37,29 @@ public class ReceiptSelectValidator {
         }
     }
 
-    public void validateDeliveryNote(ReceiptSelectForm receiptSelectForm, BindingResult bindingResult) {
+    public void validateDeliveryNote(String deliveryNote, BindingResult bindingResult) {
 
-        Collection<ReceiptAction> receiptActions = receiptActionDAO.getReceiptActionByDeliveryNote(receiptSelectForm.getDeliveryNote());
+        Collection<ReceiptAction> receiptActions = receiptActionDAO.getReceiptActionByDeliveryNote(deliveryNote);
 
         if (receiptActions.size() > 0) {
             bindingResult.rejectValue("deliveryNote", "error.receipt.deliveryNote", "DeliveryNote already received");
         }
     }
 
-    public void validateDock(ReceiptSelectForm receiptSelectForm, BindingResult bindingResult) {
+    public void validateDock(Long dockId, BindingResult bindingResult) {
 
-        IncomingDock incomingDock = incomingDockDAO.getIncomingDockById(receiptSelectForm.getDockId());
+        IncomingDock incomingDock = incomingDockDAO.getIncomingDockById(dockId);
 
         if (incomingDock == null) {
             bindingResult.rejectValue("dockId", "error.receipt.dockId", "Non existent dock");
         }
+    }
+
+    public void validateLines(List<ReceiptActionsForm> receiptActionsForms, BindingResult bindingResult) {
+
+        for (ReceiptActionsForm receiptActionsForm : receiptActionsForms) {
+
+        }
+
     }
 }

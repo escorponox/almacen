@@ -3,31 +3,55 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <div>
-    <h2>Select Receipt</h2>
-    <sf:form method="post" id="receiptSelectForm" modelAttribute="receiptSelectForm">
+    <h2>Receipt</h2>
+    <sf:form method="post" id="receiptForm" action="${pageContext.request.contextPath}/receipt/create"
+             modelAttribute="receiptForm">
         <table cellspacing="5" style="text-align: center">
             <tr>
-                <td><sf:label path="orderCode">Order Code: </sf:label></td>
-                <td><sf:input path="orderCode" disabled="true"/></td>
-                <td><sf:errors path="orderCode"/></td>
+                <td><sf:label path="orderCode">Order Code: </sf:label>
+                    <sf:input path="orderCode" disabled="true"/>
+                    <sf:hidden path="orderCode"/></td>
+                <td><sf:label path="deliveryNote">Delivery Note: </sf:label>
+                    <sf:input path="deliveryNote" disabled="true"/>
+                    <sf:hidden path="deliveryNote"/></td>
+                <td>
+                    <sf:label path="dockName">Incoming Dock: </sf:label>
+                    <sf:input path="dockName" disabled="true"/>
+                    <sf:hidden path="dockId"/></td>
             </tr>
             <tr>
-                <td><sf:label path="deliveryNote">Delivery Note: </sf:label></td>
-                <td><sf:input path="deliveryNote"/></td>
-                <td><sf:errors path="deliveryNote"/></td>
+                <td><sf:label path="providerCode">Provider Code: </sf:label>
+                    <sf:input path="providerCode" disabled="true"/></td>
+                <td><sf:label path="providerName">Provider Code: </sf:label>
+                    <sf:input path="providerName" disabled="true"/></td>
             </tr>
+        </table>
+        <table cellspacing="5" style="text-align: center">
             <tr>
-                <td><sf:label path="dockId">Incoming Dock: </sf:label></td>
-                <td><sf:select path="dockId">
-                    <sf:options items="${docks}" itemValue="id" itemLabel="name"/>
-                </sf:select>
-                </td>
-                <td><sf:errors path="dockId"/></td>
+                <th>Line</th>
+                <th>Item Code</th>
+                <th>Item Name</th>
+                <th>Pending Quantity</th>
+                <th>Received Quantity</th>
             </tr>
-
+            <c:forEach items="${receiptForm.receiptActionsForms}" var="recAction" varStatus="status">
+                <tr>
+                    <td align="center"><input type="hidden"
+                                              name="receiptActionsForms[${status.index}].receivingOrderLine"
+                                              value="${recAction.receivingOrderLine}">${status.count}</td>
+                    <td align="center"><input name="receiptActionsForms[${status.index}].itemCode"
+                                              value="${recAction.itemCode}" disabled></td>
+                    <td align="center"><input name="receiptActionsForms[${status.index}].itemName"
+                                              value="${recAction.itemName}" disabled></td>
+                    <td align="center"><input name="receiptActionsForms[${status.index}].pendingQuantity"
+                                              value="${recAction.pendingQuantity}" disabled></td>
+                    <td align="center"><input name="receiptActionsForms[${status.index}].recQuantity"
+                                              value="${recAction.recQuantity}"></td>
+                </tr>
+            </c:forEach>
             <tr>
-                <td><input type="button" value="Select"
-                           onclick="document.getElementById('receiptSelectForm').submit()"></td>
+                <td><input type="button" value="Create"
+                           onclick="document.getElementById('receiptForm').submit()"></td>
             </tr>
         </table>
     </sf:form>

@@ -19,7 +19,7 @@ public class ReceiptController {
     @Autowired
     private ReceiptService receiptService;
 
-    @RequestMapping(value = "/select", method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/select"}, method = RequestMethod.GET)
     public String newUser(Model model) {
 
         ReceiptSelectForm receiptSelectForm = new ReceiptSelectForm();
@@ -42,6 +42,20 @@ public class ReceiptController {
         model.addAttribute(receiptForm);
 
         return "receiptTile";
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String newUser(@Valid ReceiptForm receiptForm, BindingResult bindingResult, Model model) {
+
+        receiptService.validate(receiptForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("docks", receiptService.getAllIncomingDocks());
+            return "selectReceiptTile";
+        }
+
+
+        return "redirect:/receipt/";
     }
 
 

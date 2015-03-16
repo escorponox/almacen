@@ -12,7 +12,6 @@ public class ReceivingOrder {
     private Long code;
     private Date createdAt;
     private Date updatedAt;
-    private List<ReceiptAction> receiptActionsesByOrder;
     private Provider provider;
     private ReceivingOrdersStatus status;
     private List<ReceivingOrderLine> receivingOrderLinesByOrder;
@@ -82,15 +81,6 @@ public class ReceivingOrder {
         result = 31 * result + (createdAt != null ? createdAt.hashCode() : 0);
         result = 31 * result + (updatedAt != null ? updatedAt.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "receivingOrder")
-    public List<ReceiptAction> getReceiptActionsesByOrder() {
-        return receiptActionsesByOrder;
-    }
-
-    public void setReceiptActionsesByOrder(List<ReceiptAction> receiptActionsesByOrder) {
-        this.receiptActionsesByOrder = receiptActionsesByOrder;
     }
 
     @ManyToOne

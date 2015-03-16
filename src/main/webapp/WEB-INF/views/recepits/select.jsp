@@ -4,7 +4,8 @@
 
 <div>
     <h2>Select Receipt</h2>
-    <sf:form method="post" id="receiptSelectForm" modelAttribute="receiptSelectForm">
+    <sf:form method="post" id="receiptSelectForm" action="${pageContext.request.contextPath}/receipt/select"
+             modelAttribute="receiptSelectForm">
         <table cellspacing="5" style="text-align: center">
             <tr>
                 <td><sf:label path="orderCode">Order Code: </sf:label></td>

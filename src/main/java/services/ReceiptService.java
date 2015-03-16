@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import services.utils.receipts.ReceiptSelectValidator;
+import services.utils.receipts.ReceiptFormCreator;
+import services.utils.receipts.ReceiptValidator;
 
 import java.util.Collection;
 
@@ -17,7 +18,9 @@ import java.util.Collection;
 public class ReceiptService {
 
     @Autowired
-    private ReceiptSelectValidator receiptSelectValidator;
+    private ReceiptValidator receiptValidator;
+    @Autowired
+    private ReceiptFormCreator receiptFormCreator;
 
     @Autowired
     private IncomingDockDAO incomingDockDAO;
@@ -29,12 +32,22 @@ public class ReceiptService {
 
     public void validate(ReceiptSelectForm receiptSelectForm, BindingResult bindingResult) {
 
-        receiptSelectValidator.validateOrderCode(receiptSelectForm, bindingResult);
-        receiptSelectValidator.validateDeliveryNote(receiptSelectForm, bindingResult);
-        receiptSelectValidator.validateDock(receiptSelectForm, bindingResult);
+        receiptValidator.validateOrderCode(receiptSelectForm.getOrderCode(), bindingResult);
+        receiptValidator.validateDeliveryNote(receiptSelectForm.getDeliveryNote(), bindingResult);
+        receiptValidator.validateDock(receiptSelectForm.getDockId(), bindingResult);
     }
 
     public ReceiptForm createReceipt(ReceiptSelectForm receiptSelectForm) {
-        return null;
+
+        return receiptFormCreator.create(receiptSelectForm);
+    }
+
+    public void validate(ReceiptForm receiptForm, BindingResult bindingResult) {
+
+        receiptValidator.validateOrderCode(receiptForm.getOrderCode(), bindingResult);
+        receiptValidator.validateDeliveryNote(receiptForm.getDeliveryNote(), bindingResult);
+        receiptValidator.validateDock(receiptForm.getDockId(), bindingResult);
+
+        receiptValidator.validateLines(receiptForm.getReceiptActionsForms(), bindingResult);
     }
 }

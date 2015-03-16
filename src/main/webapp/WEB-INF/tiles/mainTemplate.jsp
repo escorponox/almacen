@@ -11,6 +11,7 @@
             background-color: #DFDFDF;
         }
     </style>
+    <script src="<c:url value='/resources/js/jquery-2.1.3.min.js'/>"></script>
 </head>
 <body>
 <div class="container" style="border: #C1C1C1 solid 1px; border-radius:10px;">
