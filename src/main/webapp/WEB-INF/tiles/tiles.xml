@@ -41,4 +41,12 @@
         <put-attribute name="body" value="/WEB-INF/views/users/new.jsp"/>
     </definition>
 
+    <definition name="selectReceiptTile" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/recepits/select.jsp"/>
+    </definition>
+
+    <definition name="receiptTile" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/recepits/receipt.jsp"/>
+    </definition>
+
 </tiles-definitions>

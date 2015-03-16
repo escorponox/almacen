@@ -3,10 +3,7 @@ package initTests;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
-import webservices.client.ObjectFactory;
-import webservices.client.RecLineRequest;
-import webservices.client.RecOrderRequest;
-import webservices.client.RecOrderResponse;
+import webservices.client.*;
 
 public class RecOrderSOAPTest {
 
@@ -43,5 +40,12 @@ public class RecOrderSOAPTest {
         recOrderRequest.setRecLines(recLines);
 
         RecOrderResponse recOrderResponse = service.register(recOrderRequest);
+
+        System.out.println(recOrderResponse.getResponseCode());
+        System.out.println(recOrderResponse.getErrorDescription());
+        for (RecLineResponse recLineResponse : recOrderResponse.getRecLineResponses().getRecLineResponse()) {
+            System.out.println(recLineResponse.getResponseCode() + " - " + recLineResponse.getErrorDescription());
+        }
+
     }
 }

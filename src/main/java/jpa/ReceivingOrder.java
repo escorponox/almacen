@@ -113,7 +113,7 @@ public class ReceivingOrder {
         this.status = status;
     }
 
-    @OneToMany(mappedBy = "receivingOrder")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "receivingOrder")
     public List<ReceivingOrderLine> getReceivingOrderLinesByOrder() {
         return receivingOrderLinesByOrder;
     }

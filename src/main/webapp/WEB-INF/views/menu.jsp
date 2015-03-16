@@ -7,3 +7,7 @@
 <security:authorize access="hasRole('ROLE_ADMIN')">
     <a href="<s:url value="/users?list"/>">Users Management</a>
 </security:authorize>
+
+<security:authorize access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')">
+    <a href="<s:url value="/receipt/select"/>">Receipts</a>
+</security:authorize>

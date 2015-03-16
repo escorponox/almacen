@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ORDERS_LINES", schema = "PROYECTO", catalog = "")
-public class OrdersLine {
+public class OrderLine {
     private Long id;
     private Long lineNumber;
     private Long orderedQuantity;
@@ -60,7 +60,7 @@ public class OrdersLine {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        OrdersLine that = (OrdersLine) o;
+        OrderLine that = (OrderLine) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (lineNumber != null ? !lineNumber.equals(that.lineNumber) : that.lineNumber != null) return false;

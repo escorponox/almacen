@@ -14,7 +14,7 @@ public class Order {
     private Client client;
     private OrdersStatus status;
     private User seller;
-    private List<OrdersLine> orderLines;
+    private List<OrderLine> orderLines;
     private List<PickingAction> pickingActions;
 
     @SequenceGenerator(name = "ORDERS_SEQ", sequenceName = "ORDERS_SEQ", allocationSize = 1)
@@ -115,11 +115,11 @@ public class Order {
     }
 
     @OneToMany(mappedBy = "order")
-    public List<OrdersLine> getOrderLines() {
+    public List<OrderLine> getOrderLines() {
         return orderLines;
     }
 
-    public void setOrderLines(List<OrdersLine> orderLines) {
+    public void setOrderLines(List<OrderLine> orderLines) {
         this.orderLines = orderLines;
     }
 

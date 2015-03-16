@@ -13,7 +13,6 @@ public class ReceiptAction {
     private Date receivedAt;
     private List<LocateAction> locateActions;
     private IncomingDock incomingDock;
-    private ReceivingOrder receivingOrder;
     private ReceivingOrderLine receivingOrderLine;
     private User picker;
 
@@ -101,16 +100,6 @@ public class ReceiptAction {
 
     public void setIncomingDock(IncomingDock incomingDock) {
         this.incomingDock = incomingDock;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "REC_ORDER_ID", referencedColumnName = "ID", nullable = false)
-    public ReceivingOrder getReceivingOrder() {
-        return receivingOrder;
-    }
-
-    public void setReceivingOrder(ReceivingOrder receivingOrder) {
-        this.receivingOrder = receivingOrder;
     }
 
     @ManyToOne

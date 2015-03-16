@@ -13,7 +13,7 @@ public class PickingAction {
     private ActionStatus status;
     private Container container;
     private Order order;
-    private OrdersLine orderLine;
+    private OrderLine orderLine;
     private OutgoingDock outgoingDock;
     private User picker;
 
@@ -116,11 +116,11 @@ public class PickingAction {
 
     @ManyToOne
     @JoinColumn(name = "LINE_ID", referencedColumnName = "ID", nullable = false)
-    public OrdersLine getOrderLine() {
+    public OrderLine getOrderLine() {
         return orderLine;
     }
 
-    public void setOrderLine(OrdersLine orderLine) {
+    public void setOrderLine(OrderLine orderLine) {
         this.orderLine = orderLine;
     }
 
