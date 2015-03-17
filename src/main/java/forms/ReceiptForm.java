@@ -1,18 +1,24 @@
 package forms;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ReceiptForm {
 
     @NotNull
+    @Min(value = 1, message = "Code must be greater than one")
     private Long orderCode;
 
     @NotNull
+    @Size(min = 1, message = "Delivery note is empty")
     private String deliveryNote;
 
     @NotNull
+    @Min(value = 1, message = "Dock id must be greater than one")
     private Long dockId;
 
     private String dockName;
@@ -21,7 +27,7 @@ public class ReceiptForm {
 
     private String providerName;
 
-
+    @Valid
     private List<ReceiptActionsForm> receiptActionsForms;
 
     public ReceiptForm() {

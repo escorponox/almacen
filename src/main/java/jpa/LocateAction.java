@@ -61,7 +61,7 @@ public class LocateAction {
     }
 
     @ManyToOne
-    @JoinColumn(name = "PICKER_ID", referencedColumnName = "ID", nullable = false)
+    @JoinColumn(name = "PICKER_ID", referencedColumnName = "ID")
     public User getPicker() {
         return picker;
     }

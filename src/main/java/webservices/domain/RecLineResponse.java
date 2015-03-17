@@ -10,6 +10,10 @@ public class RecLineResponse {
     private String responseCode;
     private String errorDescription;
 
+    public RecLineResponse() {
+        responseCode = "0";
+    }
+
     public String getErrorDescription() {
         return errorDescription;
     }

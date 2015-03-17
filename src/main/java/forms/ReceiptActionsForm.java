@@ -1,11 +1,17 @@
 package forms;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 public class ReceiptActionsForm {
 
+    @NotNull(message = "Line not found.")
     private Long receivingOrderLine;
     private String itemCode;
     private String itemName;
     private Long pendingQuantity;
+
+    @Min(value = 0, message = "Can't receive negative quantity.")
     private Long recQuantity;
 
     public Long getReceivingOrderLine() {

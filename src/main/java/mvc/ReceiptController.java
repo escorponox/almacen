@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import services.ReceiptService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/receipt")
@@ -45,15 +46,15 @@ public class ReceiptController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String newUser(@Valid ReceiptForm receiptForm, BindingResult bindingResult, Model model) {
+    public String newUser(@Valid ReceiptForm receiptForm, BindingResult bindingResult, Model model, Principal principal) {
 
         receiptService.validate(receiptForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("docks", receiptService.getAllIncomingDocks());
-            return "selectReceiptTile";
+            return "receiptTile";
         }
 
+        receiptService.createReceiptActions(receiptForm, principal.getName());
 
         return "redirect:/receipt/";
     }

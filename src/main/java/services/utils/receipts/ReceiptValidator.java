@@ -4,9 +4,11 @@ import forms.ReceiptActionsForm;
 import jpa.IncomingDock;
 import jpa.ReceiptAction;
 import jpa.ReceivingOrder;
+import jpa.ReceivingOrderLine;
 import jpa.dao.IncomingDockDAO;
 import jpa.dao.ReceiptActionDAO;
 import jpa.dao.ReceivingOrderDAO;
+import jpa.dao.ReceivingOrderLineDAO;
 import jpa.enums.ReceivingOrdersStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,8 @@ public class ReceiptValidator {
 
     @Autowired
     private ReceivingOrderDAO receivingOrderDAO;
+    @Autowired
+    private ReceivingOrderLineDAO receivingOrderLineDAO;
     @Autowired
     private ReceiptActionDAO receiptActionDAO;
     @Autowired
@@ -57,9 +61,31 @@ public class ReceiptValidator {
 
     public void validateLines(List<ReceiptActionsForm> receiptActionsForms, BindingResult bindingResult) {
 
-        for (ReceiptActionsForm receiptActionsForm : receiptActionsForms) {
+        Boolean oneQuantityValid = false;
 
+        for (int i = 0; i < receiptActionsForms.size(); i++) {
+
+            ReceivingOrderLine receivingOrderLine = receivingOrderLineDAO.getReceivingOrderLineById(receiptActionsForms.get(i).getReceivingOrderLine());
+            if (receivingOrderLine == null) {
+                bindingResult.reject("error.receipt.lineNumbers", "Receiving order lines not found.");
+            }
+
+            if (receiptActionsForms.get(i).getRecQuantity() > receivingOrderLine.getPendingQuantity()) {
+                bindingResult.rejectValue("receiptActionsForms[" + i + "].recQuantity", "error.receiptAction.quantity", "Can't receive more than pending quantity");
+            }
+
+            if (receiptActionsForms.get(i).getRecQuantity() > 0) {
+                oneQuantityValid = true;
+            }
         }
 
+        if (!oneQuantityValid) {
+            bindingResult.reject("error.receipt.noStockReceived", "No stock received.");
+        }
+
+    }
+
+    public IncomingDockDAO getIncomingDockDAO() {
+        return incomingDockDAO;
     }
 }

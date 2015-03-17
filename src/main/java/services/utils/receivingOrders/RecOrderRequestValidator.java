@@ -31,9 +31,7 @@ public class RecOrderRequestValidator {
 
         ReceivingOrder receivingOrder = receivingOrderDAO.getReceivingOrderByCode(recOrderRequest.getOrderCode());
 
-        if (receivingOrder == null || receivingOrder.getStatus().getStatus() == ReceivingOrdersStatusEnum.CR) {
-            recOrderResponse.setResponseCode("0");
-        } else {
+        if (receivingOrder != null && receivingOrder.getStatus().getStatus() != ReceivingOrdersStatusEnum.CR) {
             recOrderResponse.setResponseCode("-1");
             recOrderResponse.setErrorDescription("Order code " + recOrderRequest.getOrderCode() + " already in use.");
         }
@@ -43,9 +41,7 @@ public class RecOrderRequestValidator {
 
         Provider provider = providerDAO.getProviderByNif(recOrderRequest.getProviderNif());
 
-        if (provider != null) {
-            recOrderResponse.setResponseCode("0");
-        } else {
+        if (provider == null) {
             recOrderResponse.setResponseCode("-2");
             recOrderResponse.setErrorDescription("Provider " + recOrderRequest.getProviderNif() + "not found.");
         }
@@ -61,14 +57,18 @@ public class RecOrderRequestValidator {
             RecLineResponse recLineResponse = new RecLineResponse();
             Item item = itemDAO.getItemByCode(recLineRequest.getItemCode());
 
-            if (item != null) {
-                recLineResponse.setResponseCode("0");
-                oneValidLine = true;
-            } else {
+            if (item == null) {
                 recLineResponse.setResponseCode("-1");
                 recLineResponse.setErrorDescription(new StringBuilder("Item ")
                         .append(recLineRequest.getItemCode())
                         .append(" not found.").toString());
+            } else if (recLineRequest.getQuantity() >= 0) {
+                oneValidLine = true;
+            } else {
+                recLineResponse.setResponseCode("-2");
+                recLineResponse.setErrorDescription(new StringBuilder("Negative quantity for item ")
+                        .append(recLineRequest.getItemCode())
+                        .toString());
             }
 
             recLineResponses.add(recLineResponse);

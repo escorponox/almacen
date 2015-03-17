@@ -2,7 +2,6 @@ package jpa;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "RECEIPT_ACTIONS", schema = "PROYECTO", catalog = "")
@@ -11,7 +10,6 @@ public class ReceiptAction {
     private String deliveryNote;
     private Long recQuantity;
     private Date receivedAt;
-    private List<LocateAction> locateActions;
     private IncomingDock incomingDock;
     private ReceivingOrderLine receivingOrderLine;
     private User picker;
@@ -81,15 +79,6 @@ public class ReceiptAction {
         result = 31 * result + (recQuantity != null ? recQuantity.hashCode() : 0);
         result = 31 * result + (receivedAt != null ? receivedAt.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "receiptAction")
-    public List<LocateAction> getLocateActions() {
-        return locateActions;
-    }
-
-    public void setLocateActions(List<LocateAction> locateActions) {
-        this.locateActions = locateActions;
     }
 
     @ManyToOne

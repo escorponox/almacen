@@ -3,11 +3,11 @@ package services;
 import forms.ReceiptForm;
 import forms.ReceiptSelectForm;
 import jpa.IncomingDock;
-import jpa.dao.IncomingDockDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+import services.utils.receipts.ReceiptActionsCreator;
 import services.utils.receipts.ReceiptFormCreator;
 import services.utils.receipts.ReceiptValidator;
 
@@ -21,13 +21,12 @@ public class ReceiptService {
     private ReceiptValidator receiptValidator;
     @Autowired
     private ReceiptFormCreator receiptFormCreator;
-
     @Autowired
-    private IncomingDockDAO incomingDockDAO;
+    private ReceiptActionsCreator receiptActionsCreator;
 
 
     public Collection<IncomingDock> getAllIncomingDocks() {
-        return incomingDockDAO.listAll();
+        return receiptValidator.getIncomingDockDAO().listAll();
     }
 
     public void validate(ReceiptSelectForm receiptSelectForm, BindingResult bindingResult) {
@@ -50,4 +49,10 @@ public class ReceiptService {
 
         receiptValidator.validateLines(receiptForm.getReceiptActionsForms(), bindingResult);
     }
+
+    public void createReceiptActions(ReceiptForm receiptForm, String username) {
+        receiptActionsCreator.create(receiptForm, username);
+    }
+
+
 }

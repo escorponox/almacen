@@ -16,6 +16,7 @@ public class RecOrderResponse {
     private List<RecLineResponse> recLineResponses;
 
     public RecOrderResponse() {
+        responseCode = "0";
         recLineResponses = new LinkedList<>();
     }
 
