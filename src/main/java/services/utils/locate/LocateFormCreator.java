@@ -5,7 +5,7 @@ import jpa.LocateAction;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LocateActionFormCreator {
+public class LocateFormCreator {
 
     public LocateActionForm create(LocateAction locateAction) {
 

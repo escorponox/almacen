@@ -43,7 +43,8 @@
                 <td><sf:errors path="locationConfirmation"/></td>
             </tr>
             <tr>
-                <td><input type="button" value="Confirm" onclick="document.getElementById('receiptForm').submit()"/>
+                <td><input type="button" value="Confirm"
+                           onclick="document.getElementById('locateActionForm').submit()"/>
                 </td>
             </tr>
         </table>
