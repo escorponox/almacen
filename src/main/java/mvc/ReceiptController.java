@@ -21,7 +21,7 @@ public class ReceiptController {
     private ReceiptService receiptService;
 
     @RequestMapping(value = {"/", "/select"}, method = RequestMethod.GET)
-    public String newUser(Model model) {
+    public String selectReceipt(Model model) {
 
         ReceiptSelectForm receiptSelectForm = new ReceiptSelectForm();
         model.addAttribute(receiptSelectForm);
@@ -30,7 +30,7 @@ public class ReceiptController {
     }
 
     @RequestMapping(value = "/select", method = RequestMethod.POST)
-    public String newUser(@Valid ReceiptSelectForm receiptSelectForm, BindingResult bindingResult, Model model) {
+    public String createReceiptForm(@Valid ReceiptSelectForm receiptSelectForm, BindingResult bindingResult, Model model) {
 
         receiptService.validate(receiptSelectForm, bindingResult);
 
@@ -46,7 +46,7 @@ public class ReceiptController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String newUser(@Valid ReceiptForm receiptForm, BindingResult bindingResult, Model model, Principal principal) {
+    public String createReceipt(@Valid ReceiptForm receiptForm, BindingResult bindingResult, Model model, Principal principal) {
 
         receiptService.validate(receiptForm, bindingResult);
 

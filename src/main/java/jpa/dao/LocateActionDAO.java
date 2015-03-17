@@ -1,7 +1,7 @@
 package jpa.dao;
 
-import jpa.IncomingDock;
 import jpa.LocateAction;
+import jpa.User;
 import jpa.enums.ActionStatusEnum;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,7 @@ public class LocateActionDAO {
         em.persist(locateAction);
     }
 
-    public void updateReceiptAction(LocateAction locateAction) {
+    public void updateLocateAction(LocateAction locateAction) {
         em.merge(locateAction);
     }
 
@@ -36,10 +36,24 @@ public class LocateActionDAO {
         return em.find(LocateAction.class, id);
     }
 
-    public List<LocateAction> getUnassignedLocateActionByDock(IncomingDock incomingDock) {
-        Query query = em.createQuery("select a from LocateAction a where a.receiptAction.incomingDock = :incomingDock and a.status.status = :status");
-        query.setParameter("incomingDock", incomingDock);
+    public LocateAction getAssignedAction(User user) {
+        Query query = em.createQuery("select a from LocateAction a where a.picker = :user and a.status.status = :status");
+        query.setParameter("user", user);
+        query.setParameter("status", ActionStatusEnum.AS);
+        List<LocateAction> resultList = query.getResultList();
+        if (resultList.size() > 0) {
+            return resultList.get(0);
+        }
+        return null;
+    }
+
+    public LocateAction getFirstUnassignedLocateAction() {
+        Query query = em.createQuery("select a from LocateAction a where  a.status.status = :status order by a.receiptAction.receivedAt,a.receiptAction.receivingOrderLine.item.code");
         query.setParameter("status", ActionStatusEnum.CR);
-        return query.getResultList();
+        List<LocateAction> resultList = query.getResultList();
+        if (resultList.size() > 0) {
+            return resultList.get(0);
+        }
+        return null;
     }
 }

@@ -49,4 +49,11 @@
         <put-attribute name="body" value="/WEB-INF/views/recepits/receipt.jsp"/>
     </definition>
 
+    <definition name="noLocateActions" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/locate/noLocateActions.jsp"/>
+    </definition>
+
+    <definition name="locate" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/locate/locate.jsp"/>
+    </definition>
 </tiles-definitions>

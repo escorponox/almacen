@@ -21,6 +21,7 @@
 
         <intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/receipt**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
+        <intercept-url pattern="/locate**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
 
     </http>
 
