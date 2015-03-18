@@ -1,10 +1,14 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "USER_ROLES", schema = "PROYECTO", catalog = "")
-public class UserRole {
+public class UserRole implements Serializable {
+
+    private static final long serialVersionUID = 5336557307026547512L;
+
     private Long id;
     private RoleType role;
     private User user;

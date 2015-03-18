@@ -1,6 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<flow xmlns="http://www.springframework.org/schema/webflow"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+    <var name="customer" class="jpa.Customer"/>
+
+    <view-state id="welcome" view="selectCustomer">
+        <transition on="nifEntered" to="lookUpCustomer"/>
+    </view-state>
+
+    <action-state id="lookUpCustomer">
+        <evaluate result="customer" expression="orderService.findCustomer(requestParameters.nif)"/>
+        <transition on-exception="services.utils.customers.CustomerNotFoundException" to="registrationForm"/>
+        <transition to="customerReady"/>
+    </action-state>
+
+    <view-state id="registrationForm" model="customer" view="newCustomer">
+        <on-entry>
+            <evaluate expression="customer.nif = requestParameters.nif"/>
+        </on-entry>
+        <transition on="submit" to="addCustomer"/>
+    </view-state>
+
+    <action-state id="addCustomer">
+        <evaluate expression="orderService.addCustomer(customer)"/>
+        <transition on-exception="org.springframework.transaction.TransactionSystemException" to="registrationForm"/>
+        <transition to="customerReady"/>
+    </action-state>
+
+    <end-state id="customerReady">
+        <output name="customer"/>
+    </end-state>
+
+    <end-state id="cancel"/>
+
+    <global-transitions>
+        <transition on="cancel" to="cancel" validate="false"/>
+    </global-transitions>
 </flow>

@@ -1,6 +1,7 @@
 package jpa.dao;
 
-import jpa.ReceivingOrder;
+
+import jpa.Order;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,34 +11,34 @@ import javax.persistence.Query;
 import java.util.Collection;
 import java.util.List;
 
-@Repository("receivingOrderDao")
+@Repository("orderDAO")
 @Transactional
 public class OrderDAO {
 
     @PersistenceContext
     private EntityManager em;
 
-    public void addReceivingOrder(ReceivingOrder receivingOrder) {
-        em.persist(receivingOrder);
+    public void addOrder(Order order) {
+        em.persist(order);
     }
 
-    public void updateReceivingOrder(ReceivingOrder receivingOrder) {
-        em.merge(receivingOrder);
+    public void updateOrder(Order order) {
+        em.merge(order);
     }
 
-    public Collection<ReceivingOrder> listAll() {
-        Query query = em.createQuery("select a from ReceivingOrder a");
+    public Collection<Order> listAll() {
+        Query query = em.createQuery("select a from Order a");
         return query.getResultList();
     }
 
-    public ReceivingOrder getReceivingOrderById(Long id) {
-        return em.find(ReceivingOrder.class, id);
+    public Order getOrderById(Long id) {
+        return em.find(Order.class, id);
     }
 
-    public ReceivingOrder getReceivingOrderByCode(Long code) {
-        Query query = em.createQuery("select a from ReceivingOrder a where a.code = :code");
+    public Order getOrderByCode(Long code) {
+        Query query = em.createQuery("select a from Order a where a.code = :code");
         query.setParameter("code", code);
-        List<ReceivingOrder> resultList = query.getResultList();
+        List<Order> resultList = query.getResultList();
         if (resultList.size() > 0) {
             return resultList.get(0);
         }

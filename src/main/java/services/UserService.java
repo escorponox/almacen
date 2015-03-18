@@ -67,8 +67,8 @@ public class UserService {
         return userDAO.getUserById(id);
     }
 
-    public void addUser(User user) {
-        userDAO.addUser(user);
+    public void getUserByUsername(String username) {
+        userDAO.getUserByUsername(username);
     }
 
     public UserNameAvailabilityChecker getUserNameAvailabilityChecker() {

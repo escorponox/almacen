@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<flow xmlns="http://www.springframework.org/schema/webflow"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<flow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://www.springframework.org/schema/webflow"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <var name="order" class="jpa.Order"/>
+
+    <action-state id="setSeller">
+        <set name="order.seller" value="userService.getUserByUsername(currentUser.name)"/>
+        <set name="order.status" value="ordersStatusDao.getOrdersStatusById(1)"/>
+        <transition to="identifyCustomer"/>
+    </action-state>
+
+    <subflow-state id="identifyCustomer" subflow="customerFlow">
+        <output name="customer" value="order.customer"/>
+        <transition on="customerReady" to="buildOrder"/>
+    </subflow-state>
+
+    <subflow-state id="buildOrder" subflow="buildOrderFlow">
+        <input name="order" value="order"/>
+        <transition on="orderCreated" to="viewOrder"/>
+    </subflow-state>
+
+    <view-state id="viewOrder" view="viewOrder">
+        <transition to="endState"/>
+    </view-state>
+
+    <end-state id="endState"/>
+
+    <global-transitions>
+        <transition on="cancel" to="endState"/>
+    </global-transitions>
 
 </flow>

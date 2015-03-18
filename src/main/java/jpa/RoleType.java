@@ -3,10 +3,14 @@ package jpa;
 import jpa.enums.RoleTypeEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "ROLE_TYPE", schema = "PROYECTO", catalog = "")
-public class RoleType {
+public class RoleType implements Serializable {
+
+    private static final long serialVersionUID = 577848716400118633L;
+
     private Long id;
     private RoleTypeEnum role;
     private String description;

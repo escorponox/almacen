@@ -1,10 +1,14 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "LOCATE_ACTIONS", schema = "PROYECTO", catalog = "")
-public class LocateAction {
+public class LocateAction implements Serializable {
+
+    private static final long serialVersionUID = -5224034483285952631L;
+
     private Long id;
     private ActionStatus status;
     private ReceiptAction receiptAction;

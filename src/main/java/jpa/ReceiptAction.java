@@ -1,11 +1,12 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "RECEIPT_ACTIONS", schema = "PROYECTO", catalog = "")
-public class ReceiptAction {
+public class ReceiptAction implements Serializable {
     private Long id;
     private String deliveryNote;
     private Long recQuantity;

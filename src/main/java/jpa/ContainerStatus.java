@@ -3,10 +3,14 @@ package jpa;
 import jpa.enums.ContainerStatusEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "CONTAINER_STATUS", schema = "PROYECTO", catalog = "")
-public class ContainerStatus {
+public class ContainerStatus implements Serializable {
+
+    private static final long serialVersionUID = -8600709964635883565L;
+
     private Long id;
     private ContainerStatusEnum status;
     private String description;

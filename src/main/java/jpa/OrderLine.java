@@ -1,16 +1,25 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "ORDERS_LINES", schema = "PROYECTO", catalog = "")
-public class OrderLine {
+public class OrderLine implements Serializable {
+
+    private static final long serialVersionUID = -8703449521449248806L;
+
     private Long id;
     private Long lineNumber;
     private Long orderedQuantity;
     private Long pendingQuantity;
     private Item item;
     private Order order;
+
+    public OrderLine() {
+    }
+
+
 
     @SequenceGenerator(name = "ORDERS_LINES_SEQ", sequenceName = "ORDERS_LINES_SEQ", allocationSize = 1)
 

@@ -1,11 +1,15 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "INCOMING_DOCKS", schema = "PROYECTO", catalog = "")
-public class IncomingDock {
+public class IncomingDock implements Serializable {
+
+    private static final long serialVersionUID = -6188486819137456972L;
+
     private Long id;
     private String name;
     private List<ReceiptAction> receiptActions;

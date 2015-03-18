@@ -1,18 +1,20 @@
 package jpa;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "PICKING_ACTIONS", schema = "PROYECTO", catalog = "")
-public class PickingAction {
+public class PickingAction implements Serializable {
+
+    private static final long serialVersionUID = 4996012426970191390L;
+
     private Long id;
-    private BigDecimal ordered;
-    private BigDecimal picked;
+    private Integer ordered;
+    private Integer picked;
     private Long seq;
     private ActionStatus status;
     private Container container;
-    private Order order;
     private OrderLine orderLine;
     private OutgoingDock outgoingDock;
     private User picker;
@@ -32,21 +34,21 @@ public class PickingAction {
 
     @Basic
     @Column(name = "ORDERED", nullable = false, insertable = true, updatable = true, precision = -127)
-    public BigDecimal getOrdered() {
+    public Integer getOrdered() {
         return ordered;
     }
 
-    public void setOrdered(BigDecimal ordered) {
+    public void setOrdered(Integer ordered) {
         this.ordered = ordered;
     }
 
     @Basic
     @Column(name = "PICKED", nullable = true, insertable = true, updatable = true, precision = -127)
-    public BigDecimal getPicked() {
+    public Integer getPicked() {
         return picked;
     }
 
-    public void setPicked(BigDecimal picked) {
+    public void setPicked(Integer picked) {
         this.picked = picked;
     }
 
@@ -102,16 +104,6 @@ public class PickingAction {
 
     public void setContainer(Container container) {
         this.container = container;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "ORDER_ID", referencedColumnName = "ID", nullable = false)
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
     @ManyToOne
