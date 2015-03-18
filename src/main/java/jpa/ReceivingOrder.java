@@ -1,13 +1,17 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "RECEIVING_ORDERS", schema = "PROYECTO", catalog = "")
-public class ReceivingOrder {
+public class ReceivingOrder implements Serializable {
+
+    private static final long serialVersionUID = 5848272190271297574L;
+
     private BigDecimal id;
     private Long code;
     private Date createdAt;

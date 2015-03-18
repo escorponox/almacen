@@ -1,13 +1,26 @@
 package jpa;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "CLIENTS")
-public class Customer {
+public class Customer implements Serializable {
+
+    private static final long serialVersionUID = 4905301256905709261L;
+
     private Long id;
+
+    @Size(min = 9, max = 9, message = "NIF must be 9 character long.")
     private String nif;
+
+    @NotEmpty(message = "Name cannot be empty.")
     private String name;
+
+    @NotEmpty(message = "Address cannot be empty.")
     private String address;
     private OutgoingDock outgoingDock;
 

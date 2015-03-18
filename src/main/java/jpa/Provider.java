@@ -1,11 +1,12 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "PROVIDERS")
-public class Provider {
+public class Provider implements Serializable {
     private Long id;
     private String nif;
     private String name;

@@ -1,21 +1,30 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order {
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = -83446756335127508L;
+
     private Long id;
     private Long code;
     private Date createdAt;
     private Date updatedAt;
-    private Client client;
+    private Customer customer;
     private OrdersStatus status;
     private User seller;
     private List<OrderLine> orderLines;
-    private List<PickingAction> pickingActions;
+
+    public Order() {
+        orderLines = new LinkedList<>();
+    }
 
     @SequenceGenerator(name = "ORDERS_SEQ", sequenceName = "ORDERS_SEQ", allocationSize = 1)
 
@@ -86,12 +95,12 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "CLIENT_ID", referencedColumnName = "ID", nullable = false)
-    public Client getClient() {
-        return client;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setClient(Client client) {
-        this.client = client;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @ManyToOne
@@ -114,7 +123,7 @@ public class Order {
         this.seller = seller;
     }
 
-    @OneToMany(mappedBy = "order")
+    @Transient
     public List<OrderLine> getOrderLines() {
         return orderLines;
     }
@@ -123,12 +132,15 @@ public class Order {
         this.orderLines = orderLines;
     }
 
-    @OneToMany(mappedBy = "order")
-    public List<PickingAction> getPickingActions() {
-        return pickingActions;
-    }
+    @Transient
+    public BigDecimal getTotalAmount() {
 
-    public void setPickingActions(List<PickingAction> pickingActionsesById) {
-        this.pickingActions = pickingActionsesById;
+        BigDecimal totalAmount = BigDecimal.ZERO;
+
+        for (OrderLine orderLine : orderLines) {
+            totalAmount = totalAmount.add(orderLine.getItem().getPrice().multiply(BigDecimal.valueOf(orderLine.getOrderedQuantity())));
+        }
+
+        return totalAmount;
     }
 }

@@ -56,4 +56,24 @@
     <definition name="locate" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/views/locate/locate.jsp"/>
     </definition>
+
+    <definition name="viewOrder" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/order/view.jsp"/>
+    </definition>
+
+    <definition name="selectCustomer" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/order/selectCustomer.jsp"/>
+    </definition>
+
+    <definition name="newCustomer" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/order/newCustomer.jsp"/>
+    </definition>
+
+    <definition name="showOrder" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/order/showOrder.jsp"/>
+    </definition>
+
+    <definition name="itemQuantitySelect" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/order/newLine.jsp"/>
+    </definition>
 </tiles-definitions>

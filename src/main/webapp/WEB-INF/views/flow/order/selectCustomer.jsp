@@ -6,12 +6,12 @@
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
         <table cellspacing="3">
             <tr>
-                <td><label for="phoneNumber">Phone Number: </label></td>
-                <td><input type="text" id="phoneNumber" name="phoneNumber"/></td>
+                <td><label for="nif">NIF: </label></td>
+                <td><input type="text" id="nif" name="nif"/></td>
             </tr>
             <tr>
                 <td>
-                    <input type="submit" name="_eventId_phoneEntered" value="Lookup Customer"/>
+                    <input type="submit" name="_eventId_nifEntered" value="Lookup Customer"/>
                 </td>
             </tr>
         </table>

@@ -8,9 +8,9 @@
 
     <webflow-config:flow-registry id="flowRegistry" base-path="WEB-INF/flows"
                                   flow-builder-services="flowBuilderServices">
-        <webflow-config:flow-location id="orderFlow" path="ordering/order/order-flow.xml"/>
-        <webflow-config:flow-location id="customerFlow" path="ordering/order/orderSubFlows/customer-flow.xml"/>
-        <webflow-config:flow-location id="buildOrderFlow" path="ordering/order/orderSubFlows/buildOrder-flow.xml"/>
+        <webflow-config:flow-location id="orderFlow" path="order/order-flow.xml"/>
+        <webflow-config:flow-location id="customerFlow" path="order/orderSubFlows/customer-flow.xml"/>
+        <webflow-config:flow-location id="buildOrderFlow" path="order/orderSubFlows/buildOrder-flow.xml"/>
     </webflow-config:flow-registry>
 
     <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
@@ -33,10 +33,6 @@
     <bean id="mvcViewFactoryCreator"
           class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
         <property name="viewResolvers" ref="tilesViewResolver"/>
-    </bean>
-
-    <bean id="pizzaService" class="flow.service.PizzaService">
-        <property name="customerDAO" ref="customerDao"/>
     </bean>
 
 

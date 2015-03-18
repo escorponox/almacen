@@ -1,10 +1,14 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
-public class Item {
+public class Item implements Serializable {
+
+    private static final long serialVersionUID = 4698608600755326809L;
+
     private Long id;
     private String code;
     private String name;

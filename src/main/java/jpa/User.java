@@ -3,13 +3,17 @@ package jpa;
 import jpa.enums.RoleTypeEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = -8080846075636160244L;
+
     private Long id;
     private String username;
     private String password;
@@ -17,7 +21,6 @@ public class User {
     private BigDecimal commission;
     private List<Order> ordersBySeller;
     private List<UserRole> userRoleById;
-    private List<RoleTypeEnum> roleTypesEnums;
 
     @SequenceGenerator(name = "USERS_SEQ", sequenceName = "USERS_SEQ", allocationSize = 1)
 

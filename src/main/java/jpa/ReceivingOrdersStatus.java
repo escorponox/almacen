@@ -3,10 +3,14 @@ package jpa;
 import jpa.enums.ReceivingOrdersStatusEnum;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "RECEIVING_ORDERS_STATUS", schema = "PROYECTO", catalog = "")
-public class ReceivingOrdersStatus {
+public class ReceivingOrdersStatus implements Serializable {
+
+    private static final long serialVersionUID = -1884407321085835462L;
+
     private Long id;
     private ReceivingOrdersStatusEnum status;
     private String description;

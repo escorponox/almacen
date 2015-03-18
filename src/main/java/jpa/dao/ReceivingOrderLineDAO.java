@@ -55,10 +55,4 @@ public class ReceivingOrderLineDAO {
         }
         return null;
     }
-
-    public void deleteReceivingOrderLines(List<ReceivingOrderLine> receivingOrderLines) {
-        for (ReceivingOrderLine receivingOrderLine : receivingOrderLines) {
-            em.remove(receivingOrderLine);
-        }
-    }
 }

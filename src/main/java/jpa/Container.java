@@ -1,9 +1,13 @@
 package jpa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Container {
+public class Container implements Serializable {
+
+    private static final long serialVersionUID = -5450796839195421634L;
+
     private Long id;
     private ContainerStatus status;
     private Order order;
