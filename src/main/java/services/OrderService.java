@@ -2,6 +2,8 @@ package services;
 
 import jpa.Customer;
 import jpa.Item;
+import jpa.Order;
+import jpa.OrderLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
@@ -34,11 +36,19 @@ public class OrderService {
         customerCreator.create(customer);
     }
 
-    public Item findItem(String code) throws ItemNotFoundException {
-        return itemFinder.find(code);
+    public OrderLine createLine(Order order, String code, Long quantity) throws ItemNotFoundException, NegativeQuantityException {
+
+        Item item = itemFinder.find(code);
+        Long checkedQuantity = quantityChecker.check(quantity);
+
+        OrderLine orderLine = new OrderLine();
+        orderLine.setOrder(order);
+        orderLine.setItem(item);
+        orderLine.setLineNumber((long) (order.getOrderLines().size() + 1));
+        orderLine.setOrderedQuantity(checkedQuantity);
+        orderLine.setPendingQuantity(checkedQuantity);
+
+        return orderLine;
     }
 
-    public Long checkQuantity(Long quantity) throws NegativeQuantityException {
-        return quantityChecker.check(quantity);
-    }
 }

@@ -2,15 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div>
-    <h2>Create Pizza: </h2>
+    <h2>New Line: </h2>
     <sf:form method="post">
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}">
-
-        <h3>Code: </h3>
-        <sf:input path="code"/>
-
-        <h3>Ingredients: </h3>
-        <sf:input path="orderedQuantity"/>
 
         <table>
             <tr>
@@ -26,7 +20,7 @@
                 <td><input type="text" id="price" name="price" readonly tabindex="-1"/></td>
             </tr>
             <tr>
-                <td><label for="quantity">Item Price: </label></td>
+                <td><label for="quantity">Quantity: </label></td>
                 <td><input type="text" id="quantity" name="quantity"/></td>
             </tr>
             <tr>
@@ -35,7 +29,7 @@
             </tr>
             <tr>
                 <td>
-                    <input type="submit" name="_eventId_addLine" value="Add Pizza"/>
+                    <input type="submit" name="_eventId_submitLine" value="Submit Line"/>
                 </td>
                 <td>
                     <input type="submit" name="_eventId_cancel" value="Cancel"/>

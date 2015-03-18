@@ -33,6 +33,7 @@
             /WEB-INF/almacen-servlet.xml
             classpath:/spring/jpa.xml
             classpath:/spring/security.xml
+            classpath:/spring/flow.xml
         </param-value>
     </context-param>
 

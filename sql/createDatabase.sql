@@ -97,8 +97,7 @@ CREATE TABLE "CLIENTS"
   "ID"           NUMBER,
   "NIF"          VARCHAR2(9 BYTE),
   "NAME"         VARCHAR2(100 BYTE),
-  "ADDRESS"      VARCHAR2(200 BYTE),
-  "DEFAULT_DOCK" NUMBER
+  "ADDRESS" VARCHAR2(200 BYTE)
 );
 --------------------------------------------------------
 --  DDL for Table CONTAINER
@@ -842,12 +841,7 @@ Insert into USER_ROLES (ID,ROLE,USER_ID) values (5,3,3);
   ALTER TABLE "USER_ROLES" MODIFY ("ROLE" NOT NULL ENABLE);
   ALTER TABLE "USER_ROLES" ADD CONSTRAINT "USER_ROLES_PK" PRIMARY KEY ("ID") ENABLE;
   ALTER TABLE "USER_ROLES" MODIFY ("ID" NOT NULL ENABLE);
---------------------------------------------------------
---  Ref Constraints for Table CLIENTS
---------------------------------------------------------
 
-  ALTER TABLE "CLIENTS" ADD CONSTRAINT "CLIENTS_FK1" FOREIGN KEY ("DEFAULT_DOCK")
-	  REFERENCES "OUTGOING_DOCKS" ("ID") ENABLE;
 --------------------------------------------------------
 --  Ref Constraints for Table CONTAINER
 --------------------------------------------------------

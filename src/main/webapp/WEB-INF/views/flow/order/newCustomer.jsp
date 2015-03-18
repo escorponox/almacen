@@ -21,11 +21,6 @@
                 <td><sf:errors path="address"/></td>
             </tr>
             <tr>
-                <td><sf:label path="defaultDock.name">Default Dock: </sf:label></td>
-                <td><sf:input type="text" path="defaultDock.name"/></td>
-                <td><sf:errors path="defaultDock.name"/></td>
-            </tr>
-            <tr>
                 <td>
                     <input type="submit" name="_eventId_submit" value="Submit"/>
                 </td>

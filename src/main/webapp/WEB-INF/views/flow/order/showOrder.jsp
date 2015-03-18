@@ -22,7 +22,7 @@
             </tr>
         </table>
         <h3>Lines: </h3>
-        <table cellspacing="3">
+        <table cellspacing="5" style="text-align: center">
             <tr>
                 <th></th>
                 <th>Code</th>
@@ -31,6 +31,7 @@
                 <th>Unit Price</th>
                 <th>Price</th>
             </tr>
+            <tbody style="border: #31708f">
             <c:forEach items="${order.orderLines}" var="line">
                 <tr>
                     <td><c:out value="${line.lineNumber.toString()}"/></td>
@@ -41,6 +42,7 @@
                     <td><c:out value="${line.orderedQuantity * line.item.price}"/></td>
                 </tr>
             </c:forEach>
+            </tbody>
         </table>
         <table>
             <tr>

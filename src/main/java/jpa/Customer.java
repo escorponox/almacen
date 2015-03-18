@@ -22,7 +22,7 @@ public class Customer implements Serializable {
 
     @NotEmpty(message = "Address cannot be empty.")
     private String address;
-    private OutgoingDock outgoingDock;
+
 
     @SequenceGenerator(name = "CLIENTS_SEQ", sequenceName = "CLIENTS_SEQ", allocationSize = 1)
 
@@ -91,13 +91,4 @@ public class Customer implements Serializable {
         return result;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "DEFAULT_DOCK", referencedColumnName = "ID")
-    public OutgoingDock getOutgoingDock() {
-        return outgoingDock;
-    }
-
-    public void setOutgoingDock(OutgoingDock outgoingDock) {
-        this.outgoingDock = outgoingDock;
-    }
 }

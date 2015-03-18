@@ -6,7 +6,7 @@
     <input name="order" required="true" type="jpa.Order"/>
 
     <view-state id="showOrder" view="showOrder">
-        <transition on="newLine" to="newLine"/>
+        <transition on="newLine" to="itemQuantitySelect"/>
         <transition on="checkOut" to="orderCreated"/>
         <transition on="cancel" to="cancel"/>
     </view-state>
@@ -16,14 +16,8 @@
     </view-state>
 
     <action-state id="newLine">
-        <on-entry>
-            <set name="flowScope.line" value="new jpa.OrderLine()"/>
-            <set name="flowScope.line.order" value="order"/>
-            <set name="flowScope.line.lineNumber" value="order.orderLines.size() + 1"/>
-            <set name="flowScope.line.item" value="orderService.findItem(requestParameters.code)"/>
-            <set name="flowScope.line.orderedQuantity" value="orderService.checkQuantity(requestParameters.quantity)"/>
-            <set name="flowScope.line.pendingQuantity" value="flowScope.line.orderedQuantity"/>
-        </on-entry>
+        <evaluate result="flowScope.line"
+                  expression="orderService.createLine(order,requestParameters.code,requestParameters.quantity)"/>
         <transition on-exception="services.utils.orders.ItemNotFoundException" to="itemQuantitySelect"/>
         <transition on-exception="services.utils.orders.NegativeQuantityException" to="itemQuantitySelect"/>
         <transition to="showOrder">
