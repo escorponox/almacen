@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "CLIENTS")
-public class Client {
+public class Customer {
     private Long id;
     private String nif;
     private String name;
@@ -59,12 +59,12 @@ public class Client {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Client client = (Client) o;
+        Customer customer = (Customer) o;
 
-        if (address != null ? !address.equals(client.address) : client.address != null) return false;
-        if (id != null ? !id.equals(client.id) : client.id != null) return false;
-        if (name != null ? !name.equals(client.name) : client.name != null) return false;
-        if (nif != null ? !nif.equals(client.nif) : client.nif != null) return false;
+        if (address != null ? !address.equals(customer.address) : customer.address != null) return false;
+        if (id != null ? !id.equals(customer.id) : customer.id != null) return false;
+        if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
+        if (nif != null ? !nif.equals(customer.nif) : customer.nif != null) return false;
 
         return true;
     }
