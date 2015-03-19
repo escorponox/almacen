@@ -26,10 +26,9 @@ public class Order implements Serializable {
         orderLines = new LinkedList<>();
     }
 
-    @SequenceGenerator(name = "ORDERS_SEQ", sequenceName = "ORDERS_SEQ", allocationSize = 1)
-
     @Id
     @Column(name = "ID", nullable = false, insertable = true, updatable = true, precision = -127)
+    @SequenceGenerator(name = "ORDERS_SEQ", sequenceName = "ORDERS_SEQ", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDERS_SEQ")
     public Long getId() {
         return id;
@@ -40,6 +39,8 @@ public class Order implements Serializable {
     }
 
     @Basic
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDERS_CODE_SEQ")
+    @SequenceGenerator(name = "ORDERS_CODE_SEQ", sequenceName = "ORDERS_CODE_SEQ", allocationSize = 1)
     @Column(name = "CODE", nullable = false, insertable = true, updatable = true, precision = -127)
     public Long getCode() {
         return code;

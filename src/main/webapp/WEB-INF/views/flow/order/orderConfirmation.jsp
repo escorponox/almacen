@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div>
-    <h2>Order: </h2>
+    <h2>Order Confirmation: </h2>
     <sf:form method="post" modelAttribute="order">
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}"/>
 
@@ -53,11 +53,7 @@
         <table>
             <tr>
                 <td>
-                    <input type="submit" name="_eventId_newLine" value="New Line"/>
-                </td>
-                <td>
-                    <input type="submit" name="_eventId_checkOut" value="Check Out"
-                           <c:if test="${empty order.orderLines}">disabled</c:if>/>
+                    <input type="submit" name="_eventId_orderConfirm" value="Confirm"/>
                 </td>
                 <td>
                     <input type="submit" name="_eventId_cancel" value="Cancel"/>

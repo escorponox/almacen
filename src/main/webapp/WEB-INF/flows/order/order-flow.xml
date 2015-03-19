@@ -6,8 +6,7 @@
     <var name="order" class="jpa.Order"/>
 
     <action-state id="setSeller">
-        <set name="order.seller" value="userService.getUserByUsername(currentUser.name)"/>
-        <set name="order.status" value="ordersStatusDao.getOrdersStatusById(1)"/>
+        <evaluate expression="orderService.setOrderSeller(order,currentUser.name)"/>
         <transition to="identifyCustomer"/>
     </action-state>
 
@@ -18,12 +17,18 @@
 
     <subflow-state id="buildOrder" subflow="buildOrderFlow">
         <input name="order" value="order"/>
-        <transition on="orderCreated" to="viewOrder"/>
+        <transition on="orderCreated" to="orderConfirmation"/>
     </subflow-state>
 
-    <view-state id="viewOrder" view="viewOrder">
-        <transition to="endState"/>
+    <view-state id="orderConfirmation" view="orderConfirm">
+        <transition on="orderConfirm" to="saveOrder"/>
     </view-state>
+
+    <action-state id="saveOrder">
+        <evaluate expression="orderService.createOrder(order)"/>
+        <transition on-exception="org.springframework.transaction.TransactionSystemException" to="orderConfirmation"/>
+        <transition to="endState"/>
+    </action-state>
 
     <end-state id="endState"/>
 

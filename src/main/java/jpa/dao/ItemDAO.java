@@ -43,4 +43,10 @@ public class ItemDAO {
         }
         return null;
     }
+
+    public Collection<Item> searchByCode(String code) {
+        Query query = em.createQuery("select a from Item a where a.code like :code");
+        query.setParameter("code", "%" + code + "%");
+        return query.getResultList();
+    }
 }

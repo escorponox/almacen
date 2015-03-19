@@ -3,6 +3,7 @@
       xmlns="http://www.springframework.org/schema/webflow"
       xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
 
+    <var name="itemSelect" class="forms.ItemQuantitySelectForm"/>
     <input name="order" required="true" type="jpa.Order"/>
 
     <view-state id="showOrder" view="showOrder">
@@ -11,15 +12,19 @@
         <transition on="cancel" to="cancel"/>
     </view-state>
 
-    <view-state id="itemQuantitySelect" view="itemQuantitySelect">
+
+    <view-state id="itemQuantitySelect" view="itemQuantitySelect" model="itemSelect">
+        <on-entry>
+            <set name="itemSelect" value="new forms.ItemQuantitySelectForm()"/>
+        </on-entry>
         <transition on="submitLine" to="newLine"/>
+        <transition on="cancelLine" to="showOrder"/>
     </view-state>
 
     <action-state id="newLine">
         <evaluate result="flowScope.line"
                   expression="orderService.createLine(order,requestParameters.code,requestParameters.quantity)"/>
-        <transition on-exception="services.utils.orders.ItemNotFoundException" to="itemQuantitySelect"/>
-        <transition on-exception="services.utils.orders.NegativeQuantityException" to="itemQuantitySelect"/>
+        <transition on-exception="org.springframework.transaction.TransactionSystemException" to="itemQuantitySelect"/>
         <transition to="showOrder">
             <evaluate expression="order.orderLines.add(flowScope.line)"/>
         </transition>

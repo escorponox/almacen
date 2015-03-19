@@ -20,7 +20,6 @@ public class OrderLine implements Serializable {
     }
 
 
-
     @SequenceGenerator(name = "ORDERS_LINES_SEQ", sequenceName = "ORDERS_LINES_SEQ", allocationSize = 1)
 
     @Id

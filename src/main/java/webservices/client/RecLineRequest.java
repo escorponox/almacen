@@ -1,4 +1,3 @@
-
 package webservices.client;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for recLineRequest complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="recLineRequest">
  *   &lt;complexContent>
@@ -23,13 +22,11 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "recLineRequest", propOrder = {
-    "itemCode",
-    "quantity"
+        "itemCode",
+        "quantity"
 })
 public class RecLineRequest {
 
@@ -38,11 +35,9 @@ public class RecLineRequest {
 
     /**
      * Gets the value of the itemCode property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     * {@link Long }
      */
     public Long getItemCode() {
         return itemCode;
@@ -50,11 +45,9 @@ public class RecLineRequest {
 
     /**
      * Sets the value of the itemCode property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setItemCode(Long value) {
         this.itemCode = value;
@@ -62,11 +55,9 @@ public class RecLineRequest {
 
     /**
      * Gets the value of the quantity property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Long }
-     *     
+     *
+     * @return possible object is
+     * {@link Long }
      */
     public Long getQuantity() {
         return quantity;
@@ -74,11 +65,9 @@ public class RecLineRequest {
 
     /**
      * Sets the value of the quantity property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Long }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link Long }
      */
     public void setQuantity(Long value) {
         this.quantity = value;

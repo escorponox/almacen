@@ -57,8 +57,8 @@
         <put-attribute name="body" value="/WEB-INF/views/locate/locate.jsp"/>
     </definition>
 
-    <definition name="viewOrder" extends=".mainTemplate">
-        <put-attribute name="body" value="/WEB-INF/views/flow/order/view.jsp"/>
+    <definition name="orderConfirm" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/order/orderConfirmation.jsp"/>
     </definition>
 
     <definition name="selectCustomer" extends=".mainTemplate">

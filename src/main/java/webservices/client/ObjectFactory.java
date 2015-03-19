@@ -1,4 +1,3 @@
-
 package webservices.client;
 
 import javax.xml.bind.JAXBElement;
@@ -8,18 +7,17 @@ import javax.xml.namespace.QName;
 
 
 /**
- * This object contains factory methods for each 
- * Java content interface and Java element interface 
- * generated in the webservices.client package. 
- * <p>An ObjectFactory allows you to programatically 
- * construct new instances of the Java representation 
- * for XML content. The Java representation of XML 
- * content can consist of schema derived interfaces 
- * and classes representing the binding of schema 
- * type definitions, element declarations and model 
- * groups.  Factory methods for each of these are 
+ * This object contains factory methods for each
+ * Java content interface and Java element interface
+ * generated in the webservices.client package.
+ * <p>An ObjectFactory allows you to programatically
+ * construct new instances of the Java representation
+ * for XML content. The Java representation of XML
+ * content can consist of schema derived interfaces
+ * and classes representing the binding of schema
+ * type definitions, element declarations and model
+ * groups.  Factory methods for each of these are
  * provided in this class.
- * 
  */
 @XmlRegistry
 public class ObjectFactory {
@@ -32,14 +30,12 @@ public class ObjectFactory {
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: webservices.client
-     * 
      */
     public ObjectFactory() {
     }
 
     /**
      * Create an instance of {@link RecOrderRequest }
-     * 
      */
     public RecOrderRequest createRecOrderRequest() {
         return new RecOrderRequest();
@@ -47,7 +43,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RecOrderResponse }
-     * 
      */
     public RecOrderResponse createRecOrderResponse() {
         return new RecOrderResponse();
@@ -55,7 +50,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link Register }
-     * 
      */
     public Register createRegister() {
         return new Register();
@@ -63,7 +57,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RegisterResponse }
-     * 
      */
     public RegisterResponse createRegisterResponse() {
         return new RegisterResponse();
@@ -71,7 +64,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RecLineResponse }
-     * 
      */
     public RecLineResponse createRecLineResponse() {
         return new RecLineResponse();
@@ -79,7 +71,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RecLineRequest }
-     * 
      */
     public RecLineRequest createRecLineRequest() {
         return new RecLineRequest();
@@ -87,7 +78,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RecOrderRequest.RecLines }
-     * 
      */
     public RecOrderRequest.RecLines createRecOrderRequestRecLines() {
         return new RecOrderRequest.RecLines();
@@ -95,7 +85,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link RecOrderResponse.RecLineResponses }
-     * 
      */
     public RecOrderResponse.RecLineResponses createRecOrderResponseRecLineResponses() {
         return new RecOrderResponse.RecLineResponses();
@@ -103,7 +92,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link RegisterResponse }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://webservices/", name = "registerResponse")
     public JAXBElement<RegisterResponse> createRegisterResponse(RegisterResponse value) {
@@ -112,7 +100,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link RecOrderRequest }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.carlos.coves.com/jaxb", name = "recOrder")
     public JAXBElement<RecOrderRequest> createRecOrder(RecOrderRequest value) {
@@ -121,7 +108,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link RecOrderResponse }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.carlos.coves.com/jaxb", name = "recOrderResponse")
     public JAXBElement<RecOrderResponse> createRecOrderResponse(RecOrderResponse value) {
@@ -130,7 +116,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Register }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://webservices/", name = "register")
     public JAXBElement<Register> createRegister(Register value) {
@@ -139,7 +124,6 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Object }{@code >}}
-     * 
      */
     @XmlElementDecl(namespace = "http://www.carlos.coves.com/jaxb", name = "recLine")
     public JAXBElement<Object> createRecLine(Object value) {

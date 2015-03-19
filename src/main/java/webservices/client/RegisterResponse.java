@@ -1,4 +1,3 @@
-
 package webservices.client;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -9,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for registerResponse complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="registerResponse">
  *   &lt;complexContent>
@@ -23,12 +22,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "registerResponse", propOrder = {
-    "_return"
+        "_return"
 })
 public class RegisterResponse {
 
@@ -37,11 +34,9 @@ public class RegisterResponse {
 
     /**
      * Gets the value of the return property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RecOrderResponse }
-     *     
+     *
+     * @return possible object is
+     * {@link RecOrderResponse }
      */
     public RecOrderResponse getReturn() {
         return _return;
@@ -49,11 +44,9 @@ public class RegisterResponse {
 
     /**
      * Sets the value of the return property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RecOrderResponse }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RecOrderResponse }
      */
     public void setReturn(RecOrderResponse value) {
         this._return = value;

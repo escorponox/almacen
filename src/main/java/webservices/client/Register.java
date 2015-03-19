@@ -1,4 +1,3 @@
-
 package webservices.client;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -8,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * <p>Java class for register complex type.
- * 
+ * <p/>
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ * <p/>
  * <pre>
  * &lt;complexType name="register">
  *   &lt;complexContent>
@@ -22,12 +21,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "register", propOrder = {
-    "request"
+        "request"
 })
 public class Register {
 
@@ -35,11 +32,9 @@ public class Register {
 
     /**
      * Gets the value of the request property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link RecOrderRequest }
-     *     
+     *
+     * @return possible object is
+     * {@link RecOrderRequest }
      */
     public RecOrderRequest getRequest() {
         return request;
@@ -47,11 +42,9 @@ public class Register {
 
     /**
      * Sets the value of the request property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link RecOrderRequest }
-     *     
+     *
+     * @param value allowed object is
+     *              {@link RecOrderRequest }
      */
     public void setRequest(RecOrderRequest value) {
         this.request = value;

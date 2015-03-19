@@ -7,13 +7,15 @@ import jpa.OrderLine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
+import services.domain.FillItemDataResponse;
 import services.utils.customers.CustomerCreator;
 import services.utils.customers.CustomerFinder;
 import services.utils.customers.CustomerNotFoundException;
+import services.utils.items.ItemCodeSearcher;
 import services.utils.items.ItemFinder;
-import services.utils.orders.ItemNotFoundException;
-import services.utils.orders.NegativeQuantityException;
-import services.utils.orders.QuantityChecker;
+import services.utils.orders.OrderCreator;
+
+import java.util.List;
 
 @Service("orderService")
 public class OrderService {
@@ -25,8 +27,11 @@ public class OrderService {
     @Autowired
     private ItemFinder itemFinder;
     @Autowired
-    private QuantityChecker quantityChecker;
-
+    private OrderCreator orderCreator;
+    @Autowired
+    private ItemCodeSearcher itemCodeSearcher;
+    @Autowired
+    private UserService userService;
 
     public Customer findCustomer(String nif) throws CustomerNotFoundException {
         return customerFinder.find(nif);
@@ -36,19 +41,47 @@ public class OrderService {
         customerCreator.create(customer);
     }
 
-    public OrderLine createLine(Order order, String code, Long quantity) throws ItemNotFoundException, NegativeQuantityException {
+    public void setOrderSeller(Order order, String userName) {
+        order.setSeller(userService.getUserByUsername(userName));
+    }
+
+    public OrderLine createLine(Order order, String code, Long quantity) {
 
         Item item = itemFinder.find(code);
-        Long checkedQuantity = quantityChecker.check(quantity);
 
         OrderLine orderLine = new OrderLine();
         orderLine.setOrder(order);
         orderLine.setItem(item);
         orderLine.setLineNumber((long) (order.getOrderLines().size() + 1));
-        orderLine.setOrderedQuantity(checkedQuantity);
-        orderLine.setPendingQuantity(checkedQuantity);
+        orderLine.setOrderedQuantity(quantity);
+        orderLine.setPendingQuantity(quantity);
 
         return orderLine;
     }
 
+    public void createOrder(Order order) {
+        orderCreator.create(order);
+    }
+
+    public List<String> searchItemCodes(String tagName) {
+        return itemCodeSearcher.search(tagName);
+    }
+
+    public FillItemDataResponse fillItemData(String itemcode) {
+
+        FillItemDataResponse fillItemDataResponse = new FillItemDataResponse();
+
+        Item item = itemFinder.find(itemcode);
+
+        if (item != null) {
+            fillItemDataResponse.setErrorCode("0");
+            fillItemDataResponse.getData().setItemName(item.getName());
+            fillItemDataResponse.getData().setItemPrice(item.getPrice());
+        } else {
+            fillItemDataResponse.setErrorCode("-1");
+            fillItemDataResponse.setErrorDescription("No item found.");
+        }
+
+        return fillItemDataResponse;
+    }
 }

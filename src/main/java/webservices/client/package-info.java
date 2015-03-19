@@ -1,2 +1,1 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://webservices/")
-package webservices.client;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://webservices/") package webservices.client;

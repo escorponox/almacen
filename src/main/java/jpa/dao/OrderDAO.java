@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -43,5 +44,11 @@ public class OrderDAO {
             return resultList.get(0);
         }
         return null;
+    }
+
+    public Long getOrderCodeFromSequence() {
+        Query q = em.createNativeQuery("SELECT ORDERS_CODE_SEQ.nextval from DUAL");
+        BigDecimal result = (BigDecimal) q.getSingleResult();
+        return result.longValue();
     }
 }
