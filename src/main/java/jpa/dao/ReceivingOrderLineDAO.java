@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
 import java.util.List;
 
 @Repository("receivingOrderLineLineDao")
@@ -30,7 +29,7 @@ public class ReceivingOrderLineDAO {
         em.remove(receivingOrderLine);
     }
 
-    public Collection<ReceivingOrderLine> listAll() {
+    public List<ReceivingOrderLine> listAll() {
         Query query = em.createQuery("select a from ReceivingOrderLine a");
         return query.getResultList();
     }

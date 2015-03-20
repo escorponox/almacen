@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
 import java.util.List;
 
 @Repository("orderLineDAO")
@@ -26,7 +25,7 @@ public class OrderLineDAO {
         em.merge(orderLine);
     }
 
-    public Collection<OrderLine> listAll() {
+    public List<OrderLine> listAll() {
         Query query = em.createQuery("select a from OrderLine a");
         return query.getResultList();
     }

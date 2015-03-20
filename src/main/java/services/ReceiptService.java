@@ -11,7 +11,7 @@ import services.utils.receipts.ReceiptActionsCreator;
 import services.utils.receipts.ReceiptFormCreator;
 import services.utils.receipts.ReceiptValidator;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -25,7 +25,7 @@ public class ReceiptService {
     private ReceiptActionsCreator receiptActionsCreator;
 
 
-    public Collection<IncomingDock> getAllIncomingDocks() {
+    public List<IncomingDock> getAllIncomingDocks() {
         return receiptValidator.getIncomingDockDAO().listAll();
     }
 

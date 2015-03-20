@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
 import java.util.List;
 
 @Repository("locateActionDAO")
@@ -27,7 +26,7 @@ public class LocateActionDAO {
         em.merge(locateAction);
     }
 
-    public Collection<LocateAction> listAll() {
+    public List<LocateAction> listAll() {
         Query query = em.createQuery("select a from LocateAction a");
         return query.getResultList();
     }

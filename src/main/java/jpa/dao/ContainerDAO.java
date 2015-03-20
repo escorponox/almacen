@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
 import java.util.List;
 
 @Repository("containerDAO")
@@ -26,7 +25,7 @@ public class ContainerDAO {
         em.merge(container);
     }
 
-    public Collection<Container> listAll() {
+    public List<Container> listAll() {
         Query query = em.createQuery("select a from Container a");
         return query.getResultList();
     }

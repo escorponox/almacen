@@ -1,9 +1,8 @@
 package services;
 
-import jpa.Customer;
-import jpa.Item;
-import jpa.Order;
-import jpa.OrderLine;
+import forms.OrdersReleaseForm;
+import jpa.*;
+import jpa.dao.OutgoingDockDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
@@ -14,12 +13,15 @@ import services.utils.customers.CustomerNotFoundException;
 import services.utils.items.ItemCodeSearcher;
 import services.utils.items.ItemFinder;
 import services.utils.orders.OrderCreator;
+import services.utils.orders.ReleaseCandidatesFinder;
 
 import java.util.List;
 
 @Service("orderService")
 public class OrderService {
 
+    @Autowired
+    private OutgoingDockDAO outgoingDockDAO;
     @Autowired
     private CustomerFinder customerFinder;
     @Autowired
@@ -32,6 +34,8 @@ public class OrderService {
     private ItemCodeSearcher itemCodeSearcher;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReleaseCandidatesFinder releaseCandidatesFinder;
 
     public Customer findCustomer(String nif) throws CustomerNotFoundException {
         return customerFinder.find(nif);
@@ -83,5 +87,15 @@ public class OrderService {
         }
 
         return fillItemDataResponse;
+    }
+
+    public List<OutgoingDock> getAllOutgoingDocks() {
+        return outgoingDockDAO.listAll();
+    }
+
+
+    public OrdersReleaseForm getReleaseCandidates() {
+
+        return releaseCandidatesFinder.find();
     }
 }

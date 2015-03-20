@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
+import java.util.List;
 
 @Repository("roleTypeDao")
 @Transactional
@@ -18,7 +18,7 @@ public class RoleTypeDAO {
     @PersistenceContext
     private EntityManager em;
 
-    public Collection<RoleType> listAll() {
+    public List<RoleType> listAll() {
         Query query = em.createQuery("select a from RoleType a");
         return query.getResultList();
     }

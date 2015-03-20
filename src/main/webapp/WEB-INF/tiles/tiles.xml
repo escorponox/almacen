@@ -76,4 +76,12 @@
     <definition name="itemQuantitySelect" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/views/flow/order/newLine.jsp"/>
     </definition>
+
+    <definition name="listReleaseCandidates" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/orderRelease/listReleaseCandidates.jsp"/>
+    </definition>
+
+    <definition name="noReleaseCandidates" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/orderRelease/noReleaseCandidates.jsp"/>
+    </definition>
 </tiles-definitions>

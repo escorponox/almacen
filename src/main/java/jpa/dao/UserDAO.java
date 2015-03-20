@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
 import java.util.List;
 
 @Repository("usersDao")
@@ -28,7 +27,7 @@ public class UserDAO {
         em.merge(user);
     }
 
-    public Collection<User> listAll() {
+    public List<User> listAll() {
         Query query = em.createQuery("select a from User a");
         return query.getResultList();
     }

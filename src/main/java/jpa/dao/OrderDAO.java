@@ -2,6 +2,7 @@ package jpa.dao;
 
 
 import jpa.Order;
+import jpa.enums.OrdersStatusEnum;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 @Repository("orderDAO")
@@ -27,7 +27,7 @@ public class OrderDAO {
         em.merge(order);
     }
 
-    public Collection<Order> listAll() {
+    public List<Order> listAll() {
         Query query = em.createQuery("select a from Order a");
         return query.getResultList();
     }
@@ -47,8 +47,15 @@ public class OrderDAO {
     }
 
     public Long getOrderCodeFromSequence() {
-        Query q = em.createNativeQuery("SELECT ORDERS_CODE_SEQ.nextval from DUAL");
-        BigDecimal result = (BigDecimal) q.getSingleResult();
+        Query query = em.createNativeQuery("SELECT ORDERS_CODE_SEQ.nextval from DUAL");
+        BigDecimal result = (BigDecimal) query.getSingleResult();
         return result.longValue();
+    }
+
+    public List<Order> findAllReleaseCandidates() {
+        Query query = em.createQuery("select a from Order a where a.status.status in (:created,:inDocks) order by a.id");
+        query.setParameter("created", OrdersStatusEnum.CR);
+        query.setParameter("inDocks", OrdersStatusEnum.DO);
+        return query.getResultList();
     }
 }

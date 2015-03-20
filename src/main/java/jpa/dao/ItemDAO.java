@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
 import java.util.List;
 
 @Repository("itemDao")
@@ -25,7 +24,7 @@ public class ItemDAO {
         em.merge(item);
     }
 
-    public Collection<Item> listAll() {
+    public List<Item> listAll() {
         Query query = em.createQuery("select a from Item a");
         return query.getResultList();
     }
@@ -44,7 +43,7 @@ public class ItemDAO {
         return null;
     }
 
-    public Collection<Item> searchByCode(String code) {
+    public List<Item> searchByCode(String code) {
         Query query = em.createQuery("select a from Item a where a.code like :code");
         query.setParameter("code", "%" + code + "%");
         return query.getResultList();

@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
+import java.util.List;
 
 @Repository("actionStatusDao")
 @Transactional
@@ -17,7 +17,7 @@ public class ActionStatusDAO {
     @PersistenceContext
     private EntityManager em;
 
-    public Collection<ActionStatus> listAll() {
+    public List<ActionStatus> listAll() {
         Query query = em.createQuery("select a from ActionStatus a");
         return query.getResultList();
     }

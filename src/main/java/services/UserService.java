@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import services.utils.users.*;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 @Transactional
@@ -59,7 +59,7 @@ public class UserService {
     }
 
 
-    public Collection<User> listAll() {
+    public List<User> listAll() {
         return userDAO.listAll();
     }
 

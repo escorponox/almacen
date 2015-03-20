@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
-import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -43,7 +42,7 @@ public class ReceiptValidator {
 
     public void validateDeliveryNote(String deliveryNote, BindingResult bindingResult) {
 
-        Collection<ReceiptAction> receiptActions = receiptActionDAO.getReceiptActionByDeliveryNote(deliveryNote);
+        List<ReceiptAction> receiptActions = receiptActionDAO.getReceiptActionByDeliveryNote(deliveryNote);
 
         if (receiptActions.size() > 0) {
             bindingResult.rejectValue("deliveryNote", "error.receipt.deliveryNote", "DeliveryNote already received");

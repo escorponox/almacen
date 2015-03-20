@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import java.util.Collection;
+import java.util.List;
 
 @Repository("outgoingDockDAO")
 @Transactional
@@ -24,7 +24,7 @@ public class OutgoingDockDAO {
         em.merge(outgoingDock);
     }
 
-    public Collection<OutgoingDock> listAll() {
+    public List<OutgoingDock> listAll() {
         Query query = em.createQuery("select a from OutgoingDock a");
         return query.getResultList();
     }
