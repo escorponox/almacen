@@ -94,9 +94,9 @@ CREATE TABLE "ACTION_STATUS"
 
 CREATE TABLE "CLIENTS"
 (
-  "ID"           NUMBER,
-  "NIF"          VARCHAR2(9 BYTE),
-  "NAME"         VARCHAR2(100 BYTE),
+  "ID"   NUMBER,
+  "NIF"  VARCHAR2(9 BYTE),
+  "NAME" VARCHAR2(100 BYTE),
   "ADDRESS" VARCHAR2(200 BYTE)
 );
 --------------------------------------------------------
@@ -961,7 +961,8 @@ FOR EACH ROW
   BEGIN
     <<COLUMN_SEQUENCES>>
     BEGIN
-      IF INSERTING AND :NEW.ID IS NULL THEN
+      IF INSERTING AND :NEW.ID IS NULL
+      THEN
         SELECT CONTAINER_SEQ.NEXTVAL
         INTO :NEW.ID
         FROM SYS.DUAL;
@@ -1479,3 +1480,22 @@ SET VERSION = '0.9';
 --------------------------------------------------------------------------------
 -- VERSION 0.10
 --------------------------------------------------------------------------------
+
+CREATE OR REPLACE TRIGGER "ORDERS_TRG"
+BEFORE INSERT ON ORDERS
+FOR EACH ROW
+  BEGIN
+    <<COLUMN_SEQUENCES>>
+    BEGIN
+      IF INSERTING AND :NEW.ID IS NULL
+      THEN
+        SELECT ORDERS_SEQ.NEXTVAL
+        INTO :NEW.ID
+        FROM SYS.DUAL;
+      END IF;
+
+    END COLUMN_SEQUENCES;
+  END;
+
+UPDATE DB_VERSION
+SET VERSION = '0.9';

@@ -39,8 +39,6 @@ public class Order implements Serializable {
     }
 
     @Basic
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ORDERS_CODE_SEQ")
-    @SequenceGenerator(name = "ORDERS_CODE_SEQ", sequenceName = "ORDERS_CODE_SEQ", allocationSize = 1)
     @Column(name = "CODE", nullable = false, insertable = true, updatable = true, precision = -127)
     public Long getCode() {
         return code;
