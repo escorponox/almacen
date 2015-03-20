@@ -16,7 +16,6 @@ public class PickingAction implements Serializable {
     private ActionStatus status;
     private Container container;
     private OrderLine orderLine;
-    private OutgoingDock outgoingDock;
     private User picker;
 
     @SequenceGenerator(name = "PICKING_ACTIONS_SEQ", sequenceName = "PICKING_ACTIONS_SEQ", allocationSize = 1)
@@ -114,16 +113,6 @@ public class PickingAction implements Serializable {
 
     public void setOrderLine(OrderLine orderLine) {
         this.orderLine = orderLine;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "OUT_DOCK", referencedColumnName = "ID", nullable = false)
-    public OutgoingDock getOutgoingDock() {
-        return outgoingDock;
-    }
-
-    public void setOutgoingDock(OutgoingDock outgoingDock) {
-        this.outgoingDock = outgoingDock;
     }
 
     @ManyToOne

@@ -19,3 +19,7 @@
 <security:authorize access="hasAnyRole('ROLE_SELLER','ROLE_ADMIN')">
     <a href="<s:url value="/orderFlow"/>">Create Order</a>
 </security:authorize>
+
+<security:authorize access="hasAnyRole('ROLE_ADMIN')">
+    <a href="<s:url value="/orderRelease"/>">Order Release</a>
+</security:authorize>
