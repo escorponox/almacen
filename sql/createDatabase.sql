@@ -94,9 +94,9 @@ CREATE TABLE "ACTION_STATUS"
 
 CREATE TABLE "CLIENTS"
 (
-  "ID"   NUMBER,
-  "NIF"  VARCHAR2(9 BYTE),
-  "NAME" VARCHAR2(100 BYTE),
+  "ID"      NUMBER,
+  "NIF"     VARCHAR2(9 BYTE),
+  "NAME"    VARCHAR2(100 BYTE),
   "ADDRESS" VARCHAR2(200 BYTE)
 );
 --------------------------------------------------------
@@ -1474,6 +1474,7 @@ FOR EACH ROW
 
     END COLUMN_SEQUENCES;
   END;
+/
 
 UPDATE DB_VERSION
 SET VERSION = '0.9';
@@ -1497,9 +1498,26 @@ FOR EACH ROW
     END COLUMN_SEQUENCES;
   END;
 
+/
+
 ALTER TABLE "PICKING_ACTIONS" DROP CONSTRAINT "PICKING_ACTIONS_FK6";
 ALTER TABLE "PICKING_ACTIONS" DROP COLUMN "OUT_DOCK";
 ALTER TABLE "PICKING_ACTIONS" DROP CONSTRAINT "PICKING_ACTIONS_UK1";
 
 UPDATE DB_VERSION
 SET VERSION = '0.10';
+
+--------------------------------------------------------------------------------
+-- VERSION 0.11
+--------------------------------------------------------------------------------
+
+INSERT INTO OUTGOING_DOCKS (ID, NAME) VALUES (OUTGOING_DOCKS_SEQ.nextval, 'OD01');
+INSERT INTO OUTGOING_DOCKS (ID, NAME) VALUES (OUTGOING_DOCKS_SEQ.nextval, 'OD02');
+INSERT INTO OUTGOING_DOCKS (ID, NAME) VALUES (OUTGOING_DOCKS_SEQ.nextval, 'OD03');
+
+UPDATE DB_VERSION
+SET VERSION = '0.11';
+
+--------------------------------------------------------------------------------
+-- VERSION 0.12
+--------------------------------------------------------------------------------

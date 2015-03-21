@@ -12,7 +12,7 @@ import services.OrderService;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/orderRelease")
+@RequestMapping("/release")
 public class OrderReleaseController {
 
     @Autowired

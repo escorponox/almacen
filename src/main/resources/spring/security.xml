@@ -23,7 +23,7 @@
         <intercept-url pattern="/receipt**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
         <intercept-url pattern="/locate**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
         <intercept-url pattern="/orderFlow**" access="hasAnyRole('ROLE_SELLER','ROLE_ADMIN')"/>
-        <intercept-url pattern="/orderRelease**" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/release**" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/ajax**" access="hasAnyRole('ROLE_SELLER','ROLE_ADMIN')"/>
 
     </http>

@@ -18,7 +18,7 @@ public class ItemSelectValidator {
 
         MessageContext messages = validationContext.getMessageContext();
 
-        if ("".equals(itemQuantitySelectForm.getCode()) && itemDAO.getItemByCode(itemQuantitySelectForm.getCode()) == null) {
+        if ("".equals(itemQuantitySelectForm.getCode()) || itemDAO.getItemByCode(itemQuantitySelectForm.getCode()) == null) {
             messages.addMessage(new MessageBuilder().error().source("code")
                     .defaultText("Item not found.").build());
         }

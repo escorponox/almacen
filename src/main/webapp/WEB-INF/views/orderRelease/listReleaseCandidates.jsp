@@ -8,7 +8,7 @@
 </style>
 <div>
     <h2>Receipt</h2>
-    <sf:form method="post" id="ordersReleaseForm" action="${pageContext.request.contextPath}/orderRelease/release"
+    <sf:form method="post" id="ordersReleaseForm" action="${pageContext.request.contextPath}/release/release"
              modelAttribute="ordersReleaseForm">
         <div>
             <sf:errors/>
@@ -36,15 +36,19 @@
                                               value="${releaseCandidate.ordersStatusEnum}" readonly="true"
                                               tabindex="-1"></td>
                     <td align="center"><input type="checkbox" name="orderReleases[${status.index}].released"
-                                              value="1" <c:if test="${releaseCandidate.released}"></c:if></td>
+                                              value="1" <c:if test="${releaseCandidate.released}">checked</c:if>/></td>
                     <td align="center">
-
+                        <select name="orderReleases[${status.index}].dockId">
+                            <c:forEach items="${docks}" var="dock">
+                                <option value="<c:out value="${dock.id}"/>"><c:out value="${dock.name}"/></option>
+                            </c:forEach>
+                        </select>
                     </td>
                 </tr>
             </c:forEach>
             <tr>
-                <td><input type="button" value="Create"
-                           onclick="document.getElementById('receiptForm').submit()"></td>
+                <td><input type="button" value="Release"
+                           onclick="document.getElementById('ordersReleaseForm').submit()"></td>
             </tr>
         </table>
     </sf:form>

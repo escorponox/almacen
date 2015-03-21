@@ -21,5 +21,5 @@
 </security:authorize>
 
 <security:authorize access="hasAnyRole('ROLE_ADMIN')">
-    <a href="<s:url value="/orderRelease"/>">Order Release</a>
+    <a href="<s:url value="/release/"/>">Order Release</a>
 </security:authorize>
