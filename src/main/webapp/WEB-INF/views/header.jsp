@@ -8,7 +8,7 @@
     }
 </style>
 
-<div id="headerTitleDiv">EXES WareHouse Management</div>
+<div id="headerTitleDiv"><h1>EXES WareHouse Management</h1></div>
 
 <div id="headerUserDiv" style="float: right">
 
