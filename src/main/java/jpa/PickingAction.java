@@ -10,8 +10,8 @@ public class PickingAction implements Serializable {
     private static final long serialVersionUID = 4996012426970191390L;
 
     private Long id;
-    private Integer ordered;
-    private Integer picked;
+    private Long ordered;
+    private Long picked;
     private Long seq;
     private ActionStatus status;
     private Container container;
@@ -33,21 +33,21 @@ public class PickingAction implements Serializable {
 
     @Basic
     @Column(name = "ORDERED", nullable = false, insertable = true, updatable = true, precision = -127)
-    public Integer getOrdered() {
+    public Long getOrdered() {
         return ordered;
     }
 
-    public void setOrdered(Integer ordered) {
+    public void setOrdered(Long ordered) {
         this.ordered = ordered;
     }
 
     @Basic
     @Column(name = "PICKED", nullable = true, insertable = true, updatable = true, precision = -127)
-    public Integer getPicked() {
+    public Long getPicked() {
         return picked;
     }
 
-    public void setPicked(Integer picked) {
+    public void setPicked(Long picked) {
         this.picked = picked;
     }
 

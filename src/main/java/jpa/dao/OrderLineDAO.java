@@ -50,4 +50,10 @@ public class OrderLineDAO {
         }
         return null;
     }
+
+    public List<OrderLine> getOrderLineForPicking(Order order) {
+        Query query = em.createQuery("select a from OrderLine a where a.order = :order order by a.item.location.seq asc");
+        query.setParameter("order", order);
+        return query.getResultList();
+    }
 }

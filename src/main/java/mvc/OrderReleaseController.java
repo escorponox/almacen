@@ -1,10 +1,10 @@
 package mvc;
 
-import forms.OrderRelease;
 import forms.OrdersReleaseForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import services.OrderService;
@@ -33,8 +33,16 @@ public class OrderReleaseController {
     }
 
     @RequestMapping(value = "/release", method = RequestMethod.POST)
-    public String releaseOrders(@Valid OrderRelease orderReleaseForm) {
+    public String releaseOrders(@Valid OrdersReleaseForm ordersReleaseForm, BindingResult bindingResult, Model model) {
 
-        return null;
+        orderService.validate(ordersReleaseForm, bindingResult);
+        model.addAttribute("docks", orderService.getAllOutgoingDocks());
+
+        if (!bindingResult.hasErrors()) {
+            orderService.releaseOrders(ordersReleaseForm);
+            return "redirect:/release/";
+        }
+
+        return "listReleaseCandidates";
     }
 }

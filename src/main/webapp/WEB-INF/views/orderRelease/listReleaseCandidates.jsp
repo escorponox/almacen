@@ -21,6 +21,7 @@
                 <th>Status</th>
                 <th>Release</th>
                 <th>Dock</th>
+                <th></th>
             </tr>
             <c:forEach items="${ordersReleaseForm.orderReleases}" var="releaseCandidate" varStatus="status">
                 <tr>
@@ -43,6 +44,10 @@
                                 <option value="<c:out value="${dock.id}"/>"><c:out value="${dock.name}"/></option>
                             </c:forEach>
                         </select>
+                    </td>
+                    <td>
+                        <sf:errors path="orderReleases[${status.index}].orderId"/>
+                        <sf:errors path="orderReleases[${status.index}].dockId"/>
                     </td>
                 </tr>
             </c:forEach>

@@ -6,6 +6,7 @@ import jpa.dao.OutgoingDockDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionSystemException;
+import org.springframework.validation.BindingResult;
 import services.domain.FillItemDataResponse;
 import services.utils.customers.CustomerCreator;
 import services.utils.customers.CustomerFinder;
@@ -13,6 +14,8 @@ import services.utils.customers.CustomerNotFoundException;
 import services.utils.items.ItemCodeSearcher;
 import services.utils.items.ItemFinder;
 import services.utils.orders.OrderCreator;
+import services.utils.orders.OrderLauncher;
+import services.utils.orders.OrderReleaseFormValidator;
 import services.utils.orders.ReleaseCandidatesFinder;
 
 import java.util.List;
@@ -36,6 +39,10 @@ public class OrderService {
     private UserService userService;
     @Autowired
     private ReleaseCandidatesFinder releaseCandidatesFinder;
+    @Autowired
+    private OrderReleaseFormValidator orderReleaseFormValidator;
+    @Autowired
+    private OrderLauncher orderLauncher;
 
     public Customer findCustomer(String nif) throws CustomerNotFoundException {
         return customerFinder.find(nif);
@@ -97,5 +104,16 @@ public class OrderService {
     public OrdersReleaseForm getReleaseCandidates() {
 
         return releaseCandidatesFinder.find();
+    }
+
+    public void validate(OrdersReleaseForm ordersReleaseForm, BindingResult bindingResult) {
+
+        orderReleaseFormValidator.validateOrders(ordersReleaseForm, bindingResult);
+        orderReleaseFormValidator.validateDocks(ordersReleaseForm, bindingResult);
+    }
+
+    public void releaseOrders(OrdersReleaseForm ordersReleaseForm) {
+
+        orderLauncher.launch(ordersReleaseForm);
     }
 }

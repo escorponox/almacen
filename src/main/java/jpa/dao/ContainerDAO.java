@@ -34,7 +34,7 @@ public class ContainerDAO {
         return em.find(Container.class, id);
     }
 
-    public Container getOrderByOrder(Order order) {
+    public Container getContainerByOrder(Order order) {
         Query query = em.createQuery("select a from Container a where a.order = :order");
         query.setParameter("order", order);
         List<Container> resultList = query.getResultList();

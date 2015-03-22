@@ -15,7 +15,6 @@ public class OrderRelease {
     private String customerName;
     private OrdersStatusEnum ordersStatusEnum;
 
-    @NotNull(message = "Select order")
     private Boolean released;
 
     @NotNull(message = "Dock not selected")
