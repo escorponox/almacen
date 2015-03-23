@@ -5,7 +5,7 @@
 <div>
     <h2>Users List</h2>
     <sf:form method="post" id="userListForm">
-        <table cellspacing="5" style="text-align: center">
+        <table class="table table-striped">
             <tr>
                 <th>Username</th>
                 <th>Enabled</th>

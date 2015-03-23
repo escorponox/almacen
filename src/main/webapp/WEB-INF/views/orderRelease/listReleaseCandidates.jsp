@@ -13,48 +13,50 @@
         <div>
             <sf:errors/>
         </div>
-        <table cellspacing="5" style="text-align: center">
-            <tr>
-                <th></th>
-                <th>Order Code</th>
-                <th>Customer</th>
-                <th>Status</th>
-                <th>Release</th>
-                <th>Dock</th>
-                <th></th>
-            </tr>
-            <c:forEach items="${ordersReleaseForm.orderReleases}" var="releaseCandidate" varStatus="status">
+        <div class="table-responsive">
+            <table class="table table-striped">
                 <tr>
-                    <td align="center"><input type="hidden"
-                                              name="orderReleases[${status.index}].orderId"
-                                              value="${releaseCandidate.orderId}">${status.count}</td>
-                    <td align="center"><input name="orderReleases[${status.index}].orderCode"
-                                              value="${releaseCandidate.orderCode}" readonly="true" tabindex="-1"></td>
-                    <td align="center"><input name="orderReleases[${status.index}].customerName"
-                                              value="${releaseCandidate.customerName}" readonly="true" tabindex="-1">
-                    </td>
-                    <td align="center"><input name="orderReleases[${status.index}].ordersStatusEnum"
-                                              value="${releaseCandidate.ordersStatusEnum}" readonly="true"
-                                              tabindex="-1"></td>
-                    <td align="center"><input type="checkbox" name="orderReleases[${status.index}].released"
-                                              value="1" <c:if test="${releaseCandidate.released}">checked</c:if>/></td>
-                    <td align="center">
-                        <select name="orderReleases[${status.index}].dockId">
-                            <c:forEach items="${docks}" var="dock">
-                                <option value="<c:out value="${dock.id}"/>"><c:out value="${dock.name}"/></option>
-                            </c:forEach>
-                        </select>
-                    </td>
-                    <td>
-                        <sf:errors path="orderReleases[${status.index}].orderId"/>
-                        <sf:errors path="orderReleases[${status.index}].dockId"/>
-                    </td>
+                    <th></th>
+                    <th>Order Code</th>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Release</th>
+                    <th>Dock</th>
+                    <th></th>
                 </tr>
-            </c:forEach>
-            <tr>
-                <td><input type="button" value="Release"
-                           onclick="document.getElementById('ordersReleaseForm').submit()"></td>
-            </tr>
-        </table>
+                <c:forEach items="${ordersReleaseForm.orderReleases}" var="releaseCandidate" varStatus="status">
+                    <tr>
+                        <td><input type="hidden"
+                                   name="orderReleases[${status.index}].orderId"
+                                   value="${releaseCandidate.orderId}">${status.count}</td>
+                        <td><input name="orderReleases[${status.index}].orderCode"
+                                   value="${releaseCandidate.orderCode}" readonly="true" tabindex="-1"></td>
+                        <td><input name="orderReleases[${status.index}].customerName"
+                                   value="${releaseCandidate.customerName}" readonly="true" tabindex="-1">
+                        </td>
+                        <td><input name="orderReleases[${status.index}].ordersStatusEnum"
+                                   value="${releaseCandidate.ordersStatusEnum}" readonly="true"
+                                   tabindex="-1"></td>
+                        <td><input type="checkbox" name="orderReleases[${status.index}].released"
+                                   value="1" <c:if test="${releaseCandidate.released}">checked</c:if>/></td>
+                        <td>
+                            <select name="orderReleases[${status.index}].dockId">
+                                <c:forEach items="${docks}" var="dock">
+                                    <option value="<c:out value="${dock.id}"/>"><c:out value="${dock.name}"/></option>
+                                </c:forEach>
+                            </select>
+                        </td>
+                        <td>
+                            <sf:errors path="orderReleases[${status.index}].orderId"/>
+                            <sf:errors path="orderReleases[${status.index}].dockId"/>
+                        </td>
+                    </tr>
+                </c:forEach>
+                <tr>
+                    <td><input type="button" value="Release"
+                               onclick="document.getElementById('ordersReleaseForm').submit()"></td>
+                </tr>
+            </table>
+        </div>
     </sf:form>
 </div>

@@ -19,7 +19,6 @@
     }
 
     #login-box {
-        width: 300px;
         padding: 20px;
         margin-left: 10%;
         background: #fff;
@@ -39,26 +38,34 @@
         <div class="msg">${msg}</div>
     </c:if>
 
-    <form name='loginForm'
+    <form class="form-horizontal" role="form" name='loginForm'
           action="<c:url value='/j_spring_security_check' />" method='POST'>
 
-        <table>
-            <tr>
-                <td>User:</td>
-                <td><input type='text' name='username' value=''></td>
-            </tr>
-            <tr>
-                <td>Password:</td>
-                <td><input type='password' name='password'/></td>
-            </tr>
-            <tr>
-                <td colspan='2'><input name="submit" type="submit"
-                                       value="Submit"/></td>
-            </tr>
-        </table>
+        <div class="form-group">
+            <div class="row">
+                <label for="username" class="col-lg-2 control-label">User</label>
 
-        <input type="hidden" name="${_csrf.parameterName}"
-               value="${_csrf.token}"/>
+                <div class="col-lg-10">
+                    <input class="form-control" type='text' id="username" name='username' placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-lg-2 control-label">Password</label>
 
+                <div class="col-lg-10">
+                    <input class="form-control" id="password" type='password' name='password' placeholder="Password"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button class="btn btn-default" name="submit" type="submit">Submit</button>
+            </div>
+        </div>
+
+        <div>
+            <input type="hidden" name="${_csrf.parameterName}"
+                   value="${_csrf.token}"/>
+        </div>
     </form>
 </div>
