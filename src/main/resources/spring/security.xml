@@ -26,6 +26,7 @@
         <intercept-url pattern="/pickingFlow**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
         <intercept-url pattern="/release**" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/ship**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
+        <intercept-url pattern="/items**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
         <intercept-url pattern="/ajax**" access="hasAnyRole('ROLE_SELLER','ROLE_ADMIN')"/>
 
     </http>

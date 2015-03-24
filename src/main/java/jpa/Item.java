@@ -76,13 +76,12 @@ public class Item implements Serializable {
 
         Item item = (Item) o;
 
-        if (code != null ? !code.equals(item.code) : item.code != null) return false;
-        if (description != null ? !description.equals(item.description) : item.description != null) return false;
-        if (id != null ? !id.equals(item.id) : item.id != null) return false;
-        if (name != null ? !name.equals(item.name) : item.name != null) return false;
-        if (price != null ? !price.equals(item.price) : item.price != null) return false;
+        return !(code != null ? !code.equals(item.code) : item.code != null)
+                && !(description != null ? !description.equals(item.description) : item.description != null)
+                && !(id != null ? !id.equals(item.id) : item.id != null)
+                && !(name != null ? !name.equals(item.name) : item.name != null)
+                && !(price != null ? !price.equals(item.price) : item.price != null);
 
-        return true;
     }
 
     @Override

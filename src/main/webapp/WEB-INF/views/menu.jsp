@@ -12,6 +12,10 @@
         </security:authorize>
 
         <security:authorize access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')">
+            <a class=" btn btn-primary navbar-btn" href="<s:url value="/items/"/>">Item List</a>
+        </security:authorize>
+
+        <security:authorize access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')">
             <a class=" btn btn-primary navbar-btn" href="<s:url value="/receipt/select"/>">Receipts</a>
         </security:authorize>
 
@@ -34,13 +38,15 @@
         <security:authorize access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')">
             <a class=" btn btn-primary navbar-btn" href="<s:url value="/ship/"/>">Shipping</a>
         </security:authorize>
+
     </div>
     <div id="headerUserDiv" class="navbar-right">
 
         <security:authorize access="isAnonymous()">
             <div>
                 <c:url value="/login" var="loginUrl"/>
-                <a class=" btn btn-primary navbar-btn" id="loginLink" href="${loginUrl}" onclick="formSubmit()">LogIn</a>
+                <a class=" btn btn-primary navbar-btn" id="loginLink" href="${loginUrl}"
+                   onclick="formSubmit()">LogIn</a>
             </div>
         </security:authorize>
 

@@ -104,4 +104,8 @@
     <definition name="noShippingCandidates" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/views/orderShipping/noShippingCandidates.jsp"/>
     </definition>
+
+    <definition name="itemsList" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/item/itemsList.jsp"/>
+    </definition>
 </tiles-definitions>
