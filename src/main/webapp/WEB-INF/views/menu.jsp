@@ -30,6 +30,10 @@
         <security:authorize access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')">
             <a class=" btn btn-primary navbar-btn" href="<s:url value="/pickingFlow"/>">Picking</a>
         </security:authorize>
+
+        <security:authorize access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')">
+            <a class=" btn btn-primary navbar-btn" href="<s:url value="/ship/"/>">Shipping</a>
+        </security:authorize>
     </div>
     <div id="headerUserDiv" class="navbar-right">
 

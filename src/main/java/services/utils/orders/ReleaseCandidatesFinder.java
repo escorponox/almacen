@@ -14,9 +14,9 @@ public class ReleaseCandidatesFinder {
     private static final Long DEFAULT_DOCK_ID = 1L;
 
     @Autowired
-    public OrderDAO orderDAO;
+    private OrderDAO orderDAO;
     @Autowired
-    public OrdersStatusDAO ordersStatusDAO;
+    private OrdersStatusDAO ordersStatusDAO;
 
     public OrdersReleaseForm find() {
 

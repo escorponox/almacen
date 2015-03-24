@@ -96,4 +96,12 @@
     <definition name="selectDock" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/views/flow/picking/confirmDock.jsp"/>
     </definition>
+
+    <definition name="listShippingCandidates" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/orderShipping/listShippingCandidates.jsp"/>
+    </definition>
+
+    <definition name="noShippingCandidates" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/orderShipping/noShippingCandidates.jsp"/>
+    </definition>
 </tiles-definitions>

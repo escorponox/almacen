@@ -1,6 +1,7 @@
 package services;
 
 import forms.OrdersReleaseForm;
+import forms.OrdersShippingForm;
 import jpa.*;
 import jpa.dao.OutgoingDockDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +14,7 @@ import services.utils.customers.CustomerFinder;
 import services.utils.customers.CustomerNotFoundException;
 import services.utils.items.ItemCodeSearcher;
 import services.utils.items.ItemFinder;
-import services.utils.orders.OrderCreator;
-import services.utils.orders.OrderLauncher;
-import services.utils.orders.OrderReleaseFormValidator;
-import services.utils.orders.ReleaseCandidatesFinder;
+import services.utils.orders.*;
 
 import java.util.List;
 
@@ -43,6 +41,12 @@ public class OrderService {
     private OrderReleaseFormValidator orderReleaseFormValidator;
     @Autowired
     private OrderLauncher orderLauncher;
+    @Autowired
+    private ShippingCandidatesFinder shippingCandidatesFinder;
+    @Autowired
+    private OrdersShippingFormValidator ordersShippingFormValidator;
+    @Autowired
+    private OrderShipper orderShipper;
 
     public Customer findCustomer(String nif) throws CustomerNotFoundException {
         return customerFinder.find(nif);
@@ -115,5 +119,19 @@ public class OrderService {
     public void releaseOrders(OrdersReleaseForm ordersReleaseForm) {
 
         orderLauncher.launch(ordersReleaseForm);
+    }
+
+    public OrdersShippingForm getShippingCandidates() {
+        return shippingCandidatesFinder.find();
+    }
+
+    public void validate(OrdersShippingForm OrdersShippingForm, BindingResult bindingResult) {
+
+        ordersShippingFormValidator.validate(OrdersShippingForm, bindingResult);
+    }
+
+    public void shipOrders(OrdersShippingForm ordersShippingForm) {
+
+        orderShipper.ship(ordersShippingForm);
     }
 }

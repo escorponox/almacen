@@ -15,11 +15,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderCreator {
 
     @Autowired
-    public OrderDAO orderDAO;
+    private OrderDAO orderDAO;
     @Autowired
-    public OrderLineDAO orderLineDAO;
+    private OrderLineDAO orderLineDAO;
     @Autowired
-    public OrdersStatusDAO ordersStatusDAO;
+    private OrdersStatusDAO ordersStatusDAO;
 
     public void create(Order order) {
 

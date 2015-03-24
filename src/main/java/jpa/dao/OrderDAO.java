@@ -58,4 +58,10 @@ public class OrderDAO {
         query.setParameter("inDocks", OrdersStatusEnum.DO);
         return query.getResultList();
     }
+
+    public List<Order> findAllShippingCandidates() {
+        Query query = em.createQuery("select a from Order a where a.status.status = :inDocks order by a.id");
+        query.setParameter("inDocks", OrdersStatusEnum.DO);
+        return query.getResultList();
+    }
 }
