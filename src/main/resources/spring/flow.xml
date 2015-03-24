@@ -8,9 +8,13 @@
 
     <webflow-config:flow-registry id="flowRegistry" base-path="WEB-INF/flows"
                                   flow-builder-services="flowBuilderServices">
+
         <webflow-config:flow-location id="orderFlow" path="order/order-flow.xml"/>
-        <webflow-config:flow-location id="customerFlow" path="order/orderSubFlows/customer-flow.xml"/>
-        <webflow-config:flow-location id="buildOrderFlow" path="order/orderSubFlows/buildOrder-flow.xml"/>
+        <webflow-config:flow-location id="customerFlow" path="order/customer-flow.xml"/>
+        <webflow-config:flow-location id="buildOrderFlow" path="order/buildOrder-flow.xml"/>
+
+        <webflow-config:flow-location id="pickingFlow" path="picking/picking.xml"/>
+        <webflow-config:flow-location id="pickingTour" path="picking/tour.xml"/>
     </webflow-config:flow-registry>
 
     <bean class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">

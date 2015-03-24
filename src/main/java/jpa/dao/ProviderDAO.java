@@ -37,7 +37,7 @@ public class ProviderDAO {
         Query query = em.createQuery("select a from Provider a where a.nif = :nif");
         query.setParameter("nif", nif);
         List<Provider> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

@@ -18,8 +18,8 @@ public class StockDAO {
     @PersistenceContext
     private EntityManager em;
 
-    public void addStock(Stock Stock) {
-        em.persist(Stock);
+    public void addStock(Stock stock) {
+        em.persist(stock);
     }
 
     public void updateStock(Stock item) {
@@ -40,7 +40,7 @@ public class StockDAO {
         query.setParameter("item", item);
         query.setParameter("location", location);
         List<Stock> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

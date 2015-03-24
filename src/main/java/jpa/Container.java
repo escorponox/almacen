@@ -12,6 +12,7 @@ public class Container implements Serializable {
     private ContainerStatus status;
     private Order order;
     private OutgoingDock outgoingDock;
+    private User picker;
 
     @SequenceGenerator(name = "CONTAINER_SEQ", sequenceName = "CONTAINER_SEQ", allocationSize = 1)
 
@@ -71,5 +72,15 @@ public class Container implements Serializable {
 
     public void setOutgoingDock(OutgoingDock outgoingDock) {
         this.outgoingDock = outgoingDock;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "PICKER", referencedColumnName = "ID")
+    public User getPicker() {
+        return picker;
+    }
+
+    public void setPicker(User picker) {
+        this.picker = picker;
     }
 }

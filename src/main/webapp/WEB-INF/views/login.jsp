@@ -42,7 +42,7 @@
           action="<c:url value='/j_spring_security_check' />" method='POST'>
 
         <div class="form-group">
-            <div class="row">
+            <div class="form-group">
                 <label for="username" class="col-lg-2 control-label">User</label>
 
                 <div class="col-lg-10">

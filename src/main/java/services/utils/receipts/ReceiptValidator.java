@@ -44,7 +44,7 @@ public class ReceiptValidator {
 
         List<ReceiptAction> receiptActions = receiptActionDAO.getReceiptActionByDeliveryNote(deliveryNote);
 
-        if (receiptActions.size() > 0) {
+        if (!receiptActions.isEmpty()) {
             bindingResult.rejectValue("deliveryNote", "error.receipt.deliveryNote", "DeliveryNote already received");
         }
     }

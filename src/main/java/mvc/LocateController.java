@@ -33,7 +33,7 @@ public class LocateController {
     }
 
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
-    public String createReceiptForm(@Valid LocateActionForm locateActionForm, BindingResult bindingResult, Model model) {
+    public String createReceiptForm(@Valid LocateActionForm locateActionForm, BindingResult bindingResult) {
 
         locateService.validate(locateActionForm, bindingResult);
 

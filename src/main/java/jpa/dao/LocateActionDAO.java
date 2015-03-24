@@ -40,7 +40,7 @@ public class LocateActionDAO {
         query.setParameter("user", user);
         query.setParameter("status", ActionStatusEnum.AS);
         List<LocateAction> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;
@@ -50,7 +50,7 @@ public class LocateActionDAO {
         Query query = em.createQuery("select a from LocateAction a where  a.status.status = :status order by a.receiptAction.receivedAt,a.receiptAction.receivingOrderLine.item.code");
         query.setParameter("status", ActionStatusEnum.CR);
         List<LocateAction> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

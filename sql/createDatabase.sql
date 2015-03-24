@@ -1521,3 +1521,26 @@ SET VERSION = '0.11';
 --------------------------------------------------------------------------------
 -- VERSION 0.12
 --------------------------------------------------------------------------------
+
+ALTER TABLE CONTAINER
+ADD (PICKER NUMBER );
+
+ALTER TABLE CONTAINER
+ADD CONSTRAINT CONTAINER_FK4 FOREIGN KEY
+  (
+    PICKER
+  )
+REFERENCES USERS
+  (
+    ID
+  )
+ON DELETE SET NULL ENABLE;
+
+Insert into CONTAINER_STATUS (ID,STATUS,DESCRIPTION) values (4,'AS','ASSIGNED');
+
+UPDATE DB_VERSION
+SET VERSION = '0.12';
+
+--------------------------------------------------------------------------------
+-- VERSION 0.13
+--------------------------------------------------------------------------------

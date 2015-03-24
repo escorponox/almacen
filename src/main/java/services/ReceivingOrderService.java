@@ -3,8 +3,8 @@ package services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import services.utils.receivingOrders.RecOrderRequestValidator;
-import services.utils.receivingOrders.ReceivingOrderCreator;
+import services.utils.receiving.RecOrderRequestValidator;
+import services.utils.receiving.ReceivingOrderCreator;
 import webservices.domain.RecOrderRequest;
 import webservices.domain.RecOrderResponse;
 

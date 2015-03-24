@@ -46,7 +46,7 @@ public class ReceiptController {
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String createReceipt(@Valid ReceiptForm receiptForm, BindingResult bindingResult, Model model, Principal principal) {
+    public String createReceipt(@Valid ReceiptForm receiptForm, BindingResult bindingResult, Principal principal) {
 
         receiptService.validate(receiptForm, bindingResult);
 

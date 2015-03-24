@@ -41,7 +41,7 @@ public class CustomerDAO {
         Query query = em.createQuery("select a from Customer a where a.nif = :nif");
         query.setParameter("nif", nif);
         List<Customer> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

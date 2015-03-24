@@ -104,7 +104,7 @@ public class UserController {
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public String changePassword(@Valid ChangePasswordForm changePasswordForm,
-                                 BindingResult bindingResult, Model model) {
+                                 BindingResult bindingResult) {
 
         if (!userService.getPasswordValidator().userExist(changePasswordForm)) {
             bindingResult.reject("error.notValidId", "User not found");

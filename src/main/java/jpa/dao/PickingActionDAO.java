@@ -1,5 +1,6 @@
 package jpa.dao;
 
+import jpa.Container;
 import jpa.Order;
 import jpa.PickingAction;
 import jpa.enums.ActionStatusEnum;
@@ -35,12 +36,19 @@ public class PickingActionDAO {
         return em.find(PickingAction.class, id);
     }
 
-    public PickingAction getNextActionByOrder(Order order) {
-        Query query = em.createQuery("select a from PickingAction a where a.orderLine.order = :order and a.status.status = :status order by a.seq");
-        query.setParameter("order", order);
+    public List<PickingAction> getCreatedPickingActionsByContainer(Container container) {
+        Query query = em.createQuery("select a from PickingAction a where a.container = :container and a.status.status = :status");
+        query.setParameter("container", container);
+        query.setParameter("status", ActionStatusEnum.CR);
+        return query.getResultList();
+    }
+
+    public PickingAction getNextActionByContainer(Container container) {
+        Query query = em.createQuery("select a from PickingAction a where a.container = :container and a.status.status = :status order by a.seq");
+        query.setParameter("container", container);
         query.setParameter("status", ActionStatusEnum.AS);
         List<PickingAction> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

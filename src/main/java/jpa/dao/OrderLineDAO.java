@@ -45,7 +45,7 @@ public class OrderLineDAO {
         query.setParameter("order", order);
         query.setParameter("lineNumber", lineNumber);
         List<OrderLine> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

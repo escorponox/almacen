@@ -23,7 +23,7 @@ public class OrderReleaseController {
 
         OrdersReleaseForm orderReleaseForm = orderService.getReleaseCandidates();
 
-        if (orderReleaseForm.getOrderReleases().size() > 0) {
+        if (!orderReleaseForm.getOrderReleases().isEmpty()) {
             model.addAttribute(orderReleaseForm);
             model.addAttribute("docks", orderService.getAllOutgoingDocks());
             return "listReleaseCandidates";

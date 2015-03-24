@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <var name="container" class="jpa.Container"/>
+
+    <action-state id="assignContainer">
+        <set name="container" value="pickingService.assignContainer(currentUser.name)"/>
+        <transition to="allPickingFinished"/>
+    </action-state>
+
+    <decision-state id="allPickingFinished">
+        <if test="container == null" then="noContainer" else="pickingTour"/>
+    </decision-state>
+
+    <subflow-state id="pickingTour" subflow="pickingTour">
+        <input name="container" value="container"/>
+        <transition on="tourFinished" to="selectDock"/>
+    </subflow-state>
+
+    <view-state id="selectDock" view="selectDock" model="container">
+        <on-entry>
+            <set name="flowScope.docks" value="orderService.allOutgoingDocks"/>
+        </on-entry>
+        <transition on="selectedDock" to="finishContainer"/>
+    </view-state>
+    
+    <action-state id="finishContainer">
+        <evaluate expression="pickingService.finishContainer(container)"/>
+        <transition on-exception="org.springframework.transaction.TransactionSystemException" to="selectDock"/>
+        <transition on-exception="services.utils.picking.NotValidOutgoingDockException" to="selectDock"/>
+        <transition to="endState"/>
+    </action-state>
+
+    <view-state id="noContainer" view="noContainer">
+        <transition on="finish" to="endState"/>
+    </view-state>
+
+    <end-state id="endState"/>
+
+    <global-transitions>
+        <transition on="cancel" to="endState"/>
+    </global-transitions>
+</flow>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+    <var name="pickingForm" class="forms.PickingForm"/>
+    <input name="container" required="true" type="jpa.Container"/>
+
+
+    <action-state id="selectPicking">
+        <evaluate result="pickingForm" expression="pickingService.getNextPicking(container)"/>
+        <transition on-exception="services.utils.picking.PickingNotFoundException" to="tourFinished"/>
+        <transition to="confirmPicking"/>
+    </action-state>
+
+    <view-state id="confirmPicking" view="picking" model="pickingForm">
+        <transition on="submitPicking" to="processPicking"/>
+    </view-state>
+
+    <action-state id="processPicking">
+        <evaluate expression="pickingService.processPicking(pickingForm, container)"/>
+        <transition on-exception="org.springframework.transaction.TransactionSystemException" to="selectPicking"/>
+        <transition to="selectPicking"/>
+    </action-state>
+
+    <end-state id="tourFinished"/>
+
+    <end-state id="cancel"/>
+
+    <global-transitions>
+        <transition on="cancel" to="cancel" validate="false"/>
+    </global-transitions>
+
+</flow>

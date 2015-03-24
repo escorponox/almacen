@@ -37,7 +37,7 @@ public class ItemDAO {
         Query query = em.createQuery("select a from Item a where a.code = :code");
         query.setParameter("code", code);
         List<Item> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

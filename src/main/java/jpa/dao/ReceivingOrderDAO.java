@@ -37,7 +37,7 @@ public class ReceivingOrderDAO {
         Query query = em.createQuery("select a from ReceivingOrder a where a.code = :code");
         query.setParameter("code", code);
         List<ReceivingOrder> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

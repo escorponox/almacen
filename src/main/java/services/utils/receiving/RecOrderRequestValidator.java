@@ -1,4 +1,4 @@
-package services.utils.receivingOrders;
+package services.utils.receiving;
 
 import jpa.Item;
 import jpa.Provider;

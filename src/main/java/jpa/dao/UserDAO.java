@@ -40,7 +40,7 @@ public class UserDAO {
         Query query = em.createQuery("select a from User a where a.username = :username");
         query.setParameter("username", username);
         List<User> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

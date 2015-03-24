@@ -40,7 +40,7 @@ public class OrderDAO {
         Query query = em.createQuery("select a from Order a where a.code = :code");
         query.setParameter("code", code);
         List<Order> resultList = query.getResultList();
-        if (resultList.size() > 0) {
+        if (!resultList.isEmpty()) {
             return resultList.get(0);
         }
         return null;

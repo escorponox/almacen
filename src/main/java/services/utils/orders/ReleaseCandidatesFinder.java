@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReleaseCandidatesFinder {
 
-    private final Long DEFAULT_DOCK_ID = 1L;
+    private static final Long DEFAULT_DOCK_ID = 1L;
 
     @Autowired
     public OrderDAO orderDAO;

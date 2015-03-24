@@ -84,4 +84,16 @@
     <definition name="noReleaseCandidates" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/views/orderRelease/noReleaseCandidates.jsp"/>
     </definition>
+
+    <definition name="noContainer" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/picking/noContainer.jsp"/>
+    </definition>
+
+    <definition name="picking" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/picking/picking.jsp"/>
+    </definition>
+
+    <definition name="selectDock" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/flow/picking/confirmDock.jsp"/>
+    </definition>
 </tiles-definitions>
