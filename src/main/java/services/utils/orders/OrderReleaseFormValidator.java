@@ -1,11 +1,9 @@
 package services.utils.orders;
 
-import forms.OrderRelease;
 import forms.OrdersReleaseForm;
 import jpa.Order;
 import jpa.OutgoingDock;
 import jpa.dao.OrderDAO;
-import jpa.dao.OrdersStatusDAO;
 import jpa.dao.OutgoingDockDAO;
 import jpa.enums.OrdersStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +12,8 @@ import org.springframework.validation.BindingResult;
 
 @Component
 public class OrderReleaseFormValidator {
+
+    private static final String RELEASES_PREFIX = "orderReleases[";
 
     @Autowired
     private OrderDAO orderDAO;
@@ -28,13 +28,13 @@ public class OrderReleaseFormValidator {
 
             if (order == null) {
 
-                bindingResult.rejectValue("orderReleases[" + i + "].orderId",
+                bindingResult.rejectValue(RELEASES_PREFIX + i + "].orderId",
                         "order.notFound",
                         "Order not found.");
 
             } else if (!order.getStatus().getStatus().equals(OrdersStatusEnum.CR) && !order.getStatus().getStatus().equals(OrdersStatusEnum.DO)) {
 
-                bindingResult.rejectValue("orderReleases[" + i + "].orderId",
+                bindingResult.rejectValue(RELEASES_PREFIX + i + "].orderId",
                         "order.badStatus",
                         "Order not created or in docks.");
             }
@@ -50,7 +50,7 @@ public class OrderReleaseFormValidator {
 
             if (outgoingDock == null) {
 
-                bindingResult.rejectValue("orderReleases[" + i + "].dockId",
+                bindingResult.rejectValue(RELEASES_PREFIX + i + "].dockId",
                         "order.badStatus",
                         "Dock not found.");
             }

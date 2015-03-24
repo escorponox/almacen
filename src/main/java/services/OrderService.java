@@ -48,7 +48,7 @@ public class OrderService {
         return customerFinder.find(nif);
     }
 
-    public void addCustomer(Customer customer) throws TransactionSystemException {
+    public void addCustomer(Customer customer) {
         customerCreator.create(customer);
     }
 

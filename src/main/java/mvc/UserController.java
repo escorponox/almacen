@@ -20,6 +20,9 @@ import javax.validation.Valid;
 @RequestMapping("/users")
 public class UserController {
 
+    private static final String ROLE_TYPES_LIST = "roleTypesList";
+    private static final String REDIRECT_USERS_LIST = "redirect:/users?list";
+
     @Autowired
     private UserService userService;
 
@@ -42,11 +45,11 @@ public class UserController {
             userEditForm.setEnabled(user.getEnabled());
             userEditForm.setCommission(user.getCommission());
             userEditForm.setRoleTypeEnums(user.getRoleTypesEnums());
-            model.addAttribute("roleTypesList", RoleTypeEnum.asList());
+            model.addAttribute(ROLE_TYPES_LIST, RoleTypeEnum.asList());
             model.addAttribute(userEditForm);
             return "editUserTile";
         } else {
-            return "redirect:/users?list";
+            return REDIRECT_USERS_LIST;
         }
     }
 
@@ -58,7 +61,7 @@ public class UserController {
         if (user != null) {
             userService.deleteUser(user);
         }
-        return "redirect:/users?list";
+        return REDIRECT_USERS_LIST;
     }
 
     @RequestMapping(method = RequestMethod.GET, params = "pass")
@@ -72,7 +75,7 @@ public class UserController {
             model.addAttribute(changePasswordForm);
             return "changePasswordTile";
         } else {
-            return "redirect:/users?list";
+            return REDIRECT_USERS_LIST;
         }
     }
 
@@ -81,7 +84,7 @@ public class UserController {
 
         CreateUserForm createUserForm = new CreateUserForm();
         model.addAttribute(createUserForm);
-        model.addAttribute("roleTypesList", RoleTypeEnum.asList());
+        model.addAttribute(ROLE_TYPES_LIST, RoleTypeEnum.asList());
         return "newUserTile";
     }
 
@@ -93,13 +96,13 @@ public class UserController {
         }
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("roleTypesList", RoleTypeEnum.asList());
+            model.addAttribute(ROLE_TYPES_LIST, RoleTypeEnum.asList());
             return "editUserTile";
         }
 
         userService.updateUser(userEditForm);
 
-        return "redirect:/users?list";
+        return REDIRECT_USERS_LIST;
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
@@ -120,7 +123,7 @@ public class UserController {
 
         userService.changePassword(changePasswordForm);
 
-        return "redirect:/users?list";
+        return REDIRECT_USERS_LIST;
     }
 
     @RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -135,12 +138,12 @@ public class UserController {
         }
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("roleTypesList", RoleTypeEnum.asList());
+            model.addAttribute(ROLE_TYPES_LIST, RoleTypeEnum.asList());
             return "newUserTile";
         }
 
         userService.createUser(createUserForm);
 
-        return "redirect:/users?list";
+        return REDIRECT_USERS_LIST;
     }
 }
