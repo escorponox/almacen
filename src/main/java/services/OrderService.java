@@ -6,7 +6,6 @@ import jpa.*;
 import jpa.dao.OutgoingDockDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.TransactionSystemException;
 import org.springframework.validation.BindingResult;
 import services.domain.FillItemDataResponse;
 import services.utils.customers.CustomerCreator;
@@ -125,9 +124,9 @@ public class OrderService {
         return shippingCandidatesFinder.find();
     }
 
-    public void validate(OrdersShippingForm OrdersShippingForm, BindingResult bindingResult) {
+    public void validate(OrdersShippingForm ordersShippingForm, BindingResult bindingResult) {
 
-        ordersShippingFormValidator.validate(OrdersShippingForm, bindingResult);
+        ordersShippingFormValidator.validate(ordersShippingForm, bindingResult);
     }
 
     public void shipOrders(OrdersShippingForm ordersShippingForm) {

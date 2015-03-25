@@ -15,8 +15,6 @@ public class ReleaseCandidatesFinder {
 
     @Autowired
     private OrderDAO orderDAO;
-    @Autowired
-    private OrdersStatusDAO ordersStatusDAO;
 
     public OrdersReleaseForm find() {
 
