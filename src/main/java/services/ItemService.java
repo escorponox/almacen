@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class ItemService {
 
-    private static final Logger logger = Logger.getLogger(ItemService.class);
+    private static final Logger LOGGER = Logger.getLogger(ItemService.class);
 
     @Autowired
     private ItemDAO itemDAO;
@@ -53,7 +53,7 @@ public class ItemService {
 
         } catch (Exception e) {
             result = "";
-            logger.error("Error marshaling item list", e);
+            LOGGER.error("Error marshaling item list", e);
         }
 
         return result;

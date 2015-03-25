@@ -32,7 +32,7 @@ public class OrderShippingController {
     }
 
     @RequestMapping(value = "/ship", method = RequestMethod.POST)
-    public String releaseOrders(@Valid OrdersShippingForm ordersShippingForm, BindingResult bindingResult, Model model) {
+    public String releaseOrders(@Valid OrdersShippingForm ordersShippingForm, BindingResult bindingResult) {
 
         orderService.validate(ordersShippingForm, bindingResult);
 

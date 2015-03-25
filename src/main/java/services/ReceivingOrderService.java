@@ -1,5 +1,6 @@
 package services;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +12,8 @@ import webservices.domain.RecOrderResponse;
 @Service
 @Transactional
 public class ReceivingOrderService {
+
+    private static final Logger LOGGER = Logger.getLogger(ReceivingOrderService.class);
 
     @Autowired
     private RecOrderRequestValidator recOrderRequestValidator;
@@ -29,6 +32,7 @@ public class ReceivingOrderService {
             try {
                 receivingOrderCreator.create(recOrderRequest, recOrderResponse);
             } catch (Exception e) {
+                LOGGER.error("Error creating te receiving order. ", e);
                 recOrderResponse.setResponseCode("-4");
                 recOrderResponse.setErrorDescription("Error in saving process.");
             }

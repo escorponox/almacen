@@ -4,7 +4,6 @@ import forms.OrderRelease;
 import forms.OrdersReleaseForm;
 import jpa.Order;
 import jpa.dao.OrderDAO;
-import jpa.dao.OrdersStatusDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,8 +14,6 @@ public class ReleaseCandidatesFinder {
 
     @Autowired
     private OrderDAO orderDAO;
-    @Autowired
-    private OrdersStatusDAO ordersStatusDAO;
 
     public OrdersReleaseForm find() {
 
