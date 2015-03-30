@@ -12,7 +12,7 @@
         <class>jpa.Provider</class>
         <class>jpa.User</class>
         <class>jpa.Order</class>
-        <class>jpa.Client</class>
+        <class>jpa.Customer</class>
         <class>jpa.OutgoingDock</class>
         <class>jpa.OrdersStatus</class>
         <class>jpa.UserRole</class>
@@ -26,14 +26,14 @@
         <class>jpa.LocateAction</class>
         <class>jpa.IncomingDock</class>
         <class>jpa.ActionStatus</class>
-        <class>jpa.OrdersLine</class>
+        <class>jpa.OrderLine</class>
         <class>jpa.PickingAction</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url"
-                      value="jdbc:oracle:thin:@//?"/>
-            <property name="javax.persistence.jdbc.user" value="?"/>
-            <property name="javax.persistence.jdbc.password" value="?"/>
+                      value="jdbc:oracle:thin:@//192.168.1.102:1527/xe"/>
+            <property name="javax.persistence.jdbc.user" value="PROYECTO"/>
+            <property name="javax.persistence.jdbc.password" value="PROYECTO"/>
         </properties>
     </persistence-unit>
 

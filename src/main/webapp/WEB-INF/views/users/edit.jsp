@@ -32,6 +32,11 @@
                 <td><sf:errors path="roleTypeEnums"/></td>
             </tr>
             <tr>
+                <td><sf:label path="eMail">e-mail: </sf:label></td>
+                <td><sf:input path="eMail"/></td>
+                <td><sf:errors path="eMail"/></td>
+            </tr>
+            <tr>
                 <td><input type="button" value="Submit" onclick="saveUser()"/></td>
             </tr>
         </table>

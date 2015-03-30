@@ -34,6 +34,8 @@ public class ItemService {
             itemXml.setDescription(item.getDescription());
             itemXml.setPrice(item.getPrice());
             itemXml.setLocation(item.getLocation().getName());
+            itemXml.setMinStock(item.getMinStock());
+            itemXml.setMaxStock(item.getMaxStock());
 
             itemsListXml.getItemList().add(itemXml);
         }

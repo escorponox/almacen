@@ -23,8 +23,6 @@ public class ItemsInitiator {
         ItemDAO itemDAO = (ItemDAO) context.getBean("itemDAO");
         LocationDAO locationDAO = (LocationDAO) context.getBean("locationDAO");
 
-        Long sequence = 0L;
-
         for (int i = 1; i < 101; i++) {
             Item item = new Item();
             item.setCode(String.valueOf(999000000 + i));
@@ -32,6 +30,8 @@ public class ItemsInitiator {
             item.setDescription(String.valueOf("Description " + i));
             item.setLocation(locationDAO.getLocationById(Long.valueOf(String.valueOf(i))));
             item.setPrice(new BigDecimal("10" + i + ".5"));
+            item.setMinStock(10L);
+            item.setMaxStock(100L);
 
             itemDAO.addItem(item);
         }

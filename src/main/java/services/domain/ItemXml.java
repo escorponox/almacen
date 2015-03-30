@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.math.BigDecimal;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"code", "name", "description", "price", "location"})
+@XmlType(propOrder = {"code", "name", "description", "price", "location", "minStock", "maxStock"})
 public class ItemXml {
 
     private String code;
@@ -14,6 +14,8 @@ public class ItemXml {
     private String description;
     private BigDecimal price;
     private String location;
+    private Long minStock;
+    private Long maxStock;
 
     public String getCode() {
         return code;
@@ -53,5 +55,21 @@ public class ItemXml {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public Long getMaxStock() {
+        return maxStock;
+    }
+
+    public void setMaxStock(Long maxStock) {
+        this.maxStock = maxStock;
+    }
+
+    public Long getMinStock() {
+        return minStock;
+    }
+
+    public void setMinStock(Long minStock) {
+        this.minStock = minStock;
     }
 }

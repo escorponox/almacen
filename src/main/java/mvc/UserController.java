@@ -45,6 +45,7 @@ public class UserController {
             userEditForm.setEnabled(user.getEnabled());
             userEditForm.setCommission(user.getCommission());
             userEditForm.setRoleTypeEnums(user.getRoleTypesEnums());
+            userEditForm.seteMail(user.geteMail());
             model.addAttribute(ROLE_TYPES_LIST, RoleTypeEnum.asList());
             model.addAttribute(userEditForm);
             return "editUserTile";

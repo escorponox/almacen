@@ -1544,3 +1544,29 @@ SET VERSION = '0.12';
 --------------------------------------------------------------------------------
 -- VERSION 0.13
 --------------------------------------------------------------------------------
+
+ALTER TABLE USERS
+ADD (EMAIL VARCHAR2(100) );
+
+UPDATE USERS SET EMAIL = 'exes.wm.ccp@gmail.com';
+
+ALTER TABLE ITEM
+ADD (MINSTOCK NUMBER );
+
+ALTER TABLE ITEM
+ADD (MAXSTOCK NUMBER );
+
+UPDATE ITEM SET MINSTOCK = 10;
+UPDATE ITEM SET MAXSTOCK = 100;
+ALTER TABLE ITEM
+MODIFY (MINSTOCK NOT NULL);
+
+ALTER TABLE ITEM
+MODIFY (MAXSTOCK NOT NULL);
+
+UPDATE DB_VERSION
+SET VERSION = '0.13';
+
+--------------------------------------------------------------------------------
+-- VERSION 0.14
+--------------------------------------------------------------------------------

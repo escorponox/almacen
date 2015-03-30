@@ -9,8 +9,9 @@
             <tr>
                 <th>Username</th>
                 <th>Enabled</th>
-                <th>Commision</th>
+                <th>Commission</th>
                 <th>Roles</th>
+                <th>e-mail</th>
                 <th>Actions</th>
                 <th></th>
             </tr>
@@ -25,6 +26,7 @@
                             <c:if test="${!rolStatus.last}">&nbsp;-&nbsp;</c:if>
                         </c:forEach>
                     </td>
+                    <td><c:out value="${user.eMail}"/></td>
                     <td><input type="button" value="Edit" onclick="editUser(<c:out value="${user.id}"/>)">
                         <input type="button" value="Delete" onclick="deleteUser(<c:out value="${user.id}"/>)">
                         <input type="button" value="Change Password"

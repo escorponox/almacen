@@ -1,6 +1,7 @@
 package forms;
 
 import jpa.enums.RoleTypeEnum;
+import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
@@ -31,6 +32,9 @@ public class CreateUserForm {
 
     @NotNull(message = "Give this poor user a role")
     private List<RoleTypeEnum> roleTypeEnums;
+
+    @Email(message = "Give a valid e-mail address")
+    private String eMail;
 
     public String getUsername() {
         return username;
@@ -78,5 +82,13 @@ public class CreateUserForm {
 
     public void setRoleTypeEnums(List<RoleTypeEnum> roleTypeEnums) {
         this.roleTypeEnums = roleTypeEnums;
+    }
+
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
     }
 }

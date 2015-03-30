@@ -15,6 +15,8 @@ public class Item implements Serializable {
     private String description;
     private BigDecimal price;
     private Location location;
+    private Long minStock;
+    private Long maxStock;
 
     @SequenceGenerator(name = "ITEM_SEQ", sequenceName = "ITEM_SEQ", allocationSize = 1)
 
@@ -67,6 +69,26 @@ public class Item implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    @Basic
+    @Column(name = "MAXSTOCK", nullable = false, insertable = true, updatable = true, precision = -127)
+    public Long getMaxStock() {
+        return maxStock;
+    }
+
+    public void setMaxStock(Long maxStock) {
+        this.maxStock = maxStock;
+    }
+
+    @Basic
+    @Column(name = "MINSTOCK", nullable = false, insertable = true, updatable = true, precision = -127)
+    public Long getMinStock() {
+        return minStock;
+    }
+
+    public void setMinStock(Long minStock) {
+        this.minStock = minStock;
     }
 
     @Override

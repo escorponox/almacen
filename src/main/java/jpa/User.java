@@ -19,6 +19,7 @@ public class User implements Serializable {
     private String password;
     private Boolean enabled;
     private BigDecimal commission;
+    private String eMail;
     private List<Order> ordersBySeller;
     private List<UserRole> userRoleById;
 
@@ -75,6 +76,16 @@ public class User implements Serializable {
         this.commission = commission;
     }
 
+    @Basic
+    @Column(name = "EMAIL", nullable = true, insertable = true, updatable = true, length = 100)
+    public String geteMail() {
+        return eMail;
+    }
+
+    public void seteMail(String eMail) {
+        this.eMail = eMail;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,13 +93,12 @@ public class User implements Serializable {
 
         User user = (User) o;
 
-        if (commission != null ? !commission.equals(user.commission) : user.commission != null) return false;
-        if (enabled != null ? !enabled.equals(user.enabled) : user.enabled != null) return false;
-        if (id != null ? !id.equals(user.id) : user.id != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        return !(commission != null ? !commission.equals(user.commission) : user.commission != null)
+                && !(enabled != null ? !enabled.equals(user.enabled) : user.enabled != null)
+                && !(id != null ? !id.equals(user.id) : user.id != null)
+                && !(password != null ? !password.equals(user.password) : user.password != null)
+                && !(username != null ? !username.equals(user.username) : user.username != null);
 
-        return true;
     }
 
     @Override
@@ -121,7 +131,7 @@ public class User implements Serializable {
 
     @Transient
     public List<RoleTypeEnum> getRoleTypesEnums() {
-        List<RoleTypeEnum> roleTypes = new LinkedList<RoleTypeEnum>();
+        List<RoleTypeEnum> roleTypes = new LinkedList<>();
         for (UserRole userRole : getUserRoleById()) {
             roleTypes.add(userRole.getRole().getRole());
         }
@@ -129,6 +139,8 @@ public class User implements Serializable {
     }
 
     public void setRoleTypesEnums(List<RoleTypeEnum> roleTypes) {
+
+        //Needed for Spring MVC
     }
 
 }

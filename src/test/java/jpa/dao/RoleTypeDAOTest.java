@@ -4,6 +4,7 @@ import jpa.RoleType;
 import jpa.enums.RoleTypeEnum;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,6 +21,7 @@ public class RoleTypeDAOTest {
     }
 
     @Test
+    @Ignore
     public void getRoleTypeByRoleTest() {
 
         RoleType actual = roleTypeDAO.getRoleTypeByRole(RoleTypeEnum.ROLE_ADMIN);

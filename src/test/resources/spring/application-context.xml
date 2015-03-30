@@ -22,6 +22,20 @@
         <bean id="roleTypeDAO" class="jpa.dao.RoleTypeDAO"/>
         <bean id="userDAO" class="jpa.dao.UserDAO"/>
         <bean id="actionStatusDAO" class="jpa.dao.ActionStatusDAO"/>
+
+        <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+            <property name="host" value="smtp.gmail.com"/>
+            <property name="port" value="587"/>
+            <property name="username" value="exes.wm.ccp@gmail.com"/>
+            <property name="password" value="password666"/>
+            <property name="javaMailProperties">
+                <props>
+                    <prop key="mail.smtp.auth">true</prop>
+                    <prop key="mail.smtp.starttls.enable">true</prop>
+                    <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
+                </props>
+            </property>
+        </bean>
     </beans>
 
 </beans>
