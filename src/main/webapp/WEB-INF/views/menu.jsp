@@ -68,6 +68,11 @@
                         <a href="<s:url value="/orderFlow"/>">Create Order</a></li>
                 </security:authorize>
 
+                <security:authorize access="hasAnyRole('ROLE_SELLER')">
+                    <li>
+                        <a href="<s:url value="/salary/"/>">Salary</a></li>
+                </security:authorize>
+
                 <security:authorize access="hasAnyRole('ROLE_ADMIN')">
                     <li>
                         <a href="<s:url value="/release/"/>">Order Release</a></li>

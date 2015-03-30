@@ -107,4 +107,12 @@
     <definition name="itemsList" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/views/item/itemsList.jsp"/>
     </definition>
+
+    <definition name="selectMonth" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/salary/select.jsp"/>
+    </definition>
+
+    <definition name="showSalary" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/salary/show.jsp"/>
+    </definition>
 </tiles-definitions>

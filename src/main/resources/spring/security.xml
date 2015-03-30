@@ -28,6 +28,7 @@
         <intercept-url pattern="/ship**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
         <intercept-url pattern="/items**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
         <intercept-url pattern="/ajax**" access="hasAnyRole('ROLE_SELLER','ROLE_ADMIN')"/>
+        <intercept-url pattern="/salary**" access="hasAnyRole('ROLE_SELLER')"/>
 
     </http>
 
