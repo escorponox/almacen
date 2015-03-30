@@ -22,6 +22,7 @@
 
     <view-state id="orderConfirmation" view="orderConfirm">
         <transition on="orderConfirm" to="saveOrder"/>
+        <transition on="cancelConfirm" to="buildOrder"/>
     </view-state>
 
     <action-state id="saveOrder">

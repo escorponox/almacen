@@ -7,7 +7,6 @@
 
     <!-- Default Main Template -->
     <definition name=".mainTemplate" template="/WEB-INF/tiles/mainTemplate.jsp">
-        <put-attribute name="header" value="/WEB-INF/views/header.jsp"/>
         <put-attribute name="menu" value="/WEB-INF/views/menu.jsp"/>
         <put-attribute name="body" value="/WEB-INF/views/blank.jsp"/>
         <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />

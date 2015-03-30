@@ -33,42 +33,46 @@
     }
 </style>
 <div>
-    <h2>New Line: </h2>
-    <sf:form method="post" modelAttribute="itemSelect">
+    <h2>New Line</h2>
+    <sf:form method="post" modelAttribute="itemSelect" role="form">
         <input type="hidden" name="_flowExecutionKey" value="${flowExecutionKey}">
 
-        <table>
-            <tr>
-                <td><sf:label path="code">Item Code: </sf:label></td>
-                <td><sf:input path="code"/></td>
-                <td><sf:errors path="code"/></td>
-            </tr>
-            <tr>
-                <td><sf:label path="name">Item Name: </sf:label></td>
-                <td><sf:input path="name" readonly="true" tabindex="-1"/></td>
-            </tr>
-            <tr>
-                <td><sf:label path="price">Item Price: </sf:label></td>
-                <td><sf:input path="price" readonly="true" tabindex="-1"/></td>
-            </tr>
-            <tr>
-                <td><sf:label path="quantity">Quantity: </sf:label></td>
-                <td><sf:input path="quantity" onchange="calculateLineTotal();"/></td>
-                <td><sf:errors path="quantity"/></td>
-            </tr>
-            <tr>
-                <td><sf:label path="lineAmount">Total: </sf:label></td>
-                <td><sf:input path="lineAmount" readonly="true" tabindex="-1"/></td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="submit" name="_eventId_submitLine" value="Submit Line"/>
-                </td>
-                <td>
-                    <input type="submit" name="_eventId_cancelLine" value="Cancel"/>
-                </td>
-            </tr>
-        </table>
+        <div class="row" style="padding-top: 10px">
+            <div class="col-xs-12 col-sm-12 col-md-2"><sf:label class="control-label"
+                                                                path="code">Item Code</sf:label></div>
+            <div class="col-xs-6 col-md-4"><sf:input class="form-control" path="code"/></div>
+            <div class="col-xs-6 col-md-4"><sf:errors class="label label-danger" path="code"/></div>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class="col-xs-12 col-sm-12 col-md-2"><sf:label class="control-label"
+                                                                path="name">Item Name</sf:label></div>
+            <div class="col-xs-6 col-md-4"><sf:input class="form-control" path="name" readonly="true"
+                                                     tabindex="-1"/></div>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class="col-xs-12 col-sm-12 col-md-2"><sf:label class="control-label"
+                                                                path="price">Item Price</sf:label></div>
+            <div class="col-xs-6 col-md-4"><sf:input class="form-control" path="price" readonly="true"
+                                                     tabindex="-1"/></div>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class="col-xs-12 col-sm-12 col-md-2"><sf:label class="control-label"
+                                                                path="quantity">Quantity</sf:label></div>
+            <div class="col-xs-6 col-md-4"><sf:input class="form-control" path="quantity"
+                                                     onchange="calculateLineTotal();"/></div>
+            <div class="col-xs-6 col-md-4"><sf:errors class="label label-danger" path="quantity"/></div>
+        </div>
+        <div class="row" style="padding-top: 10px">
+            <div class="col-xs-12 col-sm-12 col-md-2"><sf:label class="control-label"
+                                                                path="lineAmount">Total</sf:label></div>
+            <div class="col-xs-6 col-md-4"><sf:input class="form-control" path="lineAmount" readonly="true"
+                                                     tabindex="-1"/></div>
+        </div>
+        <div style="padding-top: 10px">
+            <button type="submit" class="btn btn-default" name="_eventId_submitLine">Submit Line</button>
+            <button type="submit" class="btn btn-default" name="_eventId_cancelLine">Cancel</button>
+        </div>
+
 
     </sf:form>
 </div>

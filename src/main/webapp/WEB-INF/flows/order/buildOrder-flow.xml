@@ -18,7 +18,7 @@
             <set name="itemSelect" value="new forms.ItemQuantitySelectForm()"/>
         </on-entry>
         <transition on="submitLine" to="newLine"/>
-        <transition on="cancelLine" to="showOrder"/>
+        <transition on="cancelLine" to="showOrder" validate="false"/>
     </view-state>
 
     <action-state id="newLine">

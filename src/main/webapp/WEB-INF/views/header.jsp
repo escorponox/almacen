@@ -1,1 +1,0 @@
-<div id="headerTitleDiv"><h1>EXES WareHouse Management</h1></div>

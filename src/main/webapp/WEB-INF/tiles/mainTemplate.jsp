@@ -4,32 +4,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <title>Almacen</title>
-    <style>
-        body {
-            margin-top: 20px;
-            margin-bottom: 20px;
-            background-color: #DFDFDF;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="<c:url value='/resources/css/bootstrap.min.css'/>">
+    <title>EXES WareHouse Management</title>
+
     <script src="<c:url value='/resources/js/jquery-2.1.3.min.js'/>"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="<c:url value='/resources/js/bootstrap.min.js'/>"></script>
+    <link href="<c:url value='/resources/css/sticky-footer-navbar.css'/>" rel="stylesheet">
 </head>
 <body>
-<div class="container" style="border: #C1C1C1 solid 1px; border-radius:10px;">
-    <!-- Header -->
-    <tiles:insertAttribute name="header"/>
-    <!-- Menu Page -->
-    <div style="height:auto;background-color:#d0d0d0;">
-        <tiles:insertAttribute name="menu"/>
-    </div>
+
+<!-- Menu Page -->
+<div id="wrap">
+
+    <tiles:insertAttribute name="menu"/>
+
     <!-- Body Page -->
-    <div style="height:auto;background-color:#FCFCFC;">
+    <div class="container">
         <tiles:insertAttribute name="body"/>
     </div>
-    <!-- Footer Page -->
-    <tiles:insertAttribute name="footer"/>
 </div>
+<!-- Footer Page -->
+<footer class="footer">
+    <tiles:insertAttribute name="footer"/>
+</footer>
+
 </body>
 </html>
