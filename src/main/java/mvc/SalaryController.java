@@ -15,8 +15,6 @@ import services.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/salary")
@@ -44,7 +42,7 @@ public class SalaryController {
     public String calculate(@Valid SelectMonthForm selectMonthForm, BindingResult bindingResult, Model model, Principal principal) {
 
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "selectMonth";
         }
 
