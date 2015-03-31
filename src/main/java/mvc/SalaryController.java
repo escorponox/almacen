@@ -1,13 +1,20 @@
 package mvc;
 
 import forms.SelectMonthForm;
+import forms.ShowSalaryForm;
+import jpa.User;
+import jpa.enums.RoleTypeEnum;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import services.SalaryService;
+import services.UserService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -15,32 +22,35 @@ import java.util.Map;
 @RequestMapping("/salary")
 public class SalaryController {
 
-    private static final Map<Integer, String> MONTHS = new LinkedHashMap() {
-        {
-            put(1, "JANUARY");
-            put(2, "FEBRUARY");
-            put(3, "MARCH");
-            put(4, "APRIL");
-            put(5, "MAY");
-            put(6, "JUNE");
-            put(7, "JULY");
-            put(8, "AUGUST");
-            put(9, "SEPTEMBER");
-            put(10, "OCTOBER");
-            put(11, "NOVEMBER");
-            put(12, "DECEMBER");
-        }
-    };
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private SalaryService salaryService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String select(Model model) {
+    public String select(Principal principal) {
 
-        model.addAttribute("months", MONTHS);
-        return "selectMonth";
+        User user = userService.getUserByUsername(principal.getName());
+
+        if (user.getRoleTypesEnums().contains(RoleTypeEnum.ROLE_SELLER) && user.getCommission() != null) {
+            return "selectMonth";
+        } else {
+            return "noSellerOrCommission";
+        }
+
     }
 
-    @RequestMapping(value = "/show")
-    public String calculate(@Valid SelectMonthForm selectMonthForm, BindingResult bindingResult) {
+    @RequestMapping(value = "/show", method = RequestMethod.POST)
+    public String calculate(@Valid SelectMonthForm selectMonthForm, BindingResult bindingResult, Model model, Principal principal) {
+
+
+        if(bindingResult.hasErrors()) {
+            return "selectMonth";
+        }
+
+        ShowSalaryForm showSalaryForm = salaryService.calculateSalary(selectMonthForm, principal.getName());
+        model.addAttribute(showSalaryForm);
+
         return "showSalary";
     }
 

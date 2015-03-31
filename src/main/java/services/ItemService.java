@@ -1,16 +1,20 @@
 package services;
 
-import jpa.Item;
-import jpa.dao.ItemDAO;
+import jpa.User;
+import jpa.dao.UserDAO;
+import jpa.enums.RoleTypeEnum;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import services.domain.ItemXml;
-import services.domain.ItemsListXml;
+import services.utils.items.ItemsXmlListMaker;
+import services.utils.items.StockMailTextGenerator;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import java.io.StringWriter;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,45 +23,46 @@ public class ItemService {
     private static final Logger LOGGER = Logger.getLogger(ItemService.class);
 
     @Autowired
-    private ItemDAO itemDAO;
+    private ItemsXmlListMaker itemsXmlListMaker;
+    @Autowired
+    private JavaMailSender mailSender;
+    @Autowired
+    private StockMailTextGenerator stockMailTextGenerator;
+    @Autowired
+    private UserDAO userDAO;
+
 
     public String listAllItemsXml() {
 
-        List<Item> items = itemDAO.listAll();
+        return itemsXmlListMaker.make();
+    }
 
-        ItemsListXml itemsListXml = new ItemsListXml();
+    @Scheduled(cron = "0 0 2 ? * MON-FRI")
+    public void sendStockMail() {
 
-        for (Item item : items) {
-            ItemXml itemXml = new ItemXml();
-            itemXml.setCode(item.getCode());
-            itemXml.setName(item.getName());
-            itemXml.setDescription(item.getDescription());
-            itemXml.setPrice(item.getPrice());
-            itemXml.setLocation(item.getLocation().getName());
-            itemXml.setMinStock(item.getMinStock());
-            itemXml.setMaxStock(item.getMaxStock());
+        List<User> users = userDAO.listAll();
+        String mailText = stockMailTextGenerator.generate();
 
-            itemsListXml.getItemList().add(itemXml);
-        }
-
-
-        String result;
-        StringWriter sw = new StringWriter();
-
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper;
         try {
+            helper = new MimeMessageHelper(message, true);
 
-            JAXBContext context = JAXBContext.newInstance(ItemsListXml.class, ItemXml.class);
-            Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            helper.setFrom("exes.wm.ccp@gmail.com");
+            helper.setTo("exes.wm.ccp@gmail.com");
+            helper.setSubject("Stock Mail of " + new Date());
+            for (User user : users) {
 
-            m.marshal(itemsListXml, sw);
-            result = sw.toString();
+                if (user.getRoleTypesEnums().contains(RoleTypeEnum.ROLE_ADMIN)) {
+                    helper.addCc(user.geteMail());
+                }
+            }
+            helper.setText(mailText, true);
 
-        } catch (Exception e) {
-            result = "";
-            LOGGER.error("Error marshaling item list", e);
+            mailSender.send(message);
+
+        } catch (MessagingException e) {
+            LOGGER.error("Error generating stock mail. ", e);
         }
-
-        return result;
     }
 }

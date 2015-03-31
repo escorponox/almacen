@@ -115,4 +115,8 @@
     <definition name="showSalary" extends=".mainTemplate">
         <put-attribute name="body" value="/WEB-INF/views/salary/show.jsp"/>
     </definition>
+
+    <definition name="noSellerOrCommission" extends=".mainTemplate">
+        <put-attribute name="body" value="/WEB-INF/views/salary/noSellerOrCommission.jsp"/>
+    </definition>
 </tiles-definitions>

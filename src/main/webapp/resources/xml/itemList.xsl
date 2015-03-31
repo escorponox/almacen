@@ -11,6 +11,7 @@
                     <th>Description</th>
                     <th>Price</th>
                     <th>Location</th>
+                    <th>Stock</th>
                     <th>Min Stock</th>
                     <th>Max Stock</th>
                 </tr>
@@ -30,6 +31,9 @@
                         </td>
                         <td>
                             <xsl:value-of select="location"/>
+                        </td>
+                        <td>
+                            <xsl:value-of select="stock"/>
                         </td>
                         <td>
                             <xsl:value-of select="minStock"/>

@@ -46,4 +46,11 @@ public class StockDAO {
         return null;
     }
 
+    public List<Stock> getAvailableStockBydItem(Item item) {
+        Query query = em.createQuery("select a from Stock a where a.location is not null and a.item = :item");
+        query.setParameter("item", item);
+        return query.getResultList();
+    }
+
+
 }

@@ -2,6 +2,7 @@ package jpa.dao;
 
 
 import jpa.Order;
+import jpa.User;
 import jpa.enums.OrdersStatusEnum;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 @Repository("orderDAO")
@@ -62,6 +64,14 @@ public class OrderDAO {
     public List<Order> findAllShippingCandidates() {
         Query query = em.createQuery("select a from Order a where a.status.status = :inDocks order by a.id");
         query.setParameter("inDocks", OrdersStatusEnum.DO);
+        return query.getResultList();
+    }
+
+    public List<Order> findOrdersBySellerAndPeriod(User seller, Date initDate, Date endDate) {
+        Query query = em.createQuery("select a from Order a where a.seller = :seller and a.createdAt between :initDate and :endDate order by a.id");
+        query.setParameter("seller", seller);
+        query.setParameter("initDate", initDate);
+        query.setParameter("endDate", endDate);
         return query.getResultList();
     }
 }
