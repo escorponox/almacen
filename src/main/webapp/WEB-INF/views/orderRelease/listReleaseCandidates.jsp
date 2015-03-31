@@ -52,11 +52,8 @@
                         </td>
                     </tr>
                 </c:forEach>
-                <tr>
-                    <td><input type="button" value="Release"
-                               onclick="document.getElementById('ordersReleaseForm').submit()"></td>
-                </tr>
             </table>
+            <input type="button" value="Release" onclick="document.getElementById('ordersReleaseForm').submit()">
         </div>
     </sf:form>
 </div>

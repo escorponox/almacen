@@ -1,5 +1,5 @@
 <div class="container">
     <h2>
-        <label class="label label-primary">Congratulations. All your orders are finished or already released.</label>
+        Congratulations. All your orders are finished or already released.
     </h2>
 </div>

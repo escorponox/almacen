@@ -68,17 +68,20 @@ public class OrderLauncher {
 
                 for (OrderLine orderLine : orderLines) {
 
-                    PickingAction pickingAction = new PickingAction();
-                    pickingAction.setOrderLine(orderLine);
-                    pickingAction.setContainer(container);
-                    pickingAction.setStatus(actionStatusDAO.getActionStatusByStatus(ActionStatusEnum.CR));
-                    pickingAction.setOrdered(orderLine.getOrderedQuantity());
-                    pickingAction.setPicked(0L);
-                    pickingAction.setSeq(seq);
+                    if (orderLine.getPendingQuantity() > 0) {
 
-                    pickingActionDAO.addPickingAction(pickingAction);
+                        PickingAction pickingAction = new PickingAction();
+                        pickingAction.setOrderLine(orderLine);
+                        pickingAction.setContainer(container);
+                        pickingAction.setStatus(actionStatusDAO.getActionStatusByStatus(ActionStatusEnum.CR));
+                        pickingAction.setOrdered(orderLine.getPendingQuantity());
+                        pickingAction.setPicked(0L);
+                        pickingAction.setSeq(seq);
 
-                    seq++;
+                        pickingActionDAO.addPickingAction(pickingAction);
+
+                        seq++;
+                    }
                 }
 
                 order.setStatus(ordersStatusDAO.getOrdersStatusByStatus(OrdersStatusEnum.PI));

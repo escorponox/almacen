@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "OUTGOING_DOCKS", schema = "PROYECTO", catalog = "")
+@Table(name = "OUTGOING_DOCKS", catalog = "")
 public class OutgoingDock implements Serializable {
 
     private static final long serialVersionUID = 3576540951810160050L;

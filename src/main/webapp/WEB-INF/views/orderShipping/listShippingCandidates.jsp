@@ -20,7 +20,7 @@
                     <th>Order Code</th>
                     <th>Customer</th>
                     <th>Status</th>
-                    <th>Release</th>
+                    <th>Ship</th>
                     <th>Dock</th>
                     <th></th>
                 </tr>
@@ -49,11 +49,11 @@
                         </td>
                     </tr>
                 </c:forEach>
-                <tr>
-                    <td><input type="button" value="Release"
-                               onclick="document.getElementById('ordersShippingForm').submit()"></td>
-                </tr>
             </table>
+            <input type="button" value="Release"
+                   onclick="document.getElementById('ordersShippingForm').submit()">
+
+
         </div>
     </sf:form>
 </div>

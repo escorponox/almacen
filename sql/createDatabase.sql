@@ -758,7 +758,6 @@ Insert into USER_ROLES (ID,ROLE,USER_ID) values (5,3,3);
   ALTER TABLE "PICKING_ACTIONS" MODIFY ("STATUS" NOT NULL ENABLE);
   ALTER TABLE "PICKING_ACTIONS" MODIFY ("CONTAINER_ID" NOT NULL ENABLE);
   ALTER TABLE "PICKING_ACTIONS" MODIFY ("LINE_ID" NOT NULL ENABLE);
-  ALTER TABLE "PICKING_ACTIONS" MODIFY ("ORDER_ID" NOT NULL ENABLE);
   ALTER TABLE "PICKING_ACTIONS" MODIFY ("ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table PROVIDERS
@@ -782,7 +781,6 @@ Insert into USER_ROLES (ID,ROLE,USER_ID) values (5,3,3);
   ALTER TABLE "RECEIPT_ACTIONS" MODIFY ("REC_QUANTITY" NOT NULL ENABLE);
   ALTER TABLE "RECEIPT_ACTIONS" MODIFY ("DELIVERY_NOTE" NOT NULL ENABLE);
   ALTER TABLE "RECEIPT_ACTIONS" MODIFY ("REC_ORDER_LINE_ID" NOT NULL ENABLE);
-  ALTER TABLE "RECEIPT_ACTIONS" MODIFY ("REC_ORDER_ID" NOT NULL ENABLE);
   ALTER TABLE "RECEIPT_ACTIONS" MODIFY ("ID" NOT NULL ENABLE);
 --------------------------------------------------------
 --  Constraints for Table RECEIVING_ORDERS
@@ -1569,4 +1567,13 @@ SET VERSION = '0.13';
 
 --------------------------------------------------------------------------------
 -- VERSION 0.14
+--------------------------------------------------------------------------------
+
+DROP INDEX PICKING_ACTIONS_UK1;
+
+UPDATE DB_VERSION
+SET VERSION = '0.14';
+
+--------------------------------------------------------------------------------
+-- VERSION 0.15
 --------------------------------------------------------------------------------

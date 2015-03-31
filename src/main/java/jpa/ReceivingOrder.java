@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "RECEIVING_ORDERS", schema = "PROYECTO", catalog = "")
+@Table(name = "RECEIVING_ORDERS", catalog = "")
 public class ReceivingOrder implements Serializable {
 
     private static final long serialVersionUID = 5848272190271297574L;

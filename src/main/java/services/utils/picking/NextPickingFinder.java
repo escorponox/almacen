@@ -32,7 +32,7 @@ public class NextPickingFinder {
             pickingForm.setItemCode(pickingAction.getOrderLine().getItem().getCode());
             pickingForm.setItemName(pickingAction.getOrderLine().getItem().getName());
             pickingForm.setItemCodeConfirmation("");
-            pickingForm.setOrdered(pickingAction.getOrderLine().getOrderedQuantity());
+            pickingForm.setOrdered(pickingAction.getOrdered());
             pickingForm.setPicked(0L);
         }
 

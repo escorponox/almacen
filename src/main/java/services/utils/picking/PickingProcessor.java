@@ -2,9 +2,11 @@ package services.utils.picking;
 
 import forms.PickingForm;
 import jpa.Container;
+import jpa.OrderLine;
 import jpa.PickingAction;
 import jpa.Stock;
 import jpa.dao.ActionStatusDAO;
+import jpa.dao.OrderLineDAO;
 import jpa.dao.PickingActionDAO;
 import jpa.dao.StockDAO;
 import jpa.enums.ActionStatusEnum;
@@ -21,14 +23,18 @@ public class PickingProcessor {
     @Autowired
     private PickingActionDAO pickingActionDAO;
     @Autowired
+    private OrderLineDAO orderLineDAO;
+    @Autowired
     private StockDAO stockDAO;
 
     public void process(PickingForm pickingForm, Container container) {
 
         PickingAction pickingAction = pickingActionDAO.getPickingActionById(pickingForm.getPickingActionId());
 
-        Stock locationStock = stockDAO.getStockByLocationAndItem(pickingAction.getOrderLine().getItem(),
-                pickingAction.getOrderLine().getItem().getLocation());
+        OrderLine orderLine = pickingAction.getOrderLine();
+
+        Stock locationStock = stockDAO.getStockByLocationAndItem(orderLine.getItem(), orderLine.getItem().getLocation());
+
 
         if (locationStock != null) {
 
@@ -47,5 +53,9 @@ public class PickingProcessor {
         pickingAction.setStatus(actionStatusDAO.getActionStatusByStatus(ActionStatusEnum.FI));
 
         pickingActionDAO.updatePickingAction(pickingAction);
+
+        orderLine.setPendingQuantity(orderLine.getPendingQuantity() - pickingForm.getPicked());
+
+        orderLineDAO.updateOrderLine(orderLine);
     }
 }

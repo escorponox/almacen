@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "RECEIPT_ACTIONS", schema = "PROYECTO", catalog = "")
+@Table(name = "RECEIPT_ACTIONS", catalog = "")
 public class ReceiptAction implements Serializable {
     private Long id;
     private String deliveryNote;
