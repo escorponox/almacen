@@ -11,7 +11,7 @@ import java.net.URL;
  * JAX-WS RI 2.2.4-b01
  * Generated source version: 2.2
  */
-@WebServiceClient(name = "ReceivingOrdersSOAP", targetNamespace = "http://webservices/", wsdlLocation = "http://localhost:8080/almacen/ReceivingOrdersSOAP?wsdl")
+@WebServiceClient(name = "ReceivingOrdersSOAP", targetNamespace = "http://webservices/", wsdlLocation = "https://localhost:8443/almacen/ReceivingOrdersSOAP?wsdl")
 public class ReceivingOrdersSOAP_Service
         extends Service {
 
@@ -23,7 +23,19 @@ public class ReceivingOrdersSOAP_Service
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/almacen/ReceivingOrdersSOAP?wsdl");
+            //for localhost testing only
+            javax.net.ssl.HttpsURLConnection.setDefaultHostnameVerifier(
+                    new javax.net.ssl.HostnameVerifier(){
+
+                        public boolean verify(String hostname,
+                                              javax.net.ssl.SSLSession sslSession) {
+                            if (hostname.equals("localhost")) {
+                                return true;
+                            }
+                            return false;
+                        }
+                    });
+            url = new URL("https://localhost:8443/almacen/ReceivingOrdersSOAP?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

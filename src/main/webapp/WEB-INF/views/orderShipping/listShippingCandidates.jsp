@@ -50,7 +50,7 @@
                     </tr>
                 </c:forEach>
             </table>
-            <input type="button" value="Release"
+            <input type="button" value="Ship"
                    onclick="document.getElementById('ordersShippingForm').submit()">
 
 

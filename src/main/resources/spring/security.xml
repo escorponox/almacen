@@ -7,7 +7,7 @@
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <http pattern="/ReceivingOrdersSOAP/**" security="none"/>
+    <!--<http pattern="/ReceivingOrdersSOAP/**" security="none"/>-->
     <http auto-config="true" use-expressions="true">
         <form-login
                 login-page="/login"
@@ -17,7 +17,7 @@
                 password-parameter="password"/>
         <logout logout-success-url="/login?logout"/>
         <!-- enable csrf protection -->
-        <csrf/>
+        <csrf request-matcher-ref="csrfSecurityRequestMatcher"/>
 
         <intercept-url pattern="/users**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/receipt**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
@@ -29,6 +29,8 @@
         <intercept-url pattern="/items**" access="hasAnyRole('ROLE_STORE','ROLE_ADMIN')"/>
         <intercept-url pattern="/ajax**" access="hasAnyRole('ROLE_SELLER','ROLE_ADMIN')"/>
         <intercept-url pattern="/salary**" access="hasAnyRole('ROLE_SELLER')"/>
+
+        <intercept-url pattern="/ReceivingOrdersSOAP**" access="permitAll" requires-channel="https"/>
 
     </http>
 
@@ -45,5 +47,7 @@
     </authentication-manager>
     <beans:bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
         <beans:constructor-arg name="strength" value="11"/>
+    </beans:bean>
+    <beans:bean id="csrfSecurityRequestMatcher" class="spring.CsrfSecurityRequestMatcher">
     </beans:bean>
 </beans:beans>
