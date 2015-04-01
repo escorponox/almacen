@@ -32,7 +32,7 @@ public class ContainerAllocator {
         Container container = containerDAO.getContainerByPicker(user);
 
         if (container == null) {
-            
+
             container = containerDAO.getFirstUnAssignedContainer();
             if (container != null) {
 

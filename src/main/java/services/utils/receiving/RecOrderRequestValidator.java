@@ -8,6 +8,7 @@ import jpa.dao.ProviderDAO;
 import jpa.dao.ReceivingOrderDAO;
 import jpa.enums.ReceivingOrdersStatusEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 import webservices.domain.RecLineRequest;
 import webservices.domain.RecLineResponse;
@@ -44,6 +45,11 @@ public class RecOrderRequestValidator {
         if (provider == null) {
             recOrderResponse.setResponseCode("-2");
             recOrderResponse.setErrorDescription("Provider " + recOrderRequest.getProviderNif() + "not found.");
+        } else if (recOrderRequest.getPassword() == null
+                || !BCrypt.checkpw(recOrderRequest.getPassword(), provider.getPassword())) {
+
+            recOrderResponse.setResponseCode("-4");
+            recOrderResponse.setErrorDescription("Provider password not valid.");
         }
     }
 

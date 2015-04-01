@@ -33,7 +33,7 @@ public class ReceivingOrderService {
                 receivingOrderCreator.create(recOrderRequest, recOrderResponse);
             } catch (Exception e) {
                 LOGGER.error("Error creating te receiving order. ", e);
-                recOrderResponse.setResponseCode("-4");
+                recOrderResponse.setResponseCode("-5");
                 recOrderResponse.setErrorDescription("Error in saving process.");
             }
         }

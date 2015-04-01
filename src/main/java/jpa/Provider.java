@@ -11,6 +11,7 @@ public class Provider implements Serializable {
     private String nif;
     private String name;
     private String address;
+    private String password;
     private List<ReceivingOrder> receivingOrdersByProvider;
 
     @SequenceGenerator(name = "PROVIDERS_SEQ", sequenceName = "PROVIDERS_SEQ", allocationSize = 1)
@@ -54,6 +55,16 @@ public class Provider implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Basic
+    @Column(name = "PASSWORD", nullable = false, insertable = true, updatable = true, length = 64)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

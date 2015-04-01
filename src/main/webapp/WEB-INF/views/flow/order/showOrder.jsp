@@ -54,7 +54,9 @@
         </div>
         <div>
             <button class="btn btn-default" type="submit" name="_eventId_newLine">New Line</button>
-            <button class="btn btn-default<c:if test="${empty order.orderLines}"> disabled</c:if>" type="submit" name="_eventId_checkOut">Check Out</button>
+            <button class="btn btn-default<c:if test="${empty order.orderLines}"> disabled</c:if>" type="submit"
+                    name="_eventId_checkOut">Check Out
+            </button>
             <button class="btn btn-default" type="submit" name="_eventId_cancel">Cancel</button>
         </div>
 

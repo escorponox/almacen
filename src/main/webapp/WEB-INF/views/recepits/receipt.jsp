@@ -46,16 +46,16 @@
             <c:forEach items="${receiptForm.receiptActionsForms}" var="recAction" varStatus="status">
                 <tr>
                     <td><input type="hidden"
-                                              name="receiptActionsForms[${status.index}].receivingOrderLine"
-                                              value="${recAction.receivingOrderLine}">${status.count}</td>
+                               name="receiptActionsForms[${status.index}].receivingOrderLine"
+                               value="${recAction.receivingOrderLine}">${status.count}</td>
                     <td><input name="receiptActionsForms[${status.index}].itemCode"
-                                              value="${recAction.itemCode}" readonly="true" tabindex="-1"></td>
+                               value="${recAction.itemCode}" readonly="true" tabindex="-1"></td>
                     <td><input name="receiptActionsForms[${status.index}].itemName"
-                                              value="${recAction.itemName}" readonly="true" tabindex="-1"></td>
+                               value="${recAction.itemName}" readonly="true" tabindex="-1"></td>
                     <td><input name="receiptActionsForms[${status.index}].pendingQuantity"
-                                              value="${recAction.pendingQuantity}" readonly="true" tabindex="-1"></td>
+                               value="${recAction.pendingQuantity}" readonly="true" tabindex="-1"></td>
                     <td><input name="receiptActionsForms[${status.index}].recQuantity"
-                                              value="${recAction.recQuantity}"></td>
+                               value="${recAction.recQuantity}"></td>
                     <td><sf:errors path="receiptActionsForms[${status.index}].recQuantity"/></td>
                 </tr>
             </c:forEach>

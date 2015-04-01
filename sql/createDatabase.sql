@@ -1577,3 +1577,19 @@ SET VERSION = '0.14';
 --------------------------------------------------------------------------------
 -- VERSION 0.15
 --------------------------------------------------------------------------------
+
+ALTER TABLE PROVIDERS
+ADD (PASSWORD VARCHAR2(64) );
+
+UPDATE PROVIDERS
+SET password = '$2a$10$uza/2BUK2prXI85rVGzvo.wvzn7zR/hWwFu536KOU2ZUh5WATvr9C';
+
+ALTER TABLE PROVIDERS
+MODIFY (PASSWORD NOT NULL);
+
+UPDATE DB_VERSION
+SET VERSION = '0.15';
+
+--------------------------------------------------------------------------------
+-- VERSION 0.16
+--------------------------------------------------------------------------------

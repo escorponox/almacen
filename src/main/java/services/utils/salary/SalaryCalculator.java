@@ -44,7 +44,7 @@ public class SalaryCalculator {
         for (Order order : orderDAO.findOrdersBySellerAndPeriod(user, selectMonthForm.getMonth(), calendar.getTime())) {
 
             BigDecimal orderTotal = orderTotalAmountCalculator.calculate(order);
-            BigDecimal orderCommission = orderTotal.multiply(user.getCommission()).setScale(2,BigDecimal.ROUND_CEILING);
+            BigDecimal orderCommission = orderTotal.multiply(user.getCommission()).setScale(2, BigDecimal.ROUND_CEILING);
 
             SalaryOrder salaryOrder = new SalaryOrder();
             salaryOrder.setOrderCode(order.getCode());

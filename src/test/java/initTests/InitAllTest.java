@@ -69,8 +69,9 @@ public class InitAllTest {
 
         ObjectFactory objectFactory = new ObjectFactory();
         RecOrderRequest recOrderRequest = objectFactory.createRecOrderRequest();
-        recOrderRequest.setOrderCode(2L);
+        recOrderRequest.setOrderCode(1L);
         recOrderRequest.setProviderNif("51094582J");
+        recOrderRequest.setPassword("1234");
 
         RecOrderRequest.RecLines recLines = objectFactory.createRecOrderRequestRecLines();
 

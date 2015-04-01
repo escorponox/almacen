@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.math.BigDecimal;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"code", "name", "description", "price", "location","stock", "minStock", "maxStock"})
+@XmlType(propOrder = {"code", "name", "description", "price", "location", "stock", "minStock", "maxStock"})
 public class ItemXml {
 
     private String code;

@@ -8,11 +8,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 @XmlRootElement(name = "recOrder", namespace = "http://www.carlos.coves.com/jaxb")
-@XmlType(propOrder = {"orderCode", "providerNif", "recLines"})
+@XmlType(propOrder = {"orderCode", "providerNif", "password", "recLines"})
 public class RecOrderRequest {
 
     private Long orderCode;
     private String providerNif;
+    private String password;
     private List<RecLineRequest> recLines;
 
     public RecOrderRequest() {
@@ -33,6 +34,14 @@ public class RecOrderRequest {
 
     public void setProviderNif(String providerNif) {
         this.providerNif = providerNif;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<RecLineRequest> getRecLines() {

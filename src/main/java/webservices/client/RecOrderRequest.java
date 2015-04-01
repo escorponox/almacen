@@ -40,12 +40,14 @@ import java.util.List;
 @XmlType(name = "recOrderRequest", propOrder = {
         "orderCode",
         "providerNif",
+        "password",
         "recLines"
 })
 public class RecOrderRequest {
 
     protected Long orderCode;
     protected String providerNif;
+    protected String password;
     protected RecOrderRequest.RecLines recLines;
 
     /**
@@ -86,6 +88,14 @@ public class RecOrderRequest {
      */
     public void setProviderNif(String value) {
         this.providerNif = value;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
