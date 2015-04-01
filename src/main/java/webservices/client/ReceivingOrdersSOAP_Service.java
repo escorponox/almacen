@@ -29,10 +29,7 @@ public class ReceivingOrdersSOAP_Service
 
                         public boolean verify(String hostname,
                                               javax.net.ssl.SSLSession sslSession) {
-                            if (hostname.equals("localhost")) {
-                                return true;
-                            }
-                            return false;
+                            return "localhost".equals(hostname);
                         }
                     });
             url = new URL("https://localhost:8443/almacen/ReceivingOrdersSOAP?wsdl");
